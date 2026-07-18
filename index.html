@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vaibhav's Gita — Personal Companion</title>
+<title>Vaibhav's Gita — Personal Companion (Gemini)</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
 :root{
@@ -220,8 +220,8 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
     <div class="modal-om">ॐ</div>
     <div class="modal-h">Vaibhav's Personal Gita</div>
     <div class="modal-p">Enter your Anthropic API key. Guidance Parts 1 & 2 are hardcoded — zero API cost. Only Part 3 (shloka-specific, 2 sentences) calls the API, once per shloka, then saved to your Sheet forever.</div>
-    <div class="modal-p">Get your key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> → API Keys</div>
-    <input type="password" class="modal-input" id="apiKeyInput" placeholder="sk-ant-api03-..." />
+    <div class="modal-p">Get your FREE key at <a href="https://aistudio.google.com" target="_blank">aistudio.google.com</a> → Get API Key → Create API Key. No card. No billing.</div>
+    <input type="password" class="modal-input" id="apiKeyInput" placeholder="AIzaSy..." />
     <button class="btn btn-saffron" style="width:100%;padding:12px;font-size:13px" onclick="saveApiKey()">Begin My Gita Journey 🪷</button>
     <div class="modal-note">Part 3 costs ~$0.0002 per unique shloka. Once saved to Sheet, it loads free forever. Parts 1 & 2 never call the API.</div>
   </div>
@@ -571,7 +571,7 @@ function syncEnd(){document.getElementById('syncBar').classList.remove('show');}
 // ================================================================
 function saveApiKey(){
   const k=document.getElementById('apiKeyInput').value.trim();
-  if(!k||!k.startsWith('sk-ant')){alert('Please enter a valid key starting with sk-ant');return;}
+  if(!k||!k.startsWith('AIza')){alert('Please enter a valid Gemini key starting with AIza');return;}
   S.apiKey=k;save();
   document.getElementById('apiModal').style.display='none';
   init();
@@ -616,17 +616,26 @@ async function sheetToggleBm(key,chapter,shloka){try{await sheetPost('toggleBook
 // ================================================================
 // CLAUDE API — Only for Part 3 (very short)
 // ================================================================
-async function claude(prompt,maxTok=200){
+async function claude(prompt,maxTok=800){
   if(!S.apiKey){checkKey();throw new Error('No API key');}
-  const r=await fetch('https://api.anthropic.com/v1/messages',{
+  const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${S.apiKey}`;
+  const r=await fetch(url,{
     method:'POST',
-    headers:{'Content-Type':'application/json','x-api-key':S.apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:maxTok,messages:[{role:'user',content:prompt}]})
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      contents:[{parts:[{text:prompt}]}],
+      generationConfig:{maxOutputTokens:maxTok,temperature:0.7}
+    })
   });
-  if(!r.ok){const e=await r.json().catch(()=>({}));if(r.status===401){changeApiKey();throw new Error('Invalid API key');}throw new Error(e.error?.message||`API error ${r.status}`);}
+  if(!r.ok){
+    const e=await r.json().catch(()=>({}));
+    if(r.status===400||r.status===403){changeApiKey();throw new Error('Invalid Gemini API key — please check your key at aistudio.google.com');}
+    throw new Error(e.error?.message||`API error ${r.status}`);
+  }
   const d=await r.json();
-  if(d.content?.[0]?.text)return d.content[0].text;
-  throw new Error('Empty response');
+  const text=d.candidates?.[0]?.content?.parts?.[0]?.text;
+  if(text)return text;
+  throw new Error('Empty response from Gemini');
 }
 function parseJ(text){
   const c=text.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
