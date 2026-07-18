@@ -221,7 +221,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);fon
     <div class="modal-h">Vaibhav's Personal Gita</div>
     <div class="modal-p">Enter your Anthropic API key. Guidance Parts 1 & 2 are hardcoded — zero API cost. Only Part 3 (shloka-specific, 2 sentences) calls the API, once per shloka, then saved to your Sheet forever.</div>
     <div class="modal-p">Get your FREE key at <a href="https://aistudio.google.com" target="_blank">aistudio.google.com</a> → Get API Key → Create API Key. No card. No billing.</div>
-    <input type="password" class="modal-input" id="apiKeyInput" placeholder="AIzaSy..." />
+    <input type="password" class="modal-input" id="apiKeyInput" placeholder="Your Gemini API key..." />
     <button class="btn btn-saffron" style="width:100%;padding:12px;font-size:13px" onclick="saveApiKey()">Begin My Gita Journey 🪷</button>
     <div class="modal-note">Part 3 costs ~$0.0002 per unique shloka. Once saved to Sheet, it loads free forever. Parts 1 & 2 never call the API.</div>
   </div>
@@ -571,7 +571,7 @@ function syncEnd(){document.getElementById('syncBar').classList.remove('show');}
 // ================================================================
 function saveApiKey(){
   const k=document.getElementById('apiKeyInput').value.trim();
-  if(!k||!k.startsWith('AIza')){alert('Please enter a valid Gemini key starting with AIza');return;}
+  if(!k||k.length<10){alert('Please enter your Gemini API key');return;}
   S.apiKey=k;save();
   document.getElementById('apiModal').style.display='none';
   init();
