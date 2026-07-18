@@ -618,39 +618,71 @@ async function sheetToggleBm(key,chapter,shloka){try{await sheetPost('toggleBook
 // ================================================================
 async function claude(prompt,maxTok=800){
   if(!S.apiKey){checkKey();throw new Error('No API key');}
-  // Try models in order until one works
-  const models=['gemini-1.5-flash-latest','gemini-1.5-flash','gemini-pro','gemini-1.0-pro'];
-  let lastErr='';
-  for(const model of models){
+  
+  // Step 1: Get list of available models for this key
+  async function getModels(){
     try{
-      const url=`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${S.apiKey}`;
-      const r=await fetch(url,{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          contents:[{role:'user',parts:[{text:prompt}]}],
-          generationConfig:{maxOutputTokens:maxTok,temperature:0.7}
-        })
-      });
-      if(r.status===404){lastErr=`Model ${model} not found`;continue;}
-      if(r.status===429){lastErr='Rate limit exceeded — please wait a moment and try again';continue;}
-      if(!r.ok){
-        const e=await r.json().catch(()=>({}));
-        if(r.status===400&&e.error?.message?.includes('API_KEY')){changeApiKey();throw new Error('Invalid Gemini API key');}
-        lastErr=e.error?.message||`API error ${r.status}`;
-        continue;
-      }
+      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${S.apiKey}`);
+      if(!r.ok)return[];
       const d=await r.json();
-      const text=d.candidates?.[0]?.content?.parts?.[0]?.text;
-      if(text)return text;
-      lastErr='Empty response';
-      continue;
+      return (d.models||[])
+        .filter(m=>m.supportedGenerationMethods&&m.supportedGenerationMethods.includes('generateContent'))
+        .map(m=>m.name.replace('models/',''));
+    }catch(e){return[];}
+  }
+
+  // Step 2: Try to generate with a model
+  async function tryModel(model){
+    const url=`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${S.apiKey}`;
+    const r=await fetch(url,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        contents:[{role:'user',parts:[{text:prompt}]}],
+        generationConfig:{maxOutputTokens:maxTok,temperature:0.7}
+      })
+    });
+    if(!r.ok){
+      const e=await r.json().catch(()=>({}));
+      const msg=e.error?.message||'';
+      if(r.status===400&&(msg.includes('API_KEY')||msg.includes('API key'))){
+        changeApiKey();throw new Error('Invalid Gemini API key — please update');
+      }
+      throw new Error(msg||`Error ${r.status}`);
+    }
+    const d=await r.json();
+    const text=d.candidates?.[0]?.content?.parts?.[0]?.text;
+    if(!text)throw new Error('Empty response');
+    return text;
+  }
+
+  // Step 3: Get models and try them in priority order
+  const available=await getModels();
+  
+  // Prefer flash models, then pro models
+  const priority=['gemini-1.5-flash-latest','gemini-1.5-flash','gemini-1.5-pro-latest','gemini-1.5-pro','gemini-2.0-flash-lite','gemini-2.0-flash','gemini-pro'];
+  const ordered=[
+    ...priority.filter(m=>available.includes(m)),
+    ...available.filter(m=>!priority.includes(m)&&!m.includes('embedding')&&!m.includes('aqa'))
+  ];
+  
+  if(ordered.length===0&&available.length===0){
+    // Fallback: try without listing models
+    ordered.push('gemini-1.5-flash-latest','gemini-1.5-flash','gemini-pro');
+  }
+
+  let lastErr='No models available';
+  for(const model of ordered.slice(0,5)){
+    try{
+      const result=await tryModel(model);
+      if(!S.workingModel)S.workingModel=model;
+      return result;
     }catch(e){
       if(e.message.includes('Invalid Gemini'))throw e;
       lastErr=e.message;
     }
   }
-  throw new Error(lastErr||'All Gemini models failed — please try again');
+  throw new Error(`Gemini error: ${lastErr}`);
 }
 function parseJ(text){
   const c=text.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
