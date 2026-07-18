@@ -530,17 +530,75 @@ async function callGemini(prompt){
 }
 
 function parseJSON(text){
+  // Method 1: Clean and parse JSON directly
   try{
     const c=text.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
-    const s=c.search(/[{\[]/);
-    if(s!==-1) return JSON.parse(c.slice(s));
+    const s=c.search(/\{/);
+    const e=c.lastIndexOf('}');
+    if(s!==-1&&e>s){
+      const jsonStr=c.slice(s,e+1);
+      return JSON.parse(jsonStr);
+    }
   }catch(e){}
-  // Fallback: extract by key
-  const get=(key)=>{
-    const re=new RegExp(`"${key}"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"`, 's');
-    const m=text.match(re); return m?m[1].replace(/\\n/g,'\n').replace(/\\"/g,'"'):'';
-  };
-  return { meaning:get('meaning'), longterm:get('longterm'), emotional:get('emotional'), phase:get('phase'), habits:get('habits') };
+
+  // Method 2: Extract each field with flexible regex
+  function extractField(key){
+    // Match "key": "value" allowing multiline and escaped chars
+    const patterns=[
+      new RegExp(`"${key}"\\s*:\\s*"([\\s\\S]*?)"(?=\\s*[,}])`, 'i'),
+      new RegExp(`"${key}"\\s*:\\s*"([\\s\\S]*?)"\\s*\\n`, 'i'),
+      new RegExp(`\\*\\*${key}\\*\\*:?\\s*([\\s\\S]*?)(?=\\*\\*|$)`, 'i'),
+      new RegExp(`${key}:?\\s*([^\\n]{20,})`, 'i'),
+    ];
+    for(const re of patterns){
+      const m=text.match(re);
+      if(m&&m[1]&&m[1].trim().length>10){
+        return m[1].trim().replace(/\\n/g,'\n').replace(/\\"/g,'"');
+      }
+    }
+    return '';
+  }
+
+  // Method 3: If Gemini returned plain text without JSON, split by sections
+  function extractSection(labels, nextLabels){
+    for(const label of labels){
+      const re=new RegExp(`(?:${label})[:\s*]*([\s\S]{30,})`, 'i');
+      const m=text.match(re);
+      if(m){
+        let val=m[1].trim();
+        // Cut at next section
+        for(const next of nextLabels){
+          const cut=val.search(new RegExp(next,'i'));
+          if(cut>30) val=val.slice(0,cut).trim();
+        }
+        if(val.length>20) return val;
+      }
+    }
+    return '';
+  }
+
+  const allLabels=['meaning','longterm','long.term','long term','emotional','phase','habits','practical'];
+  const meaning=extractField('meaning')||extractSection(['meaning','MEANING'],['longterm','long','emotional','phase','habits']);
+  const longterm=extractField('longterm')||extractField('long_term')||extractSection(['longterm','long.term','long term','lifelong','LONG'],['emotional','EMOTIONAL','phase','habits']);
+  const emotional=extractField('emotional')||extractSection(['emotional','EMOTIONAL'],['phase','PHASE','habits','HABITS']);
+  const phase=extractField('phase')||extractSection(['phase','PHASE','astrology','ASTROLOGY'],['habits','HABITS','practical']);
+  const habits=extractField('habits')||extractField('practical')||extractSection(['habits','HABITS','practical','PRACTICAL'],[]);
+
+  // Method 4: Last resort — if we got nothing, the whole text is the meaning
+  if(!meaning&&!longterm&&!emotional&&!phase&&!habits&&text.length>50){
+    // Split text into 5 equal parts
+    const lines=text.split('\n').filter(l=>l.trim().length>0);
+    const chunk=Math.ceil(lines.length/5);
+    return {
+      meaning: lines.slice(0,chunk).join(' '),
+      longterm: lines.slice(chunk,chunk*2).join(' '),
+      emotional: lines.slice(chunk*2,chunk*3).join(' '),
+      phase: lines.slice(chunk*3,chunk*4).join(' '),
+      habits: lines.slice(chunk*4).join(' ')
+    };
+  }
+
+  return { meaning, longterm, emotional, phase, habits };
 }
 
 // ================================================================
@@ -604,6 +662,7 @@ Return ONLY a valid JSON object with these exact five keys:
     document.getElementById('results').classList.add('show');
     document.getElementById('genLoad').classList.remove('show');
     btn.disabled=false;
+    if(S.workingModel) toast(`✓ Generated using ${S.workingModel}`);
 
     // Reset save button
     const sv=document.getElementById('saveBtn');
