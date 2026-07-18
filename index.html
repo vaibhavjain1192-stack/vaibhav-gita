@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vaibhav's Gita Journal</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 :root {
   --bg: #0C0A07;
@@ -13,231 +13,217 @@
   --card: #1A1712;
   --lift: #221F18;
   --border: rgba(255,255,255,0.07);
-  --border-m: rgba(255,255,255,0.12);
+  --border-m: rgba(255,255,255,0.13);
   --gold: #C8932A;
   --gold-b: #E8B84A;
   --gold-p: rgba(200,147,42,0.1);
   --gold-bd: rgba(200,147,42,0.22);
-  --lotus: #9A4A62;
-  --lotus-b: #C46A82;
-  --lotus-p: rgba(154,74,98,0.1);
-  --lotus-bd: rgba(154,74,98,0.22);
   --sage: #3A7A52;
   --sage-b: #5AAA72;
   --sage-p: rgba(58,122,82,0.1);
   --sage-bd: rgba(58,122,82,0.22);
+  --lotus: #9A4A62;
+  --lotus-b: #C46A82;
+  --lotus-p: rgba(154,74,98,0.1);
+  --lotus-bd: rgba(154,74,98,0.22);
   --slate: #2A4A6A;
   --slate-b: #4A7AAA;
   --slate-p: rgba(42,74,106,0.1);
   --slate-bd: rgba(42,74,106,0.22);
+  --violet: #5A3A8A;
+  --violet-b: #9A7ACC;
+  --violet-p: rgba(90,58,138,0.1);
+  --violet-bd: rgba(90,58,138,0.22);
   --text: rgba(255,255,255,0.88);
   --text-m: rgba(255,255,255,0.56);
   --text-l: rgba(255,255,255,0.32);
   --text-f: rgba(255,255,255,0.14);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 13.5px; line-height: 1.65; min-height: 100vh; }
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:13.5px;line-height:1.65;min-height:100vh;}
 
 /* MODAL */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 300; display: flex; align-items: center; justify-content: center; padding: 20px; }
-.modal-box { background: var(--card); border: 1px solid var(--border-m); border-radius: 20px; padding: 36px 40px; max-width: 480px; width: 100%; text-align: center; }
-.modal-om { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 48px; color: var(--gold); margin-bottom: 12px; }
-.modal-h { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
-.modal-p { font-size: 12.5px; color: var(--text-m); line-height: 1.7; margin-bottom: 14px; }
-.modal-p a { color: var(--gold); }
-.modal-input { width: 100%; padding: 11px 14px; border: 1px solid var(--border-m); border-radius: 8px; font-size: 13px; background: var(--lift); color: var(--text); font-family: 'DM Sans', sans-serif; margin-bottom: 10px; }
-.modal-note { font-size: 11px; color: var(--text-f); margin-top: 10px; line-height: 1.6; }
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;}
+.modal-box{background:var(--card);border:1px solid var(--border-m);border-radius:20px;padding:36px 40px;max-width:460px;width:100%;text-align:center;}
+.modal-om{font-size:48px;margin-bottom:10px;}
+.modal-h{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;margin-bottom:8px;color:var(--text);}
+.modal-p{font-size:12.5px;color:var(--text-m);line-height:1.7;margin-bottom:14px;}
+.modal-p a{color:var(--gold);}
+.modal-input{width:100%;padding:11px 14px;border:1px solid var(--border-m);border-radius:8px;font-size:13px;background:var(--lift);color:var(--text);font-family:'DM Sans',sans-serif;margin-bottom:10px;}
+.modal-note{font-size:11px;color:var(--text-f);margin-top:10px;line-height:1.6;}
 
 /* NAV */
-.nav { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-.nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; }
-.nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--gold); padding: 14px 20px 14px 0; border-right: 1px solid var(--border); margin-right: 16px; white-space: nowrap; flex-shrink: 0; cursor: pointer; }
-.nav-tabs { display: flex; overflow-x: auto; scrollbar-width: none; flex: 1; }
-.nav-tabs::-webkit-scrollbar { display: none; }
-.nav-tab { padding: 14px 14px; font-size: 11.5px; font-weight: 500; color: var(--text-l); cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .15s; }
-.nav-tab:hover { color: var(--text-m); }
-.nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
-.nav-right { display: flex; gap: 6px; margin-left: 10px; flex-shrink: 0; }
-.nav-btn { padding: 5px 11px; background: var(--lift); border: 1px solid var(--border); border-radius: 5px; color: var(--text-l); font-size: 10.5px; cursor: pointer; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
-.nav-btn:hover { border-color: var(--gold); color: var(--gold); }
+.nav{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.nav-inner{max-width:1000px;margin:0 auto;padding:0 24px;display:flex;align-items:center;}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--gold);padding:14px 18px 14px 0;border-right:1px solid var(--border);margin-right:14px;white-space:nowrap;flex-shrink:0;cursor:pointer;}
+.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;flex:1;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{padding:14px 13px;font-size:11.5px;font-weight:500;color:var(--text-l);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;}
+.nav-tab:hover{color:var(--text-m);}
+.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.nav-right{display:flex;gap:6px;margin-left:10px;flex-shrink:0;}
+.nav-btn{padding:5px 11px;background:var(--lift);border:1px solid var(--border);border-radius:5px;color:var(--text-l);font-size:10.5px;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+.nav-btn:hover{border-color:var(--gold);color:var(--gold);}
 
 /* PAGES */
-.page { display: none; }
-.page.active { display: block; }
+.page{display:none;}.page.active{display:block;}
 
 /* TOAST */
-.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--lift); border: 1px solid var(--border-m); color: var(--text); padding: 10px 20px; border-radius: 20px; font-size: 12px; z-index: 400; opacity: 0; transition: opacity .3s; pointer-events: none; white-space: nowrap; }
-.toast.show { opacity: 1; }
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--lift);border:1px solid var(--border-m);color:var(--text);padding:10px 20px;border-radius:20px;font-size:12px;z-index:400;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
+.toast.show{opacity:1;}
 
-/* ==================== UPLOAD PAGE ==================== */
-.upload-page { max-width: 760px; margin: 0 auto; padding: 40px 28px 80px; }
+/* ===== TODAY PAGE ===== */
+.today-page{max-width:720px;margin:0 auto;padding:36px 24px 80px;}
 
-.up-header { text-align: center; margin-bottom: 36px; }
-.up-om { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 36px; color: var(--gold); opacity: .6; margin-bottom: 8px; }
-.up-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-.up-sub { font-size: 13px; color: var(--text-m); }
+.today-header{text-align:center;margin-bottom:32px;}
+.th-om{font-size:32px;margin-bottom:6px;opacity:.5;}
+.th-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.th-sub{font-size:13px;color:var(--text-m);}
 
-/* UPLOAD ZONE */
-.upload-zone { border: 2px dashed var(--border-m); border-radius: 16px; padding: 40px 24px; text-align: center; cursor: pointer; transition: all .2s; margin-bottom: 20px; background: var(--card); position: relative; }
-.upload-zone:hover, .upload-zone.drag { border-color: var(--gold); background: var(--gold-p); }
-.upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-.uz-icon { font-size: 36px; margin-bottom: 10px; }
-.uz-text { font-size: 14px; color: var(--text-m); margin-bottom: 4px; }
-.uz-sub { font-size: 11.5px; color: var(--text-l); }
+/* INPUT CARD */
+.input-card{background:var(--card);border:1px solid var(--border-m);border-radius:16px;padding:24px 26px;margin-bottom:20px;}
+.ic-label{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);margin-bottom:14px;font-weight:600;}
+.ic-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.ic-field label{display:block;font-size:10.5px;color:var(--text-l);margin-bottom:6px;letter-spacing:.06em;text-transform:uppercase;}
+.ic-field select,.ic-field input{width:100%;padding:10px 13px;background:var(--lift);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;transition:border-color .15s;}
+.ic-field select:focus,.ic-field input:focus{outline:none;border-color:var(--gold);}
+.ic-field select option{background:var(--card);}
 
-/* IMAGE PREVIEW */
-.img-preview { display: none; border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border-m); }
-.img-preview img { width: 100%; max-height: 400px; object-fit: contain; background: var(--card); display: block; }
-.img-preview-actions { padding: 10px 14px; background: var(--card); display: flex; align-items: center; justify-content: space-between; }
-.img-name { font-size: 11px; color: var(--text-l); }
+.gen-btn{width:100%;padding:13px;background:var(--gold);color:var(--bg);font-size:14px;font-weight:600;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;letter-spacing:.01em;}
+.gen-btn:hover{background:var(--gold-b);}
+.gen-btn:disabled{opacity:.5;cursor:not-allowed;}
 
-/* CHAPTER/SHLOKA INPUT */
-.ref-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-.ref-field label { display: block; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-l); margin-bottom: 6px; }
-.ref-field input, .ref-field select { width: 100%; padding: 10px 13px; background: var(--card); border: 1px solid var(--border-m); border-radius: 8px; color: var(--text); font-size: 13px; font-family: 'DM Sans', sans-serif; }
-.ref-field input:focus, .ref-field select:focus { outline: none; border-color: var(--gold); }
-
-/* GENERATE BUTTON */
-.gen-btn { width: 100%; padding: 14px; background: var(--gold); color: var(--bg); font-size: 14px; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; margin-bottom: 28px; }
-.gen-btn:hover { background: var(--gold-b); }
-.gen-btn:disabled { opacity: .5; cursor: not-allowed; }
+/* LOADING */
+.gen-loading{display:none;text-align:center;padding:28px 20px;}
+.gen-loading.show{display:block;}
+.spinner-lg{width:32px;height:32px;border:3px solid var(--gold-p);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.gen-loading p{font-size:13px;color:var(--text-m);}
+.gen-loading span{font-size:11.5px;color:var(--text-l);}
 
 /* RESULTS */
-.results { display: none; }
-.results.show { display: block; }
+.results{display:none;}
+.results.show{display:block;}
 
-.result-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 14px; overflow: hidden; }
-.rc-header { padding: 12px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-.rc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.rc-label { font-size: 10px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; }
-.rc-body { padding: 18px 18px; }
-.rc-body textarea { width: 100%; background: var(--lift); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 13.5px; font-family: 'DM Sans', sans-serif; line-height: 1.7; padding: 12px 14px; resize: vertical; min-height: 100px; }
-.rc-body textarea:focus { outline: none; border-color: var(--gold); }
-.rc-body textarea.meaning { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; }
+/* SHLOKA DISPLAY */
+.shloka-ref{background:var(--gold-p);border:1px solid var(--gold-bd);border-radius:10px;padding:12px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.sr-badge{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);flex-shrink:0;}
+.sr-name{font-size:12px;color:var(--text-m);}
 
-/* Color themes per card */
-.card-meaning .rc-header { background: rgba(200,147,42,0.06); }
-.card-meaning .rc-dot { background: var(--gold); }
-.card-meaning .rc-label { color: var(--gold); }
-.card-meaning textarea:focus { border-color: var(--gold); }
+/* RESULT CARDS */
+.rc{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;}
+.rc-head{padding:11px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
+.rc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.rc-lbl{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;}
+.rc-body{padding:16px 16px;}
+.rc-body textarea{width:100%;background:var(--lift);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:13.5px;font-family:'DM Sans',sans-serif;line-height:1.72;padding:11px 13px;resize:vertical;min-height:88px;}
+.rc-body textarea:focus{outline:none;border-color:var(--gold);}
+.rc-body textarea.italic{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;}
 
-.card-longterm .rc-header { background: rgba(58,122,82,0.06); }
-.card-longterm .rc-dot { background: var(--sage-b); }
-.card-longterm .rc-label { color: var(--sage-b); }
-.card-longterm textarea:focus { border-color: var(--sage-b); }
+/* Card colour themes */
+.c-gold .rc-head{background:rgba(200,147,42,0.06);}
+.c-gold .rc-dot{background:var(--gold);}
+.c-gold .rc-lbl{color:var(--gold);}
+.c-gold textarea:focus{border-color:var(--gold);}
 
-.card-emotional .rc-header { background: rgba(154,74,98,0.06); }
-.card-emotional .rc-dot { background: var(--lotus-b); }
-.card-emotional .rc-label { color: var(--lotus-b); }
-.card-emotional textarea:focus { border-color: var(--lotus-b); }
+.c-sage .rc-head{background:rgba(58,122,82,0.06);}
+.c-sage .rc-dot{background:var(--sage-b);}
+.c-sage .rc-lbl{color:var(--sage-b);}
+.c-sage textarea:focus{border-color:var(--sage-b);}
 
-.card-phase .rc-header { background: rgba(42,74,106,0.06); }
-.card-phase .rc-dot { background: var(--slate-b); }
-.card-phase .rc-label { color: var(--slate-b); }
-.card-phase textarea:focus { border-color: var(--slate-b); }
+.c-lotus .rc-head{background:rgba(154,74,98,0.06);}
+.c-lotus .rc-dot{background:var(--lotus-b);}
+.c-lotus .rc-lbl{color:var(--lotus-b);}
+.c-lotus textarea:focus{border-color:var(--lotus-b);}
 
-.card-habits .rc-header { background: rgba(106,42,154,0.06); }
-.card-habits .rc-dot { background: #9A7ACC; }
-.card-habits .rc-label { color: #9A7ACC; }
-.card-habits textarea:focus { border-color: #9A7ACC; }
+.c-slate .rc-head{background:rgba(42,74,106,0.06);}
+.c-slate .rc-dot{background:var(--slate-b);}
+.c-slate .rc-lbl{color:var(--slate-b);}
+.c-slate textarea:focus{border-color:var(--slate-b);}
 
-/* SAVE SECTION */
-.save-section { background: var(--lift); border: 1px solid var(--border-m); border-radius: 14px; padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.ss-info { }
-.ss-title { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
-.ss-sub { font-size: 11.5px; color: var(--text-l); }
-.save-btn { padding: 10px 24px; background: var(--sage); color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; white-space: nowrap; transition: all .15s; }
-.save-btn:hover { background: var(--sage-b); }
-.save-btn:disabled { opacity: .5; cursor: not-allowed; }
+.c-violet .rc-head{background:rgba(90,58,138,0.06);}
+.c-violet .rc-dot{background:var(--violet-b);}
+.c-violet .rc-lbl{color:var(--violet-b);}
+.c-violet textarea:focus{border-color:var(--violet-b);}
 
-/* LOADING OVERLAY */
-.gen-loading { display: none; text-align: center; padding: 32px 20px; }
-.gen-loading.show { display: block; }
-.spinner-lg { width: 36px; height: 36px; border: 3px solid var(--gold-p); border-top-color: var(--gold); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 14px; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.gen-loading p { font-size: 13px; color: var(--text-m); }
+/* SAVE BAR */
+.save-bar{background:var(--lift);border:1px solid var(--border-m);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:4px;}
+.sb-info .sb-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.sb-info .sb-sub{font-size:11px;color:var(--text-l);}
+.save-btn{padding:10px 22px;background:var(--sage);color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all .15s;}
+.save-btn:hover{background:var(--sage-b);}
+.save-btn:disabled{opacity:.5;cursor:not-allowed;}
 
-/* ==================== JOURNAL PAGE ==================== */
-.journal-page { max-width: 1100px; margin: 0 auto; padding: 32px 28px 80px; }
-
-.jp-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
-.jp-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--text); }
-.jp-stats { display: flex; gap: 10px; }
-.jp-stat { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; text-align: center; }
-.jps-num { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--gold); line-height: 1; }
-.jps-lbl { font-size: 9.5px; color: var(--text-l); text-transform: uppercase; letter-spacing: .08em; }
+/* ===== JOURNAL PAGE ===== */
+.journal-page{max-width:1000px;margin:0 auto;padding:28px 24px 80px;}
+.jp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:10px;}
+.jp-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--text);}
+.jp-stats{display:flex;gap:8px;}
+.jps{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 14px;text-align:center;}
+.jps-n{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold);line-height:1;}
+.jps-l{font-size:9px;color:var(--text-l);text-transform:uppercase;letter-spacing:.08em;}
 
 /* CHAPTER FILTER */
-.chapter-filter { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 24px; }
-.cf-btn { padding: 5px 12px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; font-size: 11px; color: var(--text-l); cursor: pointer; transition: all .15s; font-family: 'DM Sans', sans-serif; }
-.cf-btn:hover { border-color: var(--gold); color: var(--gold); }
-.cf-btn.active { background: var(--gold-p); border-color: var(--gold-bd); color: var(--gold); }
+.ch-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
+.cf{padding:5px 12px;background:var(--card);border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--text-l);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;}
+.cf:hover{border-color:var(--gold-bd);color:var(--gold);}
+.cf.active{background:var(--gold-p);border-color:var(--gold-bd);color:var(--gold);}
 
 /* JOURNAL ENTRIES */
-.journal-entries { display: flex; flex-direction: column; gap: 14px; }
-.je { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color .15s; }
-.je:hover { border-color: var(--border-m); }
-.je-header { padding: 14px 18px; cursor: pointer; display: flex; align-items: center; gap: 12px; }
-.je-num { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
-.je-title { flex: 1; }
-.je-ch { font-size: 11px; color: var(--text-l); margin-bottom: 2px; }
-.je-meaning-preview { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: var(--text-m); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 500px; }
-.je-date { font-size: 10px; color: var(--text-f); flex-shrink: 0; }
-.je-arrow { color: var(--text-f); font-size: 12px; transition: transform .2s; flex-shrink: 0; }
-.je-arrow.open { transform: rotate(180deg); }
-.je-body { display: none; border-top: 1px solid var(--border); }
-.je-body.open { display: block; }
-.je-section { padding: 14px 18px; border-bottom: 1px solid var(--border); }
-.je-section:last-child { border-bottom: none; }
-.je-slabel { font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
-.je-stext { font-size: 13px; color: var(--text-m); line-height: 1.7; }
-.je-stext.meaning { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: var(--text); }
-.je-img { padding: 14px 18px; border-bottom: 1px solid var(--border); }
-.je-img img { width: 100%; max-height: 300px; object-fit: contain; border-radius: 8px; background: var(--lift); }
+.j-entries{display:flex;flex-direction:column;gap:10px;}
+.je{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .15s;}
+.je:hover{border-color:var(--border-m);}
+.je-head{padding:13px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;}
+.je-badge{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700;color:var(--gold);flex-shrink:0;white-space:nowrap;}
+.je-info{flex:1;min-width:0;}
+.je-ch{font-size:10.5px;color:var(--text-l);margin-bottom:2px;}
+.je-preview{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--text-m);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.je-date{font-size:10px;color:var(--text-f);flex-shrink:0;}
+.je-arr{color:var(--text-f);font-size:11px;transition:transform .2s;flex-shrink:0;}
+.je-arr.open{transform:rotate(180deg);}
+.je-body{display:none;border-top:1px solid var(--border);}
+.je-body.open{display:block;}
+.je-sec{padding:12px 16px;border-bottom:1px solid var(--border);}
+.je-sec:last-child{border-bottom:none;}
+.je-slbl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px;font-weight:600;}
+.je-stxt{font-size:13px;color:var(--text-m);line-height:1.7;white-space:pre-wrap;}
+.je-stxt.italic{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--text);}
 
-/* EMPTY STATE */
-.empty-state { text-align: center; padding: 64px 24px; }
-.es-om { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 48px; color: var(--gold); opacity: .3; margin-bottom: 16px; }
-.es-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--text-m); margin-bottom: 8px; }
-.es-sub { font-size: 13px; color: var(--text-l); }
+/* EMPTY */
+.empty{text-align:center;padding:56px 20px;}
+.empty-om{font-size:44px;opacity:.2;margin-bottom:14px;}
+.empty-t{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text-m);margin-bottom:6px;}
+.empty-s{font-size:13px;color:var(--text-l);}
 
-/* ==================== PROGRESS PAGE ==================== */
-.progress-page { max-width: 900px; margin: 0 auto; padding: 32px 28px 80px; }
-.prog-header { margin-bottom: 28px; }
-.prog-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-.prog-sub { font-size: 13px; color: var(--text-m); }
+/* ===== PROGRESS PAGE ===== */
+.progress-page{max-width:860px;margin:0 auto;padding:28px 24px 80px;}
+.pp-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.pp-sub{font-size:13px;color:var(--text-m);margin-bottom:24px;}
+.p-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;}
+.ps{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 14px;text-align:center;}
+.ps-n{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:4px;}
+.ps-l{font-size:9.5px;color:var(--text-l);text-transform:uppercase;letter-spacing:.1em;}
+.cp-list{display:flex;flex-direction:column;gap:7px;}
+.cp{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:11px 14px;cursor:pointer;transition:border-color .15s;}
+.cp:hover{border-color:var(--gold-bd);}
+.cp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+.cp-name{font-size:12.5px;font-weight:500;color:var(--text);}
+.cp-count{font-size:11px;color:var(--gold);font-weight:600;}
+.cp-bar{height:3px;background:var(--lift);border-radius:2px;overflow:hidden;}
+.cp-fill{height:100%;background:var(--gold);border-radius:2px;}
 
-.prog-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 28px; }
-.ps { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 16px; text-align: center; }
-.ps-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 4px; }
-.ps-lbl { font-size: 10px; color: var(--text-l); text-transform: uppercase; letter-spacing: .1em; }
+/* UTIL */
+.spinner-sm{display:inline-block;width:12px;height:12px;border:2px solid var(--gold-p);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:5px;}
 
-.chapter-progress { display: flex; flex-direction: column; gap: 8px; }
-.cp-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; cursor: pointer; transition: border-color .15s; }
-.cp-item:hover { border-color: var(--gold-bd); }
-.cp-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.cp-name { font-size: 12.5px; font-weight: 500; color: var(--text); }
-.cp-count { font-size: 11.5px; color: var(--gold); font-weight: 600; }
-.cp-bar { height: 3px; background: var(--lift); border-radius: 2px; overflow: hidden; }
-.cp-fill { height: 100%; background: var(--gold); border-radius: 2px; transition: width .3s; }
-
-/* UTILS */
-.spinner-sm { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(200,147,42,0.2); border-top-color: var(--gold); border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; margin-right: 5px; }
-.btn { padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; transition: all .15s; font-family: 'DM Sans', sans-serif; }
-.btn-outline { background: transparent; color: var(--text-l); border: 1px solid var(--border); }
-.btn-outline:hover { border-color: var(--text-l); color: var(--text); }
-
-@media (max-width: 680px) {
-  .nav-inner { padding: 0 12px; }
-  .nav-brand { font-size: 17px; padding: 12px 12px 12px 0; margin-right: 10px; }
-  .upload-page, .journal-page, .progress-page { padding: 20px 14px 60px; }
-  .ref-row { grid-template-columns: 1fr; }
-  .prog-stats { grid-template-columns: 1fr 1fr; }
-  .save-section { flex-direction: column; align-items: flex-start; }
-  .je-meaning-preview { max-width: 200px; }
-  .modal-box { padding: 24px 18px; }
+@media(max-width:640px){
+  .nav-inner{padding:0 12px;}.nav-brand{font-size:17px;padding:12px 12px 12px 0;margin-right:10px;}
+  .today-page,.journal-page,.progress-page{padding:18px 14px 60px;}
+  .ic-row{grid-template-columns:1fr;}
+  .p-stats{grid-template-columns:1fr 1fr;}
+  .save-bar{flex-direction:column;align-items:flex-start;}
+  .modal-box{padding:24px 18px;}
 }
 </style>
 </head>
@@ -248,21 +234,21 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 <!-- API KEY MODAL -->
 <div class="modal" id="apiModal">
   <div class="modal-box">
-    <div class="modal-om">ॐ</div>
+    <div class="modal-om">🪷</div>
     <div class="modal-h">Vaibhav's Gita Journal</div>
-    <div class="modal-p">Enter your Gemini API key to begin. Get your free key at <a href="https://aistudio.google.com" target="_blank">aistudio.google.com</a> → Get API Key → Create API Key. No card required.</div>
+    <div class="modal-p">Enter your Gemini API key. Get your FREE key at <a href="https://aistudio.google.com" target="_blank">aistudio.google.com</a> → Get API Key → Create API Key in new project. No card required.</div>
     <input type="password" class="modal-input" id="apiKeyInput" placeholder="Your Gemini API key..." />
-    <button class="btn" style="width:100%;padding:12px;background:var(--gold);color:var(--bg);font-size:13px;font-weight:600;border-radius:8px" onclick="saveApiKey()">Begin My Gita Journey 🪷</button>
-    <div class="modal-note">Free tier: 1500 requests/day. Your key is stored only in your browser. Each shloka analysis costs zero — Gemini's vision API reads your photo.</div>
+    <button style="width:100%;padding:12px;background:var(--gold);color:var(--bg);font-size:13px;font-weight:600;border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;" onclick="saveApiKey()">Begin My Gita Journey 🪷</button>
+    <div class="modal-note">Free tier: 1500 requests/day. Your key never leaves your browser.</div>
   </div>
 </div>
 
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <div class="nav-brand" onclick="showPage('upload')">🪷 Vaibhav's Gita</div>
-    <div class="nav-tabs" id="navTabs">
-      <div class="nav-tab active" onclick="showPage('upload')">📸 Today's Shloka</div>
+    <div class="nav-brand" onclick="showPage('today')">🪷 Vaibhav's Gita</div>
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showPage('today')">✦ Today's Shloka</div>
       <div class="nav-tab" onclick="showPage('journal')">📖 My Journal</div>
       <div class="nav-tab" onclick="showPage('progress')">📿 Progress</div>
     </div>
@@ -272,177 +258,128 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   </div>
 </nav>
 
-<!-- ==================== UPLOAD PAGE ==================== -->
-<div class="page active" id="page-upload">
-  <div class="upload-page">
+<!-- ===== TODAY PAGE ===== -->
+<div class="page active" id="page-today">
+  <div class="today-page">
 
-    <div class="up-header">
-      <div class="up-om">ॐ</div>
-      <div class="up-title">Today's Shloka</div>
-      <div class="up-sub">Upload a photo of the shloka you read today and receive your personal guidance</div>
+    <div class="today-header">
+      <div class="th-om">ॐ</div>
+      <div class="th-title">Today's Shloka</div>
+      <div class="th-sub">Enter the chapter and shloka you read today — receive your personal guidance</div>
     </div>
 
-    <!-- IMAGE UPLOAD -->
-    <div class="upload-zone" id="uploadZone">
-      <input type="file" accept="image/*" id="fileInput" onchange="handleFile(this.files[0])" />
-      <div class="uz-icon">📷</div>
-      <div class="uz-text">Tap to upload or take a photo of your shloka</div>
-      <div class="uz-sub">JPEG, PNG, WEBP · Any size</div>
-    </div>
-
-    <div class="img-preview" id="imgPreview">
-      <img id="previewImg" src="" alt="Shloka preview" />
-      <div class="img-preview-actions">
-        <span class="img-name" id="imgName"></span>
-        <button class="btn btn-outline" onclick="clearImage()">✕ Change photo</button>
+    <div class="input-card">
+      <div class="ic-label">Which shloka did you read?</div>
+      <div class="ic-row">
+        <div class="ic-field">
+          <label>Chapter</label>
+          <select id="chSel">
+            <option value="">Select chapter...</option>
+            <option value="1">Chapter 1 · Arjuna Vishada Yoga (47)</option>
+            <option value="2">Chapter 2 · Sankhya Yoga (72)</option>
+            <option value="3">Chapter 3 · Karma Yoga (43)</option>
+            <option value="4">Chapter 4 · Jnana Karma Sanyasa Yoga (42)</option>
+            <option value="5">Chapter 5 · Karma Sanyasa Yoga (29)</option>
+            <option value="6">Chapter 6 · Dhyana Yoga (47)</option>
+            <option value="7">Chapter 7 · Jnana Vijnana Yoga (30)</option>
+            <option value="8">Chapter 8 · Aksara Brahma Yoga (28)</option>
+            <option value="9">Chapter 9 · Raja Vidya Guhya Yoga (34)</option>
+            <option value="10">Chapter 10 · Vibhuti Yoga (42)</option>
+            <option value="11">Chapter 11 · Vishwarupa Darshana Yoga (55)</option>
+            <option value="12">Chapter 12 · Bhakti Yoga (20)</option>
+            <option value="13">Chapter 13 · Kshetra Kshetrajna Yoga (35)</option>
+            <option value="14">Chapter 14 · Gunatraya Vibhaga Yoga (27)</option>
+            <option value="15">Chapter 15 · Purushottama Yoga (20)</option>
+            <option value="16">Chapter 16 · Daivasura Sampad Yoga (24)</option>
+            <option value="17">Chapter 17 · Shraddhatraya Yoga (28)</option>
+            <option value="18">Chapter 18 · Moksha Sanyasa Yoga (78)</option>
+          </select>
+        </div>
+        <div class="ic-field">
+          <label>Shloka Number</label>
+          <input type="number" id="shNum" placeholder="e.g. 1" min="1" max="78" />
+        </div>
       </div>
+      <button class="gen-btn" id="genBtn" onclick="generate()">✦ Generate My Guidance</button>
     </div>
 
-    <!-- CHAPTER & SHLOKA REF -->
-    <div class="ref-row">
-      <div class="ref-field">
-        <label>Chapter</label>
-        <select id="chapterSelect">
-          <option value="">Select chapter...</option>
-          <option value="1">Chapter 1 · Arjuna Vishada Yoga</option>
-          <option value="2">Chapter 2 · Sankhya Yoga</option>
-          <option value="3">Chapter 3 · Karma Yoga</option>
-          <option value="4">Chapter 4 · Jnana Karma Sanyasa Yoga</option>
-          <option value="5">Chapter 5 · Karma Sanyasa Yoga</option>
-          <option value="6">Chapter 6 · Dhyana Yoga</option>
-          <option value="7">Chapter 7 · Jnana Vijnana Yoga</option>
-          <option value="8">Chapter 8 · Aksara Brahma Yoga</option>
-          <option value="9">Chapter 9 · Raja Vidya Raja Guhya Yoga</option>
-          <option value="10">Chapter 10 · Vibhuti Yoga</option>
-          <option value="11">Chapter 11 · Vishwarupa Darshana Yoga</option>
-          <option value="12">Chapter 12 · Bhakti Yoga</option>
-          <option value="13">Chapter 13 · Kshetra Kshetrajna Yoga</option>
-          <option value="14">Chapter 14 · Gunatraya Vibhaga Yoga</option>
-          <option value="15">Chapter 15 · Purushottama Yoga</option>
-          <option value="16">Chapter 16 · Daivasura Sampad Yoga</option>
-          <option value="17">Chapter 17 · Shraddhatraya Yoga</option>
-          <option value="18">Chapter 18 · Moksha Sanyasa Yoga</option>
-        </select>
-      </div>
-      <div class="ref-field">
-        <label>Shloka Number</label>
-        <input type="number" id="shlokaNum" placeholder="e.g. 47" min="1" max="78" />
-      </div>
-    </div>
-
-    <!-- GENERATE -->
-    <button class="gen-btn" id="genBtn" onclick="generateGuidance()">✦ Generate My Guidance</button>
-
-    <!-- LOADING -->
-    <div class="gen-loading" id="genLoading">
+    <div class="gen-loading" id="genLoad">
       <div class="spinner-lg"></div>
-      <p>Reading your shloka and preparing personal guidance...<br><span style="color:var(--text-l);font-size:11.5px">This takes 10–20 seconds</span></p>
+      <p>Reading Chapter <span id="loadCh"></span>, Shloka <span id="loadSh"></span>...<br><span>Preparing your personal guidance — 10 to 20 seconds</span></p>
     </div>
 
-    <!-- RESULTS -->
     <div class="results" id="results">
 
-      <div class="result-card card-meaning">
-        <div class="rc-header">
-          <div class="rc-dot"></div>
-          <div class="rc-label">Meaning of this Shloka</div>
-        </div>
-        <div class="rc-body">
-          <textarea class="meaning" id="resMeaning" rows="4" placeholder="The meaning will appear here..."></textarea>
-        </div>
+      <div class="shloka-ref" id="shlokaRef"></div>
+
+      <div class="rc c-gold">
+        <div class="rc-head"><div class="rc-dot"></div><div class="rc-lbl">Meaning of this Shloka</div></div>
+        <div class="rc-body"><textarea class="italic" id="rMeaning" rows="4"></textarea></div>
       </div>
 
-      <div class="result-card card-longterm">
-        <div class="rc-header">
-          <div class="rc-dot"></div>
-          <div class="rc-label">Long-term Life Learning for Vaibhav</div>
-        </div>
-        <div class="rc-body">
-          <textarea id="resLongterm" rows="5" placeholder="Your lifelong principle from this shloka..."></textarea>
-        </div>
+      <div class="rc c-sage">
+        <div class="rc-head"><div class="rc-dot"></div><div class="rc-lbl">Long-term Life Learning for Vaibhav</div></div>
+        <div class="rc-body"><textarea id="rLong" rows="5"></textarea></div>
       </div>
 
-      <div class="result-card card-emotional">
-        <div class="rc-header">
-          <div class="rc-dot"></div>
-          <div class="rc-label">Emotional Learning for Vaibhav</div>
-        </div>
-        <div class="rc-body">
-          <textarea id="resEmotional" rows="5" placeholder="Your emotional insight from this shloka..."></textarea>
-        </div>
+      <div class="rc c-lotus">
+        <div class="rc-head"><div class="rc-dot"></div><div class="rc-lbl">Emotional Learning for Vaibhav</div></div>
+        <div class="rc-body"><textarea id="rEmo" rows="5"></textarea></div>
       </div>
 
-      <div class="result-card card-phase">
-        <div class="rc-header">
-          <div class="rc-dot"></div>
-          <div class="rc-label">Learning for This Phase of Your Life · Astrology</div>
-        </div>
-        <div class="rc-body">
-          <textarea id="resPhase" rows="5" placeholder="What this shloka means for where you are right now..."></textarea>
-        </div>
+      <div class="rc c-slate">
+        <div class="rc-head"><div class="rc-dot"></div><div class="rc-lbl">Learning for This Phase of Life · Astrology</div></div>
+        <div class="rc-body"><textarea id="rPhase" rows="5"></textarea></div>
       </div>
 
-      <div class="result-card card-habits">
-        <div class="rc-header">
-          <div class="rc-dot"></div>
-          <div class="rc-label">Practical Daily Habits from This Shloka</div>
-        </div>
-        <div class="rc-body">
-          <textarea id="resHabits" rows="5" placeholder="Specific daily and weekly practices this shloka suggests for you..."></textarea>
-        </div>
+      <div class="rc c-violet">
+        <div class="rc-head"><div class="rc-dot"></div><div class="rc-lbl">Practical Daily Habits from This Shloka</div></div>
+        <div class="rc-body"><textarea id="rHabits" rows="5"></textarea></div>
       </div>
 
-      <div class="save-section">
-        <div class="ss-info">
-          <div class="ss-title">Save to your Gita Journal</div>
-          <div class="ss-sub">Saved entries appear in My Journal, organized by chapter</div>
+      <div class="save-bar">
+        <div class="sb-info">
+          <div class="sb-title">Save to your Gita Journal</div>
+          <div class="sb-sub">Saved to Google Sheets · visible in My Journal organized by chapter</div>
         </div>
-        <button class="save-btn" id="saveBtn" onclick="saveToSheet()">💾 Save to Journal</button>
+        <button class="save-btn" id="saveBtn" onclick="saveEntry()">💾 Save to Journal</button>
       </div>
 
     </div>
   </div>
 </div>
 
-<!-- ==================== JOURNAL PAGE ==================== -->
+<!-- ===== JOURNAL PAGE ===== -->
 <div class="page" id="page-journal">
   <div class="journal-page">
-    <div class="jp-header">
-      <div class="jp-title">My Gita Journal</div>
+    <div class="jp-top">
+      <div class="jp-title">📖 My Gita Journal</div>
       <div class="jp-stats">
-        <div class="jp-stat"><div class="jps-num" id="jTotalSaved">0</div><div class="jps-lbl">Saved</div></div>
-        <div class="jp-stat"><div class="jps-num" id="jChapters">0</div><div class="jps-lbl">Chapters</div></div>
+        <div class="jps"><div class="jps-n" id="jTotal">0</div><div class="jps-l">Saved</div></div>
+        <div class="jps"><div class="jps-n" id="jCh">0</div><div class="jps-l">Chapters</div></div>
       </div>
     </div>
-
-    <div class="chapter-filter" id="chapterFilter">
-      <button class="cf-btn active" onclick="filterChapter('all', this)">All</button>
+    <div class="ch-filter" id="chFilter">
+      <button class="cf active" onclick="filterCh('all',this)">All</button>
     </div>
-
-    <div class="journal-entries" id="journalEntries">
-      <div class="empty-state">
-        <div class="es-om">ॐ</div>
-        <div class="es-title">Your journal awaits</div>
-        <div class="es-sub">Upload your first shloka photo to begin</div>
-      </div>
+    <div class="j-entries" id="jEntries">
+      <div class="empty"><div class="empty-om">ॐ</div><div class="empty-t">Your journal awaits</div><div class="empty-s">Enter your first shloka to begin</div></div>
     </div>
   </div>
 </div>
 
-<!-- ==================== PROGRESS PAGE ==================== -->
+<!-- ===== PROGRESS PAGE ===== -->
 <div class="page" id="page-progress">
   <div class="progress-page">
-    <div class="prog-header">
-      <div class="prog-title">📿 Reading Progress</div>
-      <div class="prog-sub">Your journey through the Bhagavad Gita · Synced with Google Sheets</div>
+    <div class="pp-title">📿 Reading Progress</div>
+    <div class="pp-sub">Your journey through the Bhagavad Gita</div>
+    <div class="p-stats">
+      <div class="ps"><div class="ps-n" id="pTotal">0</div><div class="ps-l">Shlokas Read</div></div>
+      <div class="ps"><div class="ps-n" id="pCh">0</div><div class="ps-l">Chapters</div></div>
+      <div class="ps"><div class="ps-n" id="pPct">0%</div><div class="ps-l">Complete</div></div>
+      <div class="ps"><div class="ps-n" id="pStreak">0</div><div class="ps-l">Day Streak</div></div>
     </div>
-    <div class="prog-stats">
-      <div class="ps"><div class="ps-num" id="pTotal">0</div><div class="ps-lbl">Shlokas Read</div></div>
-      <div class="ps"><div class="ps-num" id="pChapters">0</div><div class="ps-lbl">Chapters Started</div></div>
-      <div class="ps"><div class="ps-num" id="pPct">0%</div><div class="ps-lbl">Complete</div></div>
-      <div class="ps"><div class="ps-num" id="pStreak">0</div><div class="ps-lbl">Day Streak</div></div>
-    </div>
-    <div class="chapter-progress" id="chapterProgressList"></div>
+    <div class="cp-list" id="cpList"></div>
   </div>
 </div>
 
@@ -452,479 +389,370 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 // ================================================================
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbz9f4dDPqYCOSxsGTFO147q3Xx-j2Ofn9ysGeCZNqYnaJ1Hxoh820Wj6VOPmz9gVWmP/exec';
 
-const KUNDALI = `Vaibhav Sharma, born July 11 1992, 11:32 PM, Agra, India.
-Pisces Ascendant Revati (Pushan deity — guide between worlds, completion before new beginnings).
-Sun Gemini 4H Punarvasu — Atmakaraka, soul purpose of returning light after darkness, wisdom transmission.
-Moon Scorpio 9H Jyeshtha — deep emotional processing, comparison suffering, anxiety, intense inner life.
-Mercury Cancer 5H Ashlesha — penetrating coiling intelligence, spirals under pressure, depth over breadth.
-Venus Cancer 5H Pushya Vargottama — current Mahadasha lord, nourishment, warmth, relational depth.
+const KUNDALI = `Vaibhav Sharma, born July 11 1992, 11:32 PM, Agra.
+Pisces ASC Revati — absorbs environments, Pushan deity, completion before new beginnings.
+Sun Gemini 4H Punarvasu — Atmakaraka, soul purpose of returning light after darkness.
+Moon Scorpio 9H Jyeshtha — deep emotional processing, comparison suffering, anxiety.
+Mercury Cancer 5H Ashlesha — coiling intelligence, spirals under pressure, depth over breadth.
+Venus Cancer 5H Pushya Vargottama — current Mahadasha lord, nourishment, warmth.
 Mars Aries 2H Amatyakaraka — self-earned wealth, direct action, anger when blocked.
-Jupiter Leo 6H Purva Phalguni Vargottama — career through solving hard problems, wisdom service.
-Saturn Capricorn 11H Sasa Yoga — Pancha Mahapurusha, late-peak chart, sustained disciplined building.
-Rahu Sagittarius 10H Mula — enterprise AI career destiny, unconventional path, going to root.
-Ketu Gemini 4H — detachment from conventional structures, spiritual depth.
+Jupiter Leo 6H Vargottama — career through solving hard problems for others.
+Saturn Capricorn 11H Sasa Yoga — late-peak chart, sustained disciplined building, wealth through patience.
+Rahu Sagittarius 10H Mula — enterprise AI advisory destiny, unconventional career.
+Ketu Gemini 4H — detachment from conventional structures.
 D10: Ketu 4H (self-employment destiny), Jupiter-Rahu 10H (AI advisory), Saturn-Venus ASC.
-Current: Venus-Mercury Antardasha. Saturn on ASC through June 2027. Rahu exits 12H July 26 2026.
-Life phase: Prolonged job search exhaustion, anger when blocked, comparison to peers, impatience.
-Destiny: Enterprise AI advisory 2030, financial independence 2035-36, control over time.
-Core truth: Like marriage arrived destined, career freedom is written across 7 chart indicators.
+Current period: Venus-Mercury Antardasha. Saturn on ASC through June 2027. Rahu exiting 12H July 26 2026.
+Current struggles: prolonged job search exhaustion, anger when blocked, comparison to peers, impatience, inability to be present with family.
+Destiny: Enterprise AI advisory 2030, financial independence 2035-36, freedom from 9-to-5.
+Core truth: Marriage arrived destined — career freedom is equally deeply written across 7 chart indicators.
 Philosophy: Build quietly. Trust the long arc. Be present where you are.`;
 
-const CHAPTERS = {
-  1:'Arjuna Vishada Yoga',2:'Sankhya Yoga',3:'Karma Yoga',4:'Jnana Karma Sanyasa Yoga',
-  5:'Karma Sanyasa Yoga',6:'Dhyana Yoga',7:'Jnana Vijnana Yoga',8:'Aksara Brahma Yoga',
-  9:'Raja Vidya Raja Guhya Yoga',10:'Vibhuti Yoga',11:'Vishwarupa Darshana Yoga',
-  12:'Bhakti Yoga',13:'Kshetra Kshetrajna Yoga',14:'Gunatraya Vibhaga Yoga',
-  15:'Purushottama Yoga',16:'Daivasura Sampad Yoga',17:'Shraddhatraya Yoga',18:'Moksha Sanyasa Yoga'
+const CH_NAMES = {
+  1:'Arjuna Vishada Yoga',2:'Sankhya Yoga',3:'Karma Yoga',
+  4:'Jnana Karma Sanyasa Yoga',5:'Karma Sanyasa Yoga',6:'Dhyana Yoga',
+  7:'Jnana Vijnana Yoga',8:'Aksara Brahma Yoga',9:'Raja Vidya Guhya Yoga',
+  10:'Vibhuti Yoga',11:'Vishwarupa Darshana Yoga',12:'Bhakti Yoga',
+  13:'Kshetra Kshetrajna Yoga',14:'Gunatraya Vibhaga Yoga',15:'Purushottama Yoga',
+  16:'Daivasura Sampad Yoga',17:'Shraddhatraya Yoga',18:'Moksha Sanyasa Yoga'
 };
+const CH_TOTALS = {1:47,2:72,3:43,4:42,5:29,6:47,7:30,8:28,9:34,10:42,11:55,12:20,13:35,14:27,15:20,16:24,17:28,18:78};
 const TOTAL_SHLOKAS = 700;
 
 // ================================================================
 // STATE
 // ================================================================
-let S = { apiKey: '', entries: [] };
-let currentFile = null;
-let currentBase64 = null;
-let currentResults = null;
+let S = { apiKey:'', entries:[] };
+let current = null;
 let activeFilter = 'all';
 
-function save() { try { localStorage.setItem('vgita_journal', JSON.stringify(S)); } catch(e) {} }
-function load() { try { const d = localStorage.getItem('vgita_journal'); if(d) S = {...S, ...JSON.parse(d)}; } catch(e) {} }
+function save(){ try{ localStorage.setItem('vgita5', JSON.stringify(S)); }catch(e){} }
+function load(){ try{ const d=localStorage.getItem('vgita5'); if(d) S={...S,...JSON.parse(d)}; }catch(e){} }
 
 // ================================================================
 // TOAST
 // ================================================================
-function toast(msg, dur=2500) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), dur);
+function toast(msg, dur=2800){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), dur);
 }
 
 // ================================================================
 // API KEY
 // ================================================================
-function saveApiKey() {
-  const k = document.getElementById('apiKeyInput').value.trim();
-  if(!k || k.length < 10) { alert('Please enter your Gemini API key'); return; }
-  S.apiKey = k; save();
-  document.getElementById('apiModal').style.display = 'none';
+function saveApiKey(){
+  const k=document.getElementById('apiKeyInput').value.trim();
+  if(!k||k.length<10){ alert('Please enter your Gemini API key'); return; }
+  S.apiKey=k; save();
+  document.getElementById('apiModal').style.display='none';
 }
-function changeApiKey() {
-  document.getElementById('apiKeyInput').value = S.apiKey || '';
-  document.getElementById('apiModal').style.display = 'flex';
+function changeApiKey(){
+  document.getElementById('apiKeyInput').value=S.apiKey||'';
+  document.getElementById('apiModal').style.display='flex';
 }
-function checkKey() {
-  if(!S.apiKey) { document.getElementById('apiModal').style.display = 'flex'; return false; }
+function checkKey(){
+  if(!S.apiKey){ document.getElementById('apiModal').style.display='flex'; return false; }
   return true;
 }
 
 // ================================================================
-// IMAGE HANDLING
+// GEMINI API — Text only, no image
 // ================================================================
-function handleFile(file) {
-  if(!file) return;
-  currentFile = file;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    currentBase64 = e.target.result.split(',')[1];
-    document.getElementById('previewImg').src = e.target.result;
-    document.getElementById('imgName').textContent = file.name;
-    document.getElementById('imgPreview').style.display = 'block';
-    document.getElementById('uploadZone').style.display = 'none';
-    document.getElementById('results').classList.remove('show');
-    currentResults = null;
-  };
-  reader.readAsDataURL(file);
-}
-
-function clearImage() {
-  currentFile = null; currentBase64 = null; currentResults = null;
-  document.getElementById('previewImg').src = '';
-  document.getElementById('imgPreview').style.display = 'none';
-  document.getElementById('uploadZone').style.display = 'block';
-  document.getElementById('results').classList.remove('show');
-  document.getElementById('fileInput').value = '';
-}
-
-// Drag and drop
-const zone = document.getElementById('uploadZone');
-zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag'); });
-zone.addEventListener('dragleave', () => zone.classList.remove('drag'));
-zone.addEventListener('drop', e => {
-  e.preventDefault(); zone.classList.remove('drag');
-  const f = e.dataTransfer.files[0];
-  if(f && f.type.startsWith('image/')) handleFile(f);
-});
-
-// ================================================================
-// GEMINI API — Vision
-// ================================================================
-async function callGemini(prompt, imageBase64, mimeType='image/jpeg') {
-  const models = ['gemini-1.5-flash-latest', 'gemini-1.5-flash', 'gemini-1.5-pro-latest', 'gemini-1.5-pro', 'gemini-2.0-flash-lite', 'gemini-2.0-flash-exp'];
-  let lastErr = 'No models available';
-
-  for(const model of models) {
-    try {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${S.apiKey}`;
-      const body = {
-        contents: [{
-          parts: [
-            { inline_data: { mime_type: mimeType, data: imageBase64 } },
-            { text: prompt }
-          ]
-        }],
-        generationConfig: { maxOutputTokens: 1200, temperature: 0.7 }
-      };
-      const r = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
+async function callGemini(prompt){
+  const models=['gemini-1.5-flash-latest','gemini-1.5-flash','gemini-1.5-pro-latest','gemini-1.5-pro','gemini-2.0-flash-lite'];
+  let lastErr='No model available';
+  for(const model of models){
+    try{
+      const url=`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${S.apiKey}`;
+      const r=await fetch(url,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          contents:[{role:'user',parts:[{text:prompt}]}],
+          generationConfig:{maxOutputTokens:1200,temperature:0.75}
+        })
       });
-      if(r.status === 404) { lastErr = `Model ${model} not found`; continue; }
-      if(r.status === 429) { await new Promise(r=>setTimeout(r,2000)); lastErr = 'Rate limit — please wait a moment and try again'; continue; }
-      if(!r.ok) {
-        const e = await r.json().catch(() => ({}));
-        lastErr = e.error?.message || `Error ${r.status}`;
-        if(r.status === 400 && lastErr.includes('API')) { changeApiKey(); throw new Error('Invalid key'); }
-        continue;
+      if(r.status===404||r.status===429){ lastErr=`${model} unavailable`; continue; }
+      if(!r.ok){
+        const e=await r.json().catch(()=>({}));
+        if(r.status===400&&(e.error?.message||'').includes('API')){ changeApiKey(); throw new Error('Invalid key'); }
+        lastErr=e.error?.message||`Error ${r.status}`; continue;
       }
-      const d = await r.json();
-      const text = d.candidates?.[0]?.content?.parts?.[0]?.text;
+      const d=await r.json();
+      const text=d.candidates?.[0]?.content?.parts?.[0]?.text;
       if(text) return text;
-      lastErr = 'Empty response'; continue;
-    } catch(e) {
-      if(e.message.includes('Invalid key')) throw e;
-      lastErr = e.message;
+      lastErr='Empty response'; continue;
+    }catch(e){
+      if(e.message==='Invalid key') throw e;
+      lastErr=e.message;
     }
   }
   throw new Error(lastErr);
 }
 
-function parseGuidance(text) {
-  // Try JSON first
-  try {
-    const clean = text.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
-    const s = clean.search(/[{\[]/);
-    if(s !== -1) {
-      const d = JSON.parse(clean.slice(s));
-      return d;
-    }
-  } catch(e) {}
-
-  // Fallback: extract sections by labels
-  const extract = (labels) => {
-    for(const label of labels) {
-      const re = new RegExp(label + '[:\\s*]*([\\s\\S]*?)(?=\\n\\n[A-Z]|$)', 'i');
-      const m = text.match(re);
-      if(m) return m[1].trim();
-    }
-    return '';
+function parseJSON(text){
+  try{
+    const c=text.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
+    const s=c.search(/[{\[]/);
+    if(s!==-1) return JSON.parse(c.slice(s));
+  }catch(e){}
+  // Fallback: extract by key
+  const get=(key)=>{
+    const re=new RegExp(`"${key}"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"`, 's');
+    const m=text.match(re); return m?m[1].replace(/\\n/g,'\n').replace(/\\"/g,'"'):'';
   };
-
-  return {
-    meaning: extract(['MEANING', 'meaning']),
-    longterm: extract(['LONG.TERM', 'LONG TERM', 'LIFELONG', 'longterm']),
-    emotional: extract(['EMOTIONAL', 'emotional']),
-    phase: extract(['PHASE', 'ASTROLOGY', 'phase']),
-    habits: extract(['HABITS', 'PRACTICAL', 'habits', 'DAILY'])
-  };
+  return { meaning:get('meaning'), longterm:get('longterm'), emotional:get('emotional'), phase:get('phase'), habits:get('habits') };
 }
 
 // ================================================================
-// GENERATE GUIDANCE
+// GENERATE
 // ================================================================
-async function generateGuidance() {
+async function generate(){
   if(!checkKey()) return;
-  if(!currentBase64) { toast('⚠ Please upload a photo of your shloka first'); return; }
+  const ch=document.getElementById('chSel').value;
+  const sh=document.getElementById('shNum').value;
+  if(!ch){ toast('⚠ Please select a chapter'); return; }
+  if(!sh){ toast('⚠ Please enter the shloka number'); return; }
 
-  const chapter = document.getElementById('chapterSelect').value;
-  const shloka = document.getElementById('shlokaNum').value;
-  const chapterName = chapter ? CHAPTERS[parseInt(chapter)] : 'unknown chapter';
+  const chName=CH_NAMES[parseInt(ch)]||'';
+  const btn=document.getElementById('genBtn');
+  btn.disabled=true;
 
-  document.getElementById('genBtn').disabled = true;
-  document.getElementById('genLoading').classList.add('show');
+  document.getElementById('loadCh').textContent=ch;
+  document.getElementById('loadSh').textContent=sh;
+  document.getElementById('genLoad').classList.add('show');
   document.getElementById('results').classList.remove('show');
 
-  const prompt = `You are a Bhagavad Gita scholar and Vedic astrologer reading a photo of a Gita shloka.
+  const prompt=`You are a Bhagavad Gita scholar and Vedic astrologer. The reader is Vaibhav Sharma.
 
-${chapter ? `This is Chapter ${chapter} (${chapterName}), Shloka ${shloka || 'unknown'}.` : 'Identify the chapter and shloka from the image.'}
-
-KUNDALI OF THE READER:
+KUNDALI:
 ${KUNDALI}
 
-First READ the Sanskrit shloka from the image carefully. Then provide the following four responses.
+Today Vaibhav read: Bhagavad Gita Chapter ${ch} (${chName}), Shloka ${sh}.
 
-Return ONLY a valid JSON object with these exact keys:
+Please provide the following five responses. Write directly to Vaibhav — warm, personal, specific. No generic spiritual platitudes. Connect each response genuinely to his chart and his life.
+
+Return ONLY a valid JSON object with these exact five keys:
+
 {
-  "meaning": "The meaning and translation of this specific shloka in 3-4 poetic sentences. Translate accurately from what you see in the image.",
-  "longterm": "The long-term lifelong learning from this specific shloka for Vaibhav. What principle does this verse establish that should guide his entire life? Connect it to his Saturn Sasa Yoga slow-build nature, his Punarvasu Atmakaraka soul purpose, his destiny to build quietly and trust the long arc. 3-4 sentences.",
-  "emotional": "The emotional learning from this specific shloka for Vaibhav. How does this verse address his specific emotional patterns — Scorpio Moon comparison anxiety, Pisces Ascendant absorption, Mercury Ashlesha spiraling under pressure, the anger when blocked, the impatience? What does Krishna teach him emotionally through this verse? 3-4 sentences.",
-  "phase": "What this specific shloka means for Vaibhav right now in this phase of his life — July 2026. Job search exhaustion, Rahu exiting 12H on July 26 (8 days away), Saturn still on Ascendant, the approaching turning point. How does this verse speak to exactly where he is right now astrologically and personally? 3-4 sentences.",
-  "habits": "3-5 specific practical daily or weekly habits this shloka recommends for Vaibhav. Make them concrete and immediately doable — morning rituals, behavioural changes, specific actions to take or avoid today and this week. Connect each directly to the verse teaching and his chart (Saturn Sasa Yoga patience, Scorpio Moon anger, Pisces absorption). Format as a numbered list like: 1. habit one. 2. habit two."
+  "meaning": "The meaning and essence of Chapter ${ch} Shloka ${sh} in 3-4 poetic sentences. Translate the verse's core teaching clearly and beautifully. No Sanskrit needed — just the meaning in English.",
+  "longterm": "The lifelong principle this specific shloka establishes for Vaibhav. What does this verse say about how he should live his entire life? Connect to his Saturn Sasa Yoga (build patiently over decades), his Punarvasu Atmakaraka (return of light after darkness), his destiny to build quietly and trust the long arc. 3-4 sentences.",
+  "emotional": "The emotional learning from this specific shloka for Vaibhav. How does this verse address his exact emotional patterns — Scorpio Moon comparison anxiety, Pisces Ascendant absorbing stress from environments, Mercury Ashlesha spiraling under pressure, Mars anger when blocked, the impatience and frustration he feels when effort produces no visible result? 3-4 sentences.",
+  "phase": "What this specific shloka means for Vaibhav RIGHT NOW in July 2026. His job search has been going on for months. Rahu exits his 12H on July 26 — just 8 days away — ending 32 months of effort dissolving before completion. Saturn still on Ascendant compressing his energy. The turning point is very close. How does this verse speak to exactly this moment? 3-4 sentences.",
+  "habits": "3-5 specific practical daily or weekly habits and actions this shloka recommends for Vaibhav. Make them concrete and immediately doable — specific morning practices, behavioural changes, actions to take this week. Connect each habit directly to the verse's teaching AND his chart. Number them clearly: 1. 2. 3."
 }`;
 
-  try {
-    const mimeType = currentFile?.type || 'image/jpeg';
-    const text = await callGemini(prompt, currentBase64, mimeType);
-    const data = parseGuidance(text);
+  try{
+    const text=await callGemini(prompt);
+    const data=parseJSON(text);
 
-    document.getElementById('resMeaning').value = data.meaning || '';
-    document.getElementById('resLongterm').value = data.longterm || '';
-    document.getElementById('resEmotional').value = data.emotional || '';
-    document.getElementById('resPhase').value = data.phase || '';
-    document.getElementById('resHabits').value = data.habits || '';
+    // Show shloka ref
+    document.getElementById('shlokaRef').innerHTML=`
+      <div class="sr-badge">Ch.${ch} · Shloka ${sh}</div>
+      <div class="sr-name">${chName}</div>`;
 
-    currentResults = {
-      chapter: chapter || '?',
-      chapterName: chapterName,
-      shloka: shloka || '?',
-      meaning: data.meaning || '',
-      longterm: data.longterm || '',
-      emotional: data.emotional || '',
-      phase: data.phase || '',
-      habits: data.habits || '',
-      date: new Date().toISOString(),
-      imageBase64: currentBase64,
-      imageMime: mimeType
-    };
+    document.getElementById('rMeaning').value=data.meaning||'';
+    document.getElementById('rLong').value=data.longterm||'';
+    document.getElementById('rEmo').value=data.emotional||'';
+    document.getElementById('rPhase').value=data.phase||'';
+    document.getElementById('rHabits').value=data.habits||'';
+
+    current={ chapter:ch, shloka:sh, chapterName:chName,
+      meaning:data.meaning||'', longterm:data.longterm||'',
+      emotional:data.emotional||'', phase:data.phase||'',
+      habits:data.habits||'', date:new Date().toISOString() };
 
     document.getElementById('results').classList.add('show');
-    document.getElementById('genLoading').classList.remove('show');
-    document.getElementById('genBtn').disabled = false;
+    document.getElementById('genLoad').classList.remove('show');
+    btn.disabled=false;
 
-    // Scroll to results
-    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Reset save button
+    const sv=document.getElementById('saveBtn');
+    sv.textContent='💾 Save to Journal'; sv.disabled=false; sv.style.background='';
 
-  } catch(e) {
-    document.getElementById('genLoading').classList.remove('show');
-    document.getElementById('genBtn').disabled = false;
-    toast(`⚠ ${e.message || 'Could not generate guidance. Please try again.'}`);
+    document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+
+  }catch(e){
+    document.getElementById('genLoad').classList.remove('show');
+    btn.disabled=false;
+    toast(`⚠ ${e.message||'Could not generate. Please try again.'}`);
   }
 }
 
 // ================================================================
-// SAVE TO SHEET + LOCAL
+// SAVE
 // ================================================================
-async function saveToSheet() {
-  if(!currentResults) { toast('⚠ Generate guidance first'); return; }
-  const btn = document.getElementById('saveBtn');
-  btn.disabled = true; btn.textContent = '⟳ Saving...';
+async function saveEntry(){
+  if(!current){ toast('⚠ Generate guidance first'); return; }
+  const btn=document.getElementById('saveBtn');
+  btn.disabled=true; btn.textContent='⟳ Saving...';
 
-  // Capture any edits the user made to the textareas
-  currentResults.meaning = document.getElementById('resMeaning').value;
-  currentResults.longterm = document.getElementById('resLongterm').value;
-  currentResults.emotional = document.getElementById('resEmotional').value;
-  currentResults.phase = document.getElementById('resPhase').value;
-  currentResults.habits = document.getElementById('resHabits').value;
+  // Capture any edits
+  current.meaning=document.getElementById('rMeaning').value;
+  current.longterm=document.getElementById('rLong').value;
+  current.emotional=document.getElementById('rEmo').value;
+  current.phase=document.getElementById('rPhase').value;
+  current.habits=document.getElementById('rHabits').value;
 
-  // Save locally first
-  const entry = {
-    ...currentResults,
-    id: Date.now()
-  };
-  S.entries.unshift(entry);
-  save();
+  // Save locally
+  // Remove duplicate if same chapter-shloka exists
+  S.entries=S.entries.filter(e=>!(String(e.chapter)===String(current.chapter)&&String(e.shloka)===String(current.shloka)));
+  S.entries.unshift({...current, id:Date.now()});
+  save(); updateJStats();
 
-  // Save to Google Sheet
-  try {
-    const sheetData = {
-      ...currentResults,
-      imageBase64: '' // Don't send image to sheet — too large
-    };
-    await fetch(SHEET_URL + '?action=saveShloka', {
-      method: 'POST',
-      body: JSON.stringify({
-        chapter: currentResults.chapter,
-        shloka: currentResults.shloka,
-        chapterName: currentResults.chapterName,
-        sanskrit: '',
-        meaning: currentResults.meaning,
-        learning: currentResults.longterm,
-        emotions: currentResults.emotional,
-        phase: currentResults.phase,
-        habits: currentResults.habits || document.getElementById('resHabits').value || '',
-        date: currentResults.date
+  // Save to Sheet
+  try{
+    await fetch(SHEET_URL+'?action=saveShloka',{
+      method:'POST',
+      body:JSON.stringify({
+        chapter:current.chapter, shloka:current.shloka,
+        chapterName:current.chapterName, meaning:current.meaning,
+        learning:current.longterm, longterm:current.longterm,
+        emotions:current.emotional, emotional:current.emotional,
+        phase:current.phase, habits:current.habits, date:current.date
       })
     });
     toast('✓ Saved to your Gita Journal and Google Sheet!');
-  } catch(e) {
-    toast('✓ Saved locally. Sheet sync failed — will retry next time.');
+  }catch(e){
+    toast('✓ Saved locally. Sheet sync will retry next time.');
   }
 
-  btn.textContent = '✓ Saved!';
-  btn.style.background = 'var(--sage-b)';
-  setTimeout(() => {
-    btn.disabled = false;
-    btn.textContent = '💾 Save to Journal';
-    btn.style.background = '';
-  }, 3000);
-
-  updateStats();
+  btn.textContent='✓ Saved!'; btn.style.background='var(--sage-b)';
+  setTimeout(()=>{ btn.textContent='💾 Save to Journal'; btn.style.background=''; btn.disabled=false; },3000);
 }
 
 // ================================================================
-// JOURNAL PAGE
+// JOURNAL
 // ================================================================
-function renderJournal(filter='all') {
-  activeFilter = filter;
-  const container = document.getElementById('journalEntries');
-  const entries = filter === 'all'
-    ? S.entries
-    : S.entries.filter(e => String(e.chapter) === String(filter));
+function renderJournal(filter='all'){
+  activeFilter=filter;
+  const entries=filter==='all'?S.entries:S.entries.filter(e=>String(e.chapter)===String(filter));
+  const container=document.getElementById('jEntries');
 
-  if(!entries.length) {
-    container.innerHTML = `<div class="empty-state">
-      <div class="es-om">ॐ</div>
-      <div class="es-title">${filter==='all' ? 'Your journal awaits' : 'No entries for this chapter yet'}</div>
-      <div class="es-sub">${filter==='all' ? 'Upload your first shloka photo to begin' : 'Upload a shloka from this chapter'}</div>
-    </div>`;
-    return;
+  if(!entries.length){
+    container.innerHTML=`<div class="empty"><div class="empty-om">ॐ</div>
+      <div class="empty-t">${filter==='all'?'Your journal awaits':'No entries for this chapter yet'}</div>
+      <div class="empty-s">${filter==='all'?'Enter your first shloka to begin':'Read a shloka from this chapter'}</div></div>`;
+    buildFilter(); return;
   }
 
-  container.innerHTML = entries.map((e, i) => {
-    const dateStr = e.date ? new Date(e.date).toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'}) : '';
-    const uid = `je-${e.id || i}`;
-    return `
-      <div class="je" id="${uid}">
-        <div class="je-header" onclick="toggleEntry('${uid}')">
-          <div class="je-num">Ch.${e.chapter} · ${e.shloka}</div>
-          <div class="je-title">
-            <div class="je-ch">${e.chapterName || CHAPTERS[parseInt(e.chapter)] || ''}</div>
-            <div class="je-meaning-preview">${e.meaning || 'No meaning saved'}</div>
-          </div>
-          <div class="je-date">${dateStr}</div>
-          <div class="je-arrow" id="arr-${uid}">▼</div>
+  container.innerHTML=entries.map((e,i)=>{
+    const uid=`je${e.id||i}`;
+    const dt=e.date?new Date(e.date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'';
+    return `<div class="je" id="${uid}">
+      <div class="je-head" onclick="toggleJE('${uid}')">
+        <div class="je-badge">Ch.${e.chapter} · ${e.shloka}</div>
+        <div class="je-info">
+          <div class="je-ch">${e.chapterName||CH_NAMES[parseInt(e.chapter)]||''}</div>
+          <div class="je-preview">${e.meaning||'Tap to expand'}</div>
         </div>
-        <div class="je-body" id="body-${uid}">
-          ${e.imageBase64 ? `<div class="je-img"><img src="data:${e.imageMime||'image/jpeg'};base64,${e.imageBase64}" alt="Shloka" /></div>` : ''}
-          <div class="je-section">
-            <div class="je-slabel" style="color:var(--gold)">Meaning</div>
-            <div class="je-stext meaning">${e.meaning || '—'}</div>
-          </div>
-          <div class="je-section">
-            <div class="je-slabel" style="color:var(--sage-b)">Long-term Life Learning</div>
-            <div class="je-stext">${e.longterm || '—'}</div>
-          </div>
-          <div class="je-section">
-            <div class="je-slabel" style="color:var(--lotus-b)">Emotional Learning</div>
-            <div class="je-stext">${e.emotional || '—'}</div>
-          </div>
-          <div class="je-section">
-            <div class="je-slabel" style="color:var(--slate-b)">For This Phase of Life · Astrology</div>
-            <div class="je-stext">${e.phase || '—'}</div>
-          </div>
-          ${e.habits ? `<div class="je-section">
-            <div class="je-slabel" style="color:#9A7ACC">Practical Daily Habits</div>
-            <div class="je-stext">${e.habits}</div>
-          </div>` : ''}
-        </div>
-      </div>`;
+        <div class="je-date">${dt}</div>
+        <div class="je-arr" id="arr${uid}">▼</div>
+      </div>
+      <div class="je-body" id="bod${uid}">
+        <div class="je-sec"><div class="je-slbl" style="color:var(--gold)">Meaning</div><div class="je-stxt italic">${e.meaning||'—'}</div></div>
+        <div class="je-sec"><div class="je-slbl" style="color:var(--sage-b)">Long-term Life Learning</div><div class="je-stxt">${e.longterm||'—'}</div></div>
+        <div class="je-sec"><div class="je-slbl" style="color:var(--lotus-b)">Emotional Learning</div><div class="je-stxt">${e.emotional||'—'}</div></div>
+        <div class="je-sec"><div class="je-slbl" style="color:var(--slate-b)">For This Phase · Astrology</div><div class="je-stxt">${e.phase||'—'}</div></div>
+        ${e.habits?`<div class="je-sec"><div class="je-slbl" style="color:var(--violet-b)">Practical Daily Habits</div><div class="je-stxt">${e.habits}</div></div>`:''}
+      </div>
+    </div>`;
   }).join('');
 
-  // Build chapter filter
-  buildChapterFilter();
+  buildFilter();
 }
 
-function toggleEntry(uid) {
-  const body = document.getElementById(`body-${uid}`);
-  const arr = document.getElementById(`arr-${uid}`);
-  if(!body) return;
-  const isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  if(arr) arr.classList.toggle('open', !isOpen);
+function toggleJE(uid){
+  const bod=document.getElementById(`bod${uid}`);
+  const arr=document.getElementById(`arr${uid}`);
+  if(!bod) return;
+  const open=bod.classList.contains('open');
+  bod.classList.toggle('open',!open);
+  if(arr) arr.classList.toggle('open',!open);
 }
 
-function buildChapterFilter() {
-  const chapters = [...new Set(S.entries.map(e => String(e.chapter)))].sort((a,b) => parseInt(a)-parseInt(b));
-  const filter = document.getElementById('chapterFilter');
-  filter.innerHTML = `<button class="cf-btn ${activeFilter==='all'?'active':''}" onclick="filterChapter('all', this)">All (${S.entries.length})</button>`;
-  chapters.forEach(ch => {
-    const count = S.entries.filter(e => String(e.chapter) === ch).length;
-    const active = activeFilter === ch;
-    filter.innerHTML += `<button class="cf-btn ${active?'active':''}" onclick="filterChapter('${ch}', this)">Ch.${ch} (${count})</button>`;
+function buildFilter(){
+  const chs=[...new Set(S.entries.map(e=>String(e.chapter)))].sort((a,b)=>parseInt(a)-parseInt(b));
+  const f=document.getElementById('chFilter');
+  f.innerHTML=`<button class="cf ${activeFilter==='all'?'active':''}" onclick="filterCh('all',this)">All (${S.entries.length})</button>`;
+  chs.forEach(ch=>{
+    const c=S.entries.filter(e=>String(e.chapter)===ch).length;
+    f.innerHTML+=`<button class="cf ${activeFilter===ch?'active':''}" onclick="filterCh('${ch}',this)">Ch.${ch} (${c})</button>`;
   });
 }
 
-function filterChapter(ch, btn) {
-  document.querySelectorAll('.cf-btn').forEach(b => b.classList.remove('active'));
+function filterCh(ch,btn){
+  document.querySelectorAll('.cf').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderJournal(ch);
 }
 
-// ================================================================
-// PROGRESS PAGE
-// ================================================================
-function renderProgress() {
-  const total = S.entries.length;
-  const chaptersStarted = [...new Set(S.entries.map(e => e.chapter))].length;
-  const pct = Math.round(total / TOTAL_SHLOKAS * 100);
+function updateJStats(){
+  const t=S.entries.length;
+  const c=[...new Set(S.entries.map(e=>e.chapter))].length;
+  document.getElementById('jTotal').textContent=t;
+  document.getElementById('jCh').textContent=c;
+}
 
-  // Calculate streak
-  const dates = [...new Set(S.entries.map(e => e.date ? new Date(e.date).toDateString() : null).filter(Boolean))].sort();
-  let streak = 0;
-  if(dates.length) {
-    const today = new Date().toDateString();
-    const yesterday = new Date(Date.now()-86400000).toDateString();
-    if(dates[dates.length-1] === today || dates[dates.length-1] === yesterday) {
-      streak = 1;
-      for(let i=dates.length-2; i>=0; i--) {
-        const diff = new Date(dates[i+1]) - new Date(dates[i]);
-        if(diff <= 86400000 * 1.5) streak++;
+// ================================================================
+// PROGRESS
+// ================================================================
+function renderProgress(){
+  const total=S.entries.length;
+  const chs=[...new Set(S.entries.map(e=>e.chapter))].length;
+  const pct=Math.round(total/TOTAL_SHLOKAS*100);
+
+  // Streak
+  const dates=[...new Set(S.entries.map(e=>e.date?new Date(e.date).toDateString():null).filter(Boolean))].sort();
+  let streak=0;
+  if(dates.length){
+    const today=new Date().toDateString();
+    const yest=new Date(Date.now()-86400000).toDateString();
+    if(dates[dates.length-1]===today||dates[dates.length-1]===yest){
+      streak=1;
+      for(let i=dates.length-2;i>=0;i--){
+        if(new Date(dates[i+1])-new Date(dates[i])<=86400000*1.5) streak++;
         else break;
       }
     }
   }
 
-  document.getElementById('pTotal').textContent = total;
-  document.getElementById('pChapters').textContent = chaptersStarted;
-  document.getElementById('pPct').textContent = pct + '%';
-  document.getElementById('pStreak').textContent = streak;
+  document.getElementById('pTotal').textContent=total;
+  document.getElementById('pCh').textContent=chs;
+  document.getElementById('pPct').textContent=pct+'%';
+  document.getElementById('pStreak').textContent=streak;
 
-  // Chapter breakdown
-  const list = document.getElementById('chapterProgressList');
-  const byChapter = {};
-  S.entries.forEach(e => { byChapter[e.chapter] = (byChapter[e.chapter]||0) + 1; });
+  const byChapter={};
+  S.entries.forEach(e=>{ byChapter[e.chapter]=(byChapter[e.chapter]||0)+1; });
 
-  const chapterTotals = {1:47,2:72,3:43,4:42,5:29,6:47,7:30,8:28,9:34,10:42,11:55,12:20,13:35,14:27,15:20,16:24,17:28,18:78};
-
-  list.innerHTML = Object.entries(byChapter)
-    .sort((a,b) => parseInt(a[0])-parseInt(b[0]))
-    .map(([ch, count]) => {
-      const total = chapterTotals[parseInt(ch)] || 78;
-      const p = Math.round(count/total*100);
-      return `<div class="cp-item" onclick="showPage('journal');filterChapter('${ch}',document.querySelector('.cf-btn[onclick*=\\'${ch}\\']')||document.querySelector('.cf-btn'))">
-        <div class="cp-top">
-          <div class="cp-name">Chapter ${ch} · ${CHAPTERS[parseInt(ch)]||''}</div>
-          <div class="cp-count">${count}/${total} · ${p}%</div>
-        </div>
-        <div class="cp-bar"><div class="cp-fill" style="width:${p}%"></div></div>
-      </div>`;
-    }).join('');
-
-  if(!Object.keys(byChapter).length) {
-    list.innerHTML = `<div class="empty-state"><div class="es-om">ॐ</div><div class="es-title">No readings yet</div><div class="es-sub">Start by uploading your first shloka photo</div></div>`;
+  const list=document.getElementById('cpList');
+  if(!Object.keys(byChapter).length){
+    list.innerHTML=`<div class="empty"><div class="empty-om">ॐ</div><div class="empty-t">No readings yet</div><div class="empty-s">Start by entering today's shloka</div></div>`;
+    return;
   }
-}
 
-function updateStats() {
-  const total = S.entries.length;
-  const chapters = [...new Set(S.entries.map(e => e.chapter))].length;
-  document.getElementById('jTotalSaved').textContent = total;
-  document.getElementById('jChapters').textContent = chapters;
+  list.innerHTML=Object.entries(byChapter).sort((a,b)=>parseInt(a[0])-parseInt(b[0])).map(([ch,count])=>{
+    const tot=CH_TOTALS[parseInt(ch)]||78;
+    const p=Math.round(count/tot*100);
+    return `<div class="cp" onclick="showPage('journal');setTimeout(()=>filterCh('${ch}',document.querySelector('.cf.active')),100)">
+      <div class="cp-top"><div class="cp-name">Chapter ${ch} · ${CH_NAMES[parseInt(ch)]||''}</div><div class="cp-count">${count}/${tot} · ${p}%</div></div>
+      <div class="cp-bar"><div class="cp-fill" style="width:${p}%"></div></div>
+    </div>`;
+  }).join('');
 }
 
 // ================================================================
-// NAVIGATION
+// NAV
 // ================================================================
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById(`page-${id}`).classList.add('active');
-  document.querySelectorAll('.nav-tab').forEach(t => {
+  document.querySelectorAll('.nav-tab').forEach(t=>{
     if((t.getAttribute('onclick')||'').includes(`'${id}'`)) t.classList.add('active');
   });
-  if(id === 'journal') renderJournal(activeFilter);
-  if(id === 'progress') renderProgress();
+  if(id==='journal') renderJournal(activeFilter);
+  if(id==='progress') renderProgress();
   window.scrollTo(0,0);
 }
 
@@ -932,8 +760,8 @@ function showPage(id) {
 // INIT
 // ================================================================
 load();
-updateStats();
-if(S.apiKey) document.getElementById('apiModal').style.display = 'none';
+updateJStats();
+if(S.apiKey) document.getElementById('apiModal').style.display='none';
 </script>
 </body>
 </html>
