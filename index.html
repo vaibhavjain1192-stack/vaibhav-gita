@@ -560,7 +560,7 @@ zone.addEventListener('drop', e => {
 // GEMINI API — Vision
 // ================================================================
 async function callGemini(prompt, imageBase64, mimeType='image/jpeg') {
-  const models = ['gemini-1.5-flash-latest', 'gemini-1.5-flash', 'gemini-1.5-pro-latest', 'gemini-pro-vision'];
+  const models = ['gemini-1.5-flash-latest', 'gemini-1.5-flash', 'gemini-1.5-pro-latest', 'gemini-1.5-pro', 'gemini-2.0-flash-lite', 'gemini-2.0-flash-exp'];
   let lastErr = 'No models available';
 
   for(const model of models) {
@@ -581,7 +581,7 @@ async function callGemini(prompt, imageBase64, mimeType='image/jpeg') {
         body: JSON.stringify(body)
       });
       if(r.status === 404) { lastErr = `Model ${model} not found`; continue; }
-      if(r.status === 429) { lastErr = 'Rate limit — please wait a moment'; continue; }
+      if(r.status === 429) { await new Promise(r=>setTimeout(r,2000)); lastErr = 'Rate limit — please wait a moment and try again'; continue; }
       if(!r.ok) {
         const e = await r.json().catch(() => ({}));
         lastErr = e.error?.message || `Error ${r.status}`;
