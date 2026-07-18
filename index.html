@@ -685,8 +685,82 @@ async function claude(prompt,maxTok=800){
   throw new Error(`Gemini error: ${lastErr}`);
 }
 function parseJ(text){
-  const c=text.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
-  const s=c.search(/[{\[]/);if(s===-1)throw new Error('No JSON');return JSON.parse(c.slice(s));
+  // Clean markdown fences
+  let c=text.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
+  // Find start of JSON
+  const s=c.search(/[{\[]/);
+  if(s===-1)throw new Error('No JSON found in response');
+  c=c.slice(s);
+  // Find end of JSON by matching braces
+  let depth=0,inStr=false,escape=false,end=-1;
+  const opener=c[0];const closer=opener==='{'?'}':']';
+  for(let i=0;i<c.length;i++){
+    const ch=c[i];
+    if(escape){escape=false;continue;}
+    if(ch==='\\'){escape=true;continue;}
+    if(ch==='"'){inStr=!inStr;continue;}
+    if(inStr)continue;
+    if(ch===opener)depth++;
+    else if(ch===closer){depth--;if(depth===0){end=i+1;break;}}
+  }
+  if(end===-1)end=c.length;
+  const jsonStr=c.slice(0,end);
+  try{
+    return JSON.parse(jsonStr);
+  }catch(e){
+    // Try to fix common issues with Devanagari and special chars
+    const fixed=jsonStr
+      .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g,'') // remove control chars
+      .replace(/\n/g,'\\n')  // escape unescaped newlines inside strings
+      .replace(/\r/g,'\\r'); // escape carriage returns
+    try{
+      return JSON.parse(fixed);
+    }catch(e2){
+      // Last resort: extract fields manually using regex
+      const extract=(key)=>{
+        const m=jsonStr.match(new RegExp('"'+key+'"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"'));
+        return m?m[1]:'';
+      };
+      const extractNum=(key)=>{
+        const m=jsonStr.match(new RegExp('"'+key+'"\\s*:\\s*(\\d+)'));
+        return m?parseInt(m[1]):1;
+      };
+      // Check if it looks like an array
+      if(jsonStr.trim().startsWith('[')){
+        // Try to parse individual objects
+        const objs=[];
+        let objStart=-1;let d2=0;let inS2=false;let esc2=false;
+        for(let i=0;i<jsonStr.length;i++){
+          const ch=jsonStr[i];
+          if(esc2){esc2=false;continue;}
+          if(ch==='\\'){esc2=true;continue;}
+          if(ch==='"'){inS2=!inS2;continue;}
+          if(inS2)continue;
+          if(ch==='{'){if(d2===0)objStart=i;d2++;}
+          else if(ch==='}'){d2--;if(d2===0&&objStart!==-1){
+            try{objs.push(JSON.parse(jsonStr.slice(objStart,i+1)));}
+            catch(e3){
+              const s2=jsonStr.slice(objStart,i+1);
+              objs.push({
+                chapter:extractNum('chapter')||1,shloka:extractNum('shloka')||1,
+                chapterName:'',sanskrit:extract('sanskrit')||'',
+                meaning:extract('meaning')||'',part3:extract('part3')||extract('learning')||'',
+                emotion:extract('emotion')||''
+              });
+            }
+            objStart=-1;
+          }}
+        }
+        if(objs.length>0)return objs;
+      }
+      return {
+        chapter:extractNum('chapter')||1,shloka:extractNum('shloka')||1,
+        chapterName:extract('chapterName')||'',sanskrit:extract('sanskrit')||'ॐ',
+        meaning:extract('meaning')||'',part3:extract('part3')||extract('learning')||'',
+        emotion:extract('emotion')||'',transliteration:extract('transliteration')||''
+      };
+    }
+  }
 }
 
 // Full shloka data fetch (Sanskrit + meaning + Part 3)
@@ -738,10 +812,11 @@ async function loadDailyShloka(force=false){
     const d=await fetchDaily();
     currentDaily=d;
     const key=`${d.chapter}-${d.shloka}`;
-    els.s.textContent=d.sanskrit;
-    els.r.textContent=`Chapter ${d.chapter}, Shloka ${d.shloka} · ${d.chapterName}`;
-    els.m.textContent=d.meaning;
-    const {html}=renderGuidance(d.part3,'dark');
+    els.s.textContent=d.sanskrit||'ॐ';
+    els.r.textContent=`Chapter ${d.chapter}, Shloka ${d.shloka} · ${d.chapterName||''}` ;
+    els.m.textContent=d.meaning||'';
+    const p3=d.part3||d.learning||'';
+    const {html}=renderGuidance(p3,'dark');
     els.g.innerHTML=html;
     els.bm.textContent=S.bookmarks[key]?'★ Bookmarked':'☆ Bookmark';
     if(d.fromCache){els.sn.textContent='✓ Loaded from your Google Sheet — no API cost.';els.sn.style.display='block';}
