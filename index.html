@@ -459,35 +459,74 @@ function checkKey(){
 // GEMINI API — Text only, no image
 // ================================================================
 async function callGemini(prompt){
-  const models=['gemini-1.5-flash-latest','gemini-1.5-flash','gemini-1.5-pro-latest','gemini-1.5-pro','gemini-2.0-flash-lite'];
-  let lastErr='No model available';
-  for(const model of models){
+  // Step 1: Discover available models for this key
+  async function discoverModels(){
     try{
-      const url=`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${S.apiKey}`;
-      const r=await fetch(url,{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          contents:[{role:'user',parts:[{text:prompt}]}],
-          generationConfig:{maxOutputTokens:1200,temperature:0.75}
-        })
-      });
-      if(r.status===404||r.status===429){ lastErr=`${model} unavailable`; continue; }
-      if(!r.ok){
-        const e=await r.json().catch(()=>({}));
-        if(r.status===400&&(e.error?.message||'').includes('API')){ changeApiKey(); throw new Error('Invalid key'); }
-        lastErr=e.error?.message||`Error ${r.status}`; continue;
-      }
+      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${S.apiKey}&pageSize=50`);
+      if(!r.ok) return [];
       const d=await r.json();
-      const text=d.candidates?.[0]?.content?.parts?.[0]?.text;
-      if(text) return text;
-      lastErr='Empty response'; continue;
+      return (d.models||[])
+        .filter(m=>(m.supportedGenerationMethods||[]).includes('generateContent'))
+        .map(m=>m.name.replace('models/',''))
+        .filter(m=>!m.includes('embedding')&&!m.includes('aqa')&&!m.includes('vision'));
+    }catch(e){ return []; }
+  }
+
+  // Step 2: Try a model
+  async function tryModel(model){
+    const url=`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${S.apiKey}`;
+    const r=await fetch(url,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        contents:[{role:'user',parts:[{text:prompt}]}],
+        generationConfig:{maxOutputTokens:1200,temperature:0.75}
+      })
+    });
+    if(!r.ok){
+      const e=await r.json().catch(()=>({}));
+      const msg=e.error?.message||`Error ${r.status}`;
+      if(r.status===400&&msg.toLowerCase().includes('api key')){ changeApiKey(); throw new Error('Invalid key'); }
+      throw new Error(msg);
+    }
+    const d=await r.json();
+    const text=d.candidates?.[0]?.content?.parts?.[0]?.text;
+    if(!text) throw new Error('Empty response');
+    return text;
+  }
+
+  // Step 3: If we have a cached working model, try it first
+  if(S.workingModel){
+    try{ return await tryModel(S.workingModel); }
+    catch(e){ if(e.message==='Invalid key') throw e; S.workingModel=null; }
+  }
+
+  // Step 4: Discover and try models
+  const discovered=await discoverModels();
+  
+  // Priority order — prefer flash models
+  const priority=['gemini-1.5-flash-latest','gemini-1.5-flash','gemini-2.0-flash','gemini-1.5-pro','gemini-1.0-pro','gemini-pro'];
+  const ordered=[
+    ...priority.filter(m=>discovered.includes(m)||discovered.length===0),
+    ...discovered.filter(m=>!priority.includes(m))
+  ];
+
+  // If discovery failed, use full fallback list
+  const fallback=['gemini-1.5-flash-latest','gemini-1.5-flash','gemini-2.0-flash','gemini-1.5-pro-latest','gemini-1.5-pro','gemini-1.0-pro','gemini-pro','gemini-2.0-flash-thinking-exp'];
+  const toTry=ordered.length>0?ordered:fallback;
+
+  let lastErr='No models available for your API key';
+  for(const model of toTry.slice(0,8)){
+    try{
+      const result=await tryModel(model);
+      S.workingModel=model; save(); // Cache the working model
+      return result;
     }catch(e){
       if(e.message==='Invalid key') throw e;
       lastErr=e.message;
     }
   }
-  throw new Error(lastErr);
+  throw new Error(`Could not connect to Gemini. ${lastErr}. Please check your API key at aistudio.google.com`);
 }
 
 function parseJSON(text){
