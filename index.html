@@ -5,225 +5,340 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vaibhav's Gita Journal</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
-
-:root {
-  --bg: #0C0A07;
-  --surface: #141209;
-  --card: #1A1712;
-  --lift: #221F18;
-  --border: rgba(255,255,255,0.07);
-  --border-m: rgba(255,255,255,0.13);
-  --gold: #C8932A;
-  --gold-b: #E8B84A;
-  --gold-p: rgba(200,147,42,0.1);
-  --gold-bd: rgba(200,147,42,0.22);
-  --sage: #3A7A52;
-  --sage-b: #5AAA72;
-  --sage-p: rgba(58,122,82,0.1);
-  --sage-bd: rgba(58,122,82,0.22);
-  --lotus: #9A4A62;
-  --lotus-b: #C46A82;
-  --lotus-p: rgba(154,74,98,0.1);
-  --lotus-bd: rgba(154,74,98,0.22);
-  --slate: #2A4A6A;
-  --slate-b: #4A7AAA;
-  --slate-p: rgba(42,74,106,0.1);
-  --slate-bd: rgba(42,74,106,0.22);
-  --violet: #5A3A8A;
-  --violet-b: #9A7ACC;
-  --violet-p: rgba(90,58,138,0.1);
-  --violet-bd: rgba(90,58,138,0.22);
-  --text: rgba(255,255,255,0.88);
-  --text-m: rgba(255,255,255,0.56);
-  --text-l: rgba(255,255,255,0.32);
-  --text-f: rgba(255,255,255,0.14);
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{
+  --bg:#0C0A07;--surface:#141209;--card:#1A1712;--lift:#221F18;--raised:#2A2620;
+  --border:rgba(255,255,255,0.07);--border-m:rgba(255,255,255,0.13);--border-h:rgba(255,255,255,0.22);
+  --gold:#C8932A;--gold-b:#E8B84A;--gold-p:rgba(200,147,42,0.12);--gold-bd:rgba(200,147,42,0.28);
+  --sage:#3A7A52;--sage-b:#5AAA72;--sage-p:rgba(58,122,82,0.12);--sage-bd:rgba(58,122,82,0.28);
+  --lotus:#9A4A62;--lotus-b:#C46A82;--lotus-p:rgba(154,74,98,0.12);--lotus-bd:rgba(154,74,98,0.28);
+  --slate:#2A4A6A;--slate-b:#4A7AAA;--slate-p:rgba(42,74,106,0.12);--slate-bd:rgba(42,74,106,0.28);
+  --violet:#5A3A8A;--violet-b:#9A7ACC;--violet-p:rgba(90,58,138,0.12);--violet-bd:rgba(90,58,138,0.28);
+  --text:rgba(255,255,255,0.88);--text-m:rgba(255,255,255,0.56);--text-l:rgba(255,255,255,0.32);--text-f:rgba(255,255,255,0.14);
 }
-
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:13.5px;line-height:1.65;min-height:100vh;}
 
-/* MODAL */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;}
-.modal-box{background:var(--card);border:1px solid var(--border-m);border-radius:20px;padding:36px 40px;max-width:460px;width:100%;text-align:center;}
-.modal-om{font-size:48px;margin-bottom:10px;}
-.modal-h{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;margin-bottom:8px;color:var(--text);}
-.modal-p{font-size:12.5px;color:var(--text-m);line-height:1.7;margin-bottom:14px;}
-.modal-p a{color:var(--gold);}
-.modal-input{width:100%;padding:11px 14px;border:1px solid var(--border-m);border-radius:8px;font-size:13px;background:var(--lift);color:var(--text);font-family:'DM Sans',sans-serif;margin-bottom:10px;}
-.modal-note{font-size:11px;color:var(--text-f);margin-top:10px;line-height:1.6;}
-
 /* NAV */
-.nav{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
-.nav-inner{max-width:1000px;margin:0 auto;padding:0 24px;display:flex;align-items:center;}
-.nav-brand{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--gold);padding:14px 18px 14px 0;border-right:1px solid var(--border);margin-right:14px;white-space:nowrap;flex-shrink:0;cursor:pointer;}
+.nav{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:0;}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--gold);padding:13px 18px 13px 0;border-right:1px solid var(--border);margin-right:14px;white-space:nowrap;flex-shrink:0;cursor:pointer;letter-spacing:.01em;}
 .nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;flex:1;}
 .nav-tabs::-webkit-scrollbar{display:none;}
-.nav-tab{padding:14px 13px;font-size:11.5px;font-weight:500;color:var(--text-l);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;}
+.nav-tab{padding:13px 14px;font-size:11.5px;font-weight:500;color:var(--text-l);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;letter-spacing:.02em;flex-shrink:0;}
 .nav-tab:hover{color:var(--text-m);}
 .nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
-.nav-right{display:flex;gap:6px;margin-left:10px;flex-shrink:0;}
-.nav-btn{padding:5px 11px;background:var(--lift);border:1px solid var(--border);border-radius:5px;color:var(--text-l);font-size:10.5px;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;}
-.nav-btn:hover{border-color:var(--gold);color:var(--gold);}
 
 /* PAGES */
 .page{display:none;}.page.active{display:block;}
 
 /* TOAST */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--lift);border:1px solid var(--border-m);color:var(--text);padding:10px 20px;border-radius:20px;font-size:12px;z-index:400;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--raised);border:1px solid var(--border-m);color:var(--text);padding:9px 18px;border-radius:20px;font-size:12px;z-index:500;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;}
 
-/* ===== TODAY PAGE ===== */
-.today-page{max-width:720px;margin:0 auto;padding:36px 24px 80px;}
-
-.today-header{text-align:center;margin-bottom:32px;}
-.th-om{font-size:32px;margin-bottom:6px;opacity:.5;}
-.th-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--text);margin-bottom:4px;}
-.th-sub{font-size:13px;color:var(--text-m);}
-
-/* INPUT CARD */
-.input-card{background:var(--card);border:1px solid var(--border-m);border-radius:16px;padding:24px 26px;margin-bottom:20px;}
-.ic-label{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);margin-bottom:14px;font-weight:600;}
-.ic-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
-.ic-field label{display:block;font-size:10.5px;color:var(--text-l);margin-bottom:6px;letter-spacing:.06em;text-transform:uppercase;}
-.ic-field select,.ic-field input{width:100%;padding:10px 13px;background:var(--lift);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;transition:border-color .15s;}
-.ic-field select:focus,.ic-field input:focus{outline:none;border-color:var(--gold);}
-.ic-field select option{background:var(--card);}
-
-.gen-btn{width:100%;padding:13px;background:var(--gold);color:var(--bg);font-size:14px;font-weight:600;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;letter-spacing:.01em;}
-.gen-btn:hover{background:var(--gold-b);}
-.gen-btn:disabled{opacity:.5;cursor:not-allowed;}
-
-/* LOADING */
-.gen-loading{display:none;text-align:center;padding:28px 20px;}
-.gen-loading.show{display:block;}
-.spinner-lg{width:32px;height:32px;border:3px solid var(--gold-p);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px;}
+/* SPINNER */
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(200,147,42,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.gen-loading p{font-size:13px;color:var(--text-m);}
-.gen-loading span{font-size:11.5px;color:var(--text-l);}
 
-/* RESULTS */
-.results{display:none;}
-.results.show{display:block;}
+/* ============ JOURNAL PAGE ============ */
+.journal-page{max-width:1200px;margin:0 auto;padding:24px 24px 80px;}
 
-/* SHLOKA DISPLAY */
-.shloka-ref{background:var(--gold-p);border:1px solid var(--gold-bd);border-radius:10px;padding:12px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
-.sr-badge{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);flex-shrink:0;}
-.sr-name{font-size:12px;color:var(--text-m);}
+/* CHAPTER NAV BAR */
+.chapter-nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:20px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;}
+.chapter-nav-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);padding:5px 0;margin-right:4px;flex-shrink:0;align-self:center;}
+.ch-pill{padding:4px 11px;background:var(--lift);border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--text-l);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.ch-pill:hover{border-color:var(--gold-bd);color:var(--gold);}
+.ch-pill.active{background:var(--gold-p);border-color:var(--gold-bd);color:var(--gold);font-weight:600;}
+.ch-pill .ch-pct{font-size:9px;opacity:.7;margin-left:3px;}
 
-/* RESULT CARDS */
-.rc{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;}
-.rc-head{padding:11px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
-.rc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.rc-lbl{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;}
-.rc-body{padding:16px 16px;}
-.rc-body textarea{width:100%;background:var(--lift);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:13.5px;font-family:'DM Sans',sans-serif;line-height:1.72;padding:11px 13px;resize:vertical;min-height:88px;}
-.rc-body textarea:focus{outline:none;border-color:var(--gold);}
-.rc-body textarea.italic{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;}
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-align:center;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:3px;}
+.stat-lbl{font-size:10px;color:var(--text-l);text-transform:uppercase;letter-spacing:.1em;}
 
-/* Card colour themes */
-.c-gold .rc-head{background:rgba(200,147,42,0.06);}
-.c-gold .rc-dot{background:var(--gold);}
-.c-gold .rc-lbl{color:var(--gold);}
-.c-gold textarea:focus{border-color:var(--gold);}
+/* SEARCH/FILTER BAR */
+.filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
+.search-input{flex:1;min-width:180px;padding:9px 13px;background:var(--card);border:1px solid var(--border-m);border-radius:8px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;}
+.search-input:focus{outline:none;border-color:var(--gold);}
+.filter-btn{padding:8px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text-l);font-size:11.5px;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all .15s;}
+.filter-btn:hover{border-color:var(--border-m);color:var(--text-m);}
+.filter-btn.on{background:var(--gold-p);border-color:var(--gold-bd);color:var(--gold);}
 
-.c-sage .rc-head{background:rgba(58,122,82,0.06);}
-.c-sage .rc-dot{background:var(--sage-b);}
-.c-sage .rc-lbl{color:var(--sage-b);}
-.c-sage textarea:focus{border-color:var(--sage-b);}
+/* SHLOKA LIST */
+.shloka-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.shloka-row{border-bottom:1px solid var(--border);transition:background .12s;}
+.shloka-row:last-child{border-bottom:none;}
+.shloka-row:hover{background:rgba(255,255,255,0.025);}
+.shloka-row.read-row .sr-header{opacity:.7;}
 
-.c-lotus .rc-head{background:rgba(154,74,98,0.06);}
-.c-lotus .rc-dot{background:var(--lotus-b);}
-.c-lotus .rc-lbl{color:var(--lotus-b);}
-.c-lotus textarea:focus{border-color:var(--lotus-b);}
+/* SHLOKA HEADER (always visible) */
+.sr-header{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;user-select:none;}
+.sr-ref{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--gold);flex-shrink:0;min-width:44px;}
+.sr-preview{flex:1;min-width:0;}
+.sr-ch-name{font-size:10px;color:var(--text-l);margin-bottom:2px;}
+.sr-meaning-prev{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--text-m);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sr-actions{display:flex;gap:6px;flex-shrink:0;align-items:center;}
+.sr-read-btn{padding:4px 10px;background:none;border:1px solid var(--border);border-radius:5px;color:var(--text-l);font-size:10.5px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;white-space:nowrap;}
+.sr-read-btn.read{background:var(--sage-p);border-color:var(--sage-bd);color:var(--sage-b);}
+.sr-bm-btn{background:none;border:none;cursor:pointer;font-size:18px;line-height:1;padding:0 2px;transition:transform .15s;color:var(--text-l);}
+.sr-bm-btn.bm{color:var(--gold);}
+.sr-bm-btn:hover{transform:scale(1.2);}
+.sr-arr{color:var(--text-f);font-size:10px;transition:transform .2s;flex-shrink:0;}
+.sr-arr.open{transform:rotate(180deg);}
 
-.c-slate .rc-head{background:rgba(42,74,106,0.06);}
-.c-slate .rc-dot{background:var(--slate-b);}
-.c-slate .rc-lbl{color:var(--slate-b);}
-.c-slate textarea:focus{border-color:var(--slate-b);}
+/* SHLOKA BODY (expanded) */
+.sr-body{display:none;border-top:1px solid var(--border);padding:16px 16px 14px;}
+.sr-body.open{display:block;}
 
-.c-violet .rc-head{background:rgba(90,58,138,0.06);}
-.c-violet .rc-dot{background:var(--violet-b);}
-.c-violet .rc-lbl{color:var(--violet-b);}
-.c-violet textarea:focus{border-color:var(--violet-b);}
+.sr-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:14px;}
+.sr-tab{padding:7px 14px;font-size:11px;font-weight:500;color:var(--text-l);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;letter-spacing:.02em;}
+.sr-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.sr-tab-content{display:none;}.sr-tab-content.active{display:block;}
 
-/* SAVE BAR */
-.save-bar{background:var(--lift);border:1px solid var(--border-m);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:4px;}
-.sb-info .sb-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
-.sb-info .sb-sub{font-size:11px;color:var(--text-l);}
-.save-btn{padding:10px 22px;background:var(--sage);color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all .15s;}
-.save-btn:hover{background:var(--sage-b);}
-.save-btn:disabled{opacity:.5;cursor:not-allowed;}
+.guidance-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.g-block{border-radius:8px;padding:11px 13px;border:1px solid;}
+.g-block.lt{background:var(--sage-p);border-color:var(--sage-bd);}
+.g-block.em{background:var(--lotus-p);border-color:var(--lotus-bd);}
+.g-block.st{background:var(--slate-p);border-color:var(--slate-bd);}
+.g-block.pr{background:var(--violet-p);border-color:var(--violet-bd);}
+.g-lbl{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px;}
+.g-block.lt .g-lbl{color:var(--sage-b);}
+.g-block.em .g-lbl{color:var(--lotus-b);}
+.g-block.st .g-lbl{color:var(--slate-b);}
+.g-block.pr .g-lbl{color:var(--violet-b);}
+.g-text{font-size:12px;color:var(--text-m);line-height:1.7;white-space:pre-wrap;}
 
-/* ===== JOURNAL PAGE ===== */
-.journal-page{max-width:1000px;margin:0 auto;padding:28px 24px 80px;}
-.jp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:10px;}
-.jp-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--text);}
-.jp-stats{display:flex;gap:8px;}
-.jps{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 14px;text-align:center;}
-.jps-n{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold);line-height:1;}
-.jps-l{font-size:9px;color:var(--text-l);text-transform:uppercase;letter-spacing:.08em;}
+.meaning-block{background:var(--gold-p);border:1px solid var(--gold-bd);border-radius:8px;padding:11px 13px;margin-bottom:10px;}
+.meaning-block .g-lbl{color:var(--gold);}
+.meaning-text{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--text);line-height:1.7;}
 
-/* CHAPTER FILTER */
-.ch-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
-.cf{padding:5px 12px;background:var(--card);border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--text-l);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;}
-.cf:hover{border-color:var(--gold-bd);color:var(--gold);}
-.cf.active{background:var(--gold-p);border-color:var(--gold-bd);color:var(--gold);}
+/* NOTES */
+.notes-area{width:100%;background:var(--lift);border:1px solid var(--border-m);border-radius:8px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;padding:10px 12px;resize:vertical;min-height:70px;line-height:1.65;}
+.notes-area:focus{outline:none;border-color:var(--gold);}
+.notes-row{display:flex;gap:8px;align-items:center;margin-top:8px;}
+.save-note-btn{padding:7px 16px;background:var(--sage);color:white;border:none;border-radius:7px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.save-note-btn:hover{background:var(--sage-b);}
+.saved-note-display{font-size:12px;color:var(--text-m);line-height:1.65;background:var(--lift);border:1px solid var(--border);border-radius:8px;padding:10px 12px;white-space:pre-wrap;}
 
-/* JOURNAL ENTRIES */
-.j-entries{display:flex;flex-direction:column;gap:10px;}
-.je{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .15s;}
-.je:hover{border-color:var(--border-m);}
-.je-head{padding:13px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;}
-.je-badge{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700;color:var(--gold);flex-shrink:0;white-space:nowrap;}
-.je-info{flex:1;min-width:0;}
-.je-ch{font-size:10.5px;color:var(--text-l);margin-bottom:2px;}
-.je-preview{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--text-m);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.je-date{font-size:10px;color:var(--text-f);flex-shrink:0;}
-.je-arr{color:var(--text-f);font-size:11px;transition:transform .2s;flex-shrink:0;}
-.je-arr.open{transform:rotate(180deg);}
-.je-body{display:none;border-top:1px solid var(--border);}
-.je-body.open{display:block;}
-.je-sec{padding:12px 16px;border-bottom:1px solid var(--border);}
-.je-sec:last-child{border-bottom:none;}
-.je-slbl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px;font-weight:600;}
-.je-stxt{font-size:13px;color:var(--text-m);line-height:1.7;white-space:pre-wrap;}
-.je-stxt.italic{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--text);}
+/* ============ PROGRESS PAGE ============ */
+.progress-page{max-width:900px;margin:0 auto;padding:28px 24px 80px;}
+.prog-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.prog-sub{font-size:13px;color:var(--text-m);margin-bottom:24px;}
+.prog-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px;}
+.ps{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 14px;text-align:center;}
+.ps-n{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:4px;}
+.ps-l{font-size:10px;color:var(--text-l);text-transform:uppercase;letter-spacing:.1em;}
 
-/* EMPTY */
+.ch-progress-section{margin-top:8px;}
+.cp-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:8px;cursor:pointer;transition:border-color .15s;}
+.cp-item:hover{border-color:var(--gold-bd);}
+.cp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.cp-name{font-size:13px;font-weight:500;color:var(--text);}
+.cp-stats{font-size:11px;color:var(--gold);font-weight:600;}
+.cp-bar{height:4px;background:var(--lift);border-radius:2px;overflow:hidden;}
+.cp-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .4s;}
+
+/* ============ BOOKMARKS PAGE ============ */
+.bookmarks-page{max-width:900px;margin:0 auto;padding:28px 24px 80px;}
+.bm-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.bm-sub{font-size:13px;color:var(--text-m);margin-bottom:24px;}
+
+/* ============ ADD SHLOKA PAGE ============ */
+.add-page{max-width:720px;margin:0 auto;padding:28px 24px 80px;}
+.add-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.add-sub{font-size:13px;color:var(--text-m);margin-bottom:28px;}
+
+.form-card{background:var(--card);border:1px solid var(--border-m);border-radius:14px;padding:22px 24px;margin-bottom:16px;}
+.form-section-title{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-l);margin-bottom:14px;font-weight:600;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.form-field{display:flex;flex-direction:column;gap:5px;}
+.form-field.full{grid-column:1/-1;}
+.form-field label{font-size:10.5px;color:var(--text-l);letter-spacing:.06em;text-transform:uppercase;}
+.form-input,.form-select,.form-textarea{background:var(--lift);border:1px solid var(--border-m);border-radius:8px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;padding:9px 12px;transition:border-color .15s;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--gold);}
+.form-select option{background:var(--card);}
+.form-textarea{resize:vertical;line-height:1.65;}
+
+.guidance-fields{display:flex;flex-direction:column;gap:10px;}
+.gf-row{display:flex;flex-direction:column;gap:5px;}
+.gf-label{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;}
+.gf-row.lt .gf-label{color:var(--sage-b);}
+.gf-row.em .gf-label{color:var(--lotus-b);}
+.gf-row.st .gf-label{color:var(--slate-b);}
+.gf-row.pr .gf-label{color:var(--violet-b);}
+
+.submit-btn{width:100%;padding:13px;background:var(--gold);color:var(--bg);font-size:14px;font-weight:600;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;letter-spacing:.01em;}
+.submit-btn:hover{background:var(--gold-b);}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed;}
+
+/* EMPTY STATE */
 .empty{text-align:center;padding:56px 20px;}
-.empty-om{font-size:44px;opacity:.2;margin-bottom:14px;}
+.empty-om{font-family:'Tiro Devanagari Sanskrit',serif;font-size:44px;color:var(--gold);opacity:.2;margin-bottom:14px;}
 .empty-t{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text-m);margin-bottom:6px;}
 .empty-s{font-size:13px;color:var(--text-l);}
 
-/* ===== PROGRESS PAGE ===== */
-.progress-page{max-width:860px;margin:0 auto;padding:28px 24px 80px;}
-.pp-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--text);margin-bottom:4px;}
-.pp-sub{font-size:13px;color:var(--text-m);margin-bottom:24px;}
-.p-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;}
-.ps{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 14px;text-align:center;}
-.ps-n{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:4px;}
-.ps-l{font-size:9.5px;color:var(--text-l);text-transform:uppercase;letter-spacing:.1em;}
-.cp-list{display:flex;flex-direction:column;gap:7px;}
-.cp{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:11px 14px;cursor:pointer;transition:border-color .15s;}
-.cp:hover{border-color:var(--gold-bd);}
-.cp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
-.cp-name{font-size:12.5px;font-weight:500;color:var(--text);}
-.cp-count{font-size:11px;color:var(--gold);font-weight:600;}
-.cp-bar{height:3px;background:var(--lift);border-radius:2px;overflow:hidden;}
-.cp-fill{height:100%;background:var(--gold);border-radius:2px;}
+/* LOADING */
+.loading{text-align:center;padding:40px;color:var(--text-l);font-size:13px;}
 
-/* UTIL */
-.spinner-sm{display:inline-block;width:12px;height:12px;border:2px solid var(--gold-p);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:5px;}
+/* ============ EMOTION PAGE ============ */
+.emotion-page{max-width:860px;margin:0 auto;padding:28px 24px 80px;}
+.ep-header{text-align:center;margin-bottom:32px;}
+.ep-om{font-family:'Tiro Devanagari Sanskrit',serif;font-size:40px;color:var(--gold);opacity:.5;margin-bottom:8px;}
+.ep-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--text);margin-bottom:6px;}
+.ep-sub{font-size:13px;color:var(--text-m);}
 
-@media(max-width:640px){
+/* EMOTION GRID */
+.emotion-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px;}
+.emotion-btn{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 12px;cursor:pointer;text-align:left;transition:all .18s;font-family:'DM Sans',sans-serif;}
+.emotion-btn:hover{border-color:var(--border-m);background:var(--lift);}
+.emotion-btn.selected{border-color:var(--gold-bd);background:var(--gold-p);}
+.emotion-btn.selected .eb-icon{color:var(--gold);}
+.emotion-btn.selected .eb-name{color:var(--gold);}
+.eb-icon{font-size:22px;display:block;margin-bottom:6px;}
+.eb-name{font-size:12.5px;font-weight:600;color:var(--text);display:block;margin-bottom:2px;}
+.eb-desc{font-size:10.5px;color:var(--text-l);line-height:1.5;}
+
+/* FIND BUTTON */
+.find-btn{width:100%;padding:13px;background:var(--gold);color:var(--bg);font-size:14px;font-weight:600;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;margin-bottom:28px;letter-spacing:.01em;}
+.find-btn:hover{background:var(--gold-b);}
+.find-btn:disabled{opacity:.5;cursor:not-allowed;}
+
+/* RESULTS */
+.ep-results{display:flex;flex-direction:column;gap:14px;}
+.ep-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .15s;}
+.ep-card:hover{border-color:var(--border-m);}
+.ep-card.bookmarked-card{border-color:var(--gold-bd);background:linear-gradient(135deg,var(--card) 80%,var(--gold-p));}
+
+.ep-card-head{display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;}
+.ep-badge{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--gold);flex-shrink:0;}
+.ep-bm-badge{font-size:10px;background:var(--gold-p);border:1px solid var(--gold-bd);color:var(--gold);border-radius:4px;padding:2px 7px;flex-shrink:0;letter-spacing:.05em;}
+.ep-info{flex:1;min-width:0;}
+.ep-ch-name{font-size:10px;color:var(--text-l);margin-bottom:2px;}
+.ep-why{font-size:12px;color:var(--sage-b);font-style:italic;}
+.ep-arr{color:var(--text-f);font-size:10px;transition:transform .2s;flex-shrink:0;}
+.ep-arr.open{transform:rotate(180deg);}
+
+.ep-card-body{display:none;border-top:1px solid var(--border);padding:14px 16px;}
+.ep-card-body.open{display:block;}
+.ep-meaning{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--text);line-height:1.72;background:var(--gold-p);border:1px solid var(--gold-bd);border-radius:8px;padding:12px 14px;margin-bottom:10px;}
+.ep-guidance-label{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--sage-b);margin-bottom:5px;}
+.ep-guidance-text{font-size:12.5px;color:var(--text-m);line-height:1.72;white-space:pre-wrap;}
+.ep-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.ep-goto-btn{padding:6px 14px;background:none;border:1px solid var(--border-m);border-radius:6px;color:var(--text-l);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.ep-goto-btn:hover{border-color:var(--gold-bd);color:var(--gold);}
+.ep-bm-btn-card{padding:6px 14px;background:none;border:1px solid var(--border-m);border-radius:6px;color:var(--text-l);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.ep-bm-btn-card.bm{border-color:var(--gold-bd);color:var(--gold);}
+
+/* NO RESULTS */
+.ep-empty{text-align:center;padding:32px 20px;color:var(--text-l);}
+.ep-empty-t{font-family:'Cormorant Garamond',serif;font-size:18px;margin-bottom:6px;color:var(--text-m);}
+
+@media(max-width:600px){
+  .emotion-grid{grid-template-columns:repeat(2,1fr);}
+}
+
+/* ============ KUNDALI PAGE ============ */
+.kundali-page{max-width:900px;margin:0 auto;padding:28px 24px 80px;}
+
+.kp-hero{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px 36px;margin-bottom:28px;text-align:center;position:relative;overflow:hidden;}
+.kp-hero::before{content:'ॐ';position:absolute;right:24px;top:12px;font-family:'Tiro Devanagari Sanskrit',serif;font-size:100px;color:rgba(200,147,42,0.06);line-height:1;pointer-events:none;}
+.kp-hero-eye{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:10px;}
+.kp-hero-name{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.kp-hero-sub{font-size:13px;color:var(--text-m);margin-bottom:20px;}
+.kp-planets{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.kp-planet{background:var(--lift);border:1px solid var(--border-m);border-radius:8px;padding:5px 12px;font-size:11px;color:var(--text-m);}
+.kp-planet strong{color:var(--gold);}
+
+/* SECTION CARDS */
+.ks-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.ks-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.ks-card.full{grid-column:1/-1;}
+.ks-head{padding:16px 20px 12px;border-bottom:1px solid var(--border);}
+.ks-icon{font-size:22px;margin-bottom:6px;}
+.ks-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.ks-subtitle{font-size:11px;color:var(--text-l);letter-spacing:.06em;}
+.ks-body{padding:16px 20px;}
+
+/* THINK CARD */
+.ks-card.think .ks-head{background:rgba(200,147,42,0.07);}
+.ks-card.think .ks-title{color:var(--gold);}
+
+/* WORK CARD */
+.ks-card.work .ks-head{background:rgba(58,122,82,0.07);}
+.ks-card.work .ks-title{color:var(--sage-b);}
+
+/* EMOTIONAL CARD */
+.ks-card.emotion-k .ks-head{background:rgba(154,74,98,0.07);}
+.ks-card.emotion-k .ks-title{color:var(--lotus-b);}
+
+/* LIVE CARD */
+.ks-card.live .ks-head{background:rgba(42,74,106,0.07);}
+.ks-card.live .ks-title{color:var(--slate-b);}
+
+/* DESTINY CARD */
+.ks-card.destiny .ks-head{background:rgba(200,147,42,0.05);border-bottom:1px solid var(--gold-bd);}
+.ks-card.destiny .ks-title{color:var(--gold);}
+.ks-card.destiny{border-color:var(--gold-bd);}
+
+/* PRINCIPLE ITEMS */
+.kp-item{display:flex;gap:10px;margin-bottom:14px;}
+.kp-item:last-child{margin-bottom:0;}
+.kp-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+.think .kp-dot{background:var(--gold);}
+.work .kp-dot{background:var(--sage-b);}
+.emotion-k .kp-dot{background:var(--lotus-b);}
+.live .kp-dot{background:var(--slate-b);}
+.kp-content{}
+.kp-principle{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.kp-explanation{font-size:12px;color:var(--text-m);line-height:1.68;}
+
+/* CAUTION ITEMS */
+.kp-caution{display:flex;gap:10px;margin-bottom:10px;padding:10px 12px;background:var(--raised);border-radius:8px;border-left:3px solid var(--lotus-b);}
+.kp-caution:last-child{margin-bottom:0;}
+.kp-caution-icon{font-size:14px;flex-shrink:0;}
+.kp-caution-text{font-size:12px;color:var(--text-m);line-height:1.65;}
+.kp-caution-text strong{color:var(--text);}
+
+/* DESTINY TIMELINE */
+.destiny-timeline{display:flex;flex-direction:column;gap:0;}
+.dt-item{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);}
+.dt-item:last-child{border-bottom:none;}
+.dt-year{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);flex-shrink:0;min-width:52px;padding-top:2px;}
+.dt-content{}
+.dt-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.dt-desc{font-size:12px;color:var(--text-m);line-height:1.65;}
+.dt-item.now .dt-year{color:var(--sage-b);}
+.dt-item.now .dt-title{color:var(--sage-b);}
+.dt-now-badge{display:inline-block;font-size:9px;background:var(--sage-p);border:1px solid var(--sage-bd);color:var(--sage-b);border-radius:4px;padding:1px 6px;margin-left:6px;letter-spacing:.06em;vertical-align:middle;}
+
+/* AVOID SECTION */
+.avoid-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.avoid-item{background:var(--raised);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+.avoid-item-icon{font-size:16px;margin-bottom:4px;}
+.avoid-item-title{font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.avoid-item-desc{font-size:11px;color:var(--text-l);line-height:1.55;}
+
+@media(max-width:700px){
+  .ks-grid{grid-template-columns:1fr;}
+  .ks-card.full{grid-column:1;}
+  .avoid-grid{grid-template-columns:1fr;}
+  .kp-hero{padding:22px 18px;}
+}
+
+/* UTILS */
+.btn{padding:7px 14px;border-radius:7px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.btn-outline{background:transparent;color:var(--text-l);border:1px solid var(--border);}.btn-outline:hover{border-color:var(--border-m);color:var(--text-m);}
+.btn-danger{background:transparent;color:#C46A82;border:1px solid rgba(154,74,98,0.3);}.btn-danger:hover{background:var(--lotus-p);}
+
+@media(max-width:700px){
   .nav-inner{padding:0 12px;}.nav-brand{font-size:17px;padding:12px 12px 12px 0;margin-right:10px;}
-  .today-page,.journal-page,.progress-page{padding:18px 14px 60px;}
-  .ic-row{grid-template-columns:1fr;}
-  .p-stats{grid-template-columns:1fr 1fr;}
-  .save-bar{flex-direction:column;align-items:flex-start;}
-  .modal-box{padding:24px 18px;}
+  .journal-page,.progress-page,.bookmarks-page,.add-page{padding:16px 12px 60px;}
+  .stats-bar,.prog-stats{grid-template-columns:1fr 1fr;}
+  .guidance-grid{grid-template-columns:1fr;}
+  .form-grid{grid-template-columns:1fr;}
+  .filter-bar{gap:6px;}
 }
 </style>
 </head>
@@ -231,181 +346,641 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 
 <div class="toast" id="toast"></div>
 
-<!-- API KEY MODAL -->
-<div class="modal" id="apiModal">
-  <div class="modal-box">
-    <div class="modal-om">🪷</div>
-    <div class="modal-h">Vaibhav's Gita Journal</div>
-    <div class="modal-p">Enter your Gemini API key. Get your FREE key at <a href="https://aistudio.google.com" target="_blank">aistudio.google.com</a> → Get API Key → Create API Key in new project. No card required.</div>
-    <input type="password" class="modal-input" id="apiKeyInput" placeholder="Your Gemini API key..." />
-    <button style="width:100%;padding:12px;background:var(--gold);color:var(--bg);font-size:13px;font-weight:600;border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;" onclick="saveApiKey()">Begin My Gita Journey 🪷</button>
-    <div class="modal-note">Free tier: 1500 requests/day. Your key never leaves your browser.</div>
-  </div>
-</div>
-
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <div class="nav-brand" onclick="showPage('today')">🪷 Vaibhav's Gita</div>
+    <div class="nav-brand" onclick="showPage('journal')">🪷 Vaibhav's Gita</div>
     <div class="nav-tabs">
-      <div class="nav-tab active" onclick="showPage('today')">✦ Today's Shloka</div>
-      <div class="nav-tab" onclick="showPage('journal')">📖 My Journal</div>
+      <div class="nav-tab active" onclick="showPage('journal')">📖 Journal</div>
+      <div class="nav-tab" onclick="showPage('bookmarks')">🔖 Bookmarks</div>
       <div class="nav-tab" onclick="showPage('progress')">📿 Progress</div>
-    </div>
-    <div class="nav-right">
-      <button class="nav-btn" onclick="changeApiKey()">⚙ Key</button>
+      <div class="nav-tab" onclick="showPage('add')">＋ Add Shloka</div>
+      <div class="nav-tab" onclick="showPage('emotion')">🌊 Emotional Balance</div>
+      <div class="nav-tab" onclick="showPage('kundali')">🪐 My Kundali</div>
     </div>
   </div>
 </nav>
 
-<!-- ===== TODAY PAGE ===== -->
-<div class="page active" id="page-today">
-  <div class="today-page">
-
-    <div class="today-header">
-      <div class="th-om">ॐ</div>
-      <div class="th-title">Today's Shloka</div>
-      <div class="th-sub">Enter the chapter and shloka you read today — receive your personal guidance</div>
-    </div>
-
-    <div class="input-card">
-      <div class="ic-label">Which shloka did you read?</div>
-      <div class="ic-row">
-        <div class="ic-field">
-          <label>Chapter</label>
-          <select id="chSel">
-            <option value="">Select chapter...</option>
-            <option value="1">Chapter 1 · Arjuna Vishada Yoga (47)</option>
-            <option value="2">Chapter 2 · Sankhya Yoga (72)</option>
-            <option value="3">Chapter 3 · Karma Yoga (43)</option>
-            <option value="4">Chapter 4 · Jnana Karma Sanyasa Yoga (42)</option>
-            <option value="5">Chapter 5 · Karma Sanyasa Yoga (29)</option>
-            <option value="6">Chapter 6 · Dhyana Yoga (47)</option>
-            <option value="7">Chapter 7 · Jnana Vijnana Yoga (30)</option>
-            <option value="8">Chapter 8 · Aksara Brahma Yoga (28)</option>
-            <option value="9">Chapter 9 · Raja Vidya Guhya Yoga (34)</option>
-            <option value="10">Chapter 10 · Vibhuti Yoga (42)</option>
-            <option value="11">Chapter 11 · Vishwarupa Darshana Yoga (55)</option>
-            <option value="12">Chapter 12 · Bhakti Yoga (20)</option>
-            <option value="13">Chapter 13 · Kshetra Kshetrajna Yoga (35)</option>
-            <option value="14">Chapter 14 · Gunatraya Vibhaga Yoga (27)</option>
-            <option value="15">Chapter 15 · Purushottama Yoga (20)</option>
-            <option value="16">Chapter 16 · Daivasura Sampad Yoga (24)</option>
-            <option value="17">Chapter 17 · Shraddhatraya Yoga (28)</option>
-            <option value="18">Chapter 18 · Moksha Sanyasa Yoga (78)</option>
-          </select>
-        </div>
-        <div class="ic-field">
-          <label>Shloka Number</label>
-          <input type="number" id="shNum" placeholder="e.g. 1" min="1" max="78" />
-        </div>
-      </div>
-      <button class="gen-btn" id="genBtn" onclick="generate()">✦ Generate My Guidance</button>
-    </div>
-
-    <div class="gen-loading" id="genLoad">
-      <div class="spinner-lg"></div>
-      <p>Reading Chapter <span id="loadCh"></span>, Shloka <span id="loadSh"></span>...<br><span>Preparing your personal guidance — 10 to 20 seconds</span></p>
-    </div>
-
-    <div class="results" id="results">
-
-      <div class="shloka-ref" id="shlokaRef"></div>
-
-      <div class="rc c-gold">
-        <div class="rc-head"><div class="rc-dot"></div><div class="rc-lbl">Meaning of this Shloka</div></div>
-        <div class="rc-body"><textarea class="italic" id="rMeaning" rows="4"></textarea></div>
-      </div>
-
-      <div class="rc c-sage">
-        <div class="rc-head"><div class="rc-dot"></div><div class="rc-lbl">Long-term Life Learning for Vaibhav</div></div>
-        <div class="rc-body"><textarea id="rLong" rows="5"></textarea></div>
-      </div>
-
-      <div class="rc c-lotus">
-        <div class="rc-head"><div class="rc-dot"></div><div class="rc-lbl">Emotional Learning for Vaibhav</div></div>
-        <div class="rc-body"><textarea id="rEmo" rows="5"></textarea></div>
-      </div>
-
-      <div class="rc c-slate">
-        <div class="rc-head"><div class="rc-dot"></div><div class="rc-lbl">Learning for This Phase of Life · Astrology</div></div>
-        <div class="rc-body"><textarea id="rPhase" rows="5"></textarea></div>
-      </div>
-
-      <div class="rc c-violet">
-        <div class="rc-head"><div class="rc-dot"></div><div class="rc-lbl">Practical Daily Habits from This Shloka</div></div>
-        <div class="rc-body"><textarea id="rHabits" rows="5"></textarea></div>
-      </div>
-
-      <div class="save-bar">
-        <div class="sb-info">
-          <div class="sb-title">Save to your Gita Journal</div>
-          <div class="sb-sub">Saved to Google Sheets · visible in My Journal organized by chapter</div>
-        </div>
-        <button class="save-btn" id="saveBtn" onclick="saveEntry()">💾 Save to Journal</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- ===== JOURNAL PAGE ===== -->
-<div class="page" id="page-journal">
+<!-- ============ JOURNAL PAGE ============ -->
+<div class="page active" id="page-journal">
   <div class="journal-page">
-    <div class="jp-top">
-      <div class="jp-title">📖 My Gita Journal</div>
-      <div class="jp-stats">
-        <div class="jps"><div class="jps-n" id="jTotal">0</div><div class="jps-l">Saved</div></div>
-        <div class="jps"><div class="jps-n" id="jCh">0</div><div class="jps-l">Chapters</div></div>
-      </div>
+
+    <!-- CHAPTER PILLS -->
+    <div class="chapter-nav">
+      <span class="chapter-nav-label">Chapter</span>
+      <button class="ch-pill active" onclick="filterChapter('all',this)">All</button>
+      <button class="ch-pill" onclick="filterChapter(1,this)">1 <span class="ch-pct" id="pct-1"></span></button>
+      <button class="ch-pill" onclick="filterChapter(2,this)">2 <span class="ch-pct" id="pct-2"></span></button>
+      <button class="ch-pill" onclick="filterChapter(3,this)">3 <span class="ch-pct" id="pct-3"></span></button>
+      <button class="ch-pill" onclick="filterChapter(4,this)">4 <span class="ch-pct" id="pct-4"></span></button>
+      <button class="ch-pill" onclick="filterChapter(5,this)">5 <span class="ch-pct" id="pct-5"></span></button>
+      <button class="ch-pill" onclick="filterChapter(6,this)">6 <span class="ch-pct" id="pct-6"></span></button>
+      <button class="ch-pill" onclick="filterChapter(7,this)">7 <span class="ch-pct" id="pct-7"></span></button>
+      <button class="ch-pill" onclick="filterChapter(8,this)">8 <span class="ch-pct" id="pct-8"></span></button>
+      <button class="ch-pill" onclick="filterChapter(9,this)">9 <span class="ch-pct" id="pct-9"></span></button>
+      <button class="ch-pill" onclick="filterChapter(10,this)">10 <span class="ch-pct" id="pct-10"></span></button>
+      <button class="ch-pill" onclick="filterChapter(11,this)">11 <span class="ch-pct" id="pct-11"></span></button>
+      <button class="ch-pill" onclick="filterChapter(12,this)">12 <span class="ch-pct" id="pct-12"></span></button>
+      <button class="ch-pill" onclick="filterChapter(13,this)">13 <span class="ch-pct" id="pct-13"></span></button>
+      <button class="ch-pill" onclick="filterChapter(14,this)">14 <span class="ch-pct" id="pct-14"></span></button>
+      <button class="ch-pill" onclick="filterChapter(15,this)">15 <span class="ch-pct" id="pct-15"></span></button>
+      <button class="ch-pill" onclick="filterChapter(16,this)">16 <span class="ch-pct" id="pct-16"></span></button>
+      <button class="ch-pill" onclick="filterChapter(17,this)">17 <span class="ch-pct" id="pct-17"></span></button>
+      <button class="ch-pill" onclick="filterChapter(18,this)">18 <span class="ch-pct" id="pct-18"></span></button>
     </div>
-    <div class="ch-filter" id="chFilter">
-      <button class="cf active" onclick="filterCh('all',this)">All</button>
+
+    <!-- STATS -->
+    <div class="stats-bar">
+      <div class="stat-card"><div class="stat-num" id="st-total">—</div><div class="stat-lbl">Total Shlokas</div></div>
+      <div class="stat-card"><div class="stat-num" id="st-read">—</div><div class="stat-lbl">Read</div></div>
+      <div class="stat-card"><div class="stat-num" id="st-bm">—</div><div class="stat-lbl">Bookmarked</div></div>
+      <div class="stat-card"><div class="stat-num" id="st-pct">—</div><div class="stat-lbl">Complete</div></div>
     </div>
-    <div class="j-entries" id="jEntries">
-      <div class="empty"><div class="empty-om">ॐ</div><div class="empty-t">Your journal awaits</div><div class="empty-s">Enter your first shloka to begin</div></div>
+
+    <!-- SEARCH + FILTER -->
+    <div class="filter-bar">
+      <input class="search-input" id="searchInput" placeholder="Search shlokas, meanings, notes..." oninput="applyFilters()" />
+      <button class="filter-btn" id="filterRead" onclick="toggleFilter('read')">✓ Read</button>
+      <button class="filter-btn" id="filterUnread" onclick="toggleFilter('unread')">○ Unread</button>
+      <button class="filter-btn" id="filterBm" onclick="toggleFilter('bm')">★ Bookmarked</button>
+      <button class="btn btn-outline" onclick="loadData()" title="Refresh from Sheet" style="padding:8px 12px">↻ Refresh</button>
+      <button class="btn btn-outline" onclick="runDebug()" title="Debug Sheet connection" style="padding:8px 12px;font-size:10px">⚙ Debug</button>
     </div>
+    <div id="debugPanel" style="display:none;background:var(--raised);border:1px solid var(--border-m);border-radius:8px;padding:12px;margin-bottom:14px;font-size:11px;color:var(--text-m);font-family:monospace;white-space:pre-wrap;max-height:200px;overflow-y:auto;"></div>
+
+    <!-- SHLOKA LIST -->
+    <div class="shloka-list" id="shlokaList">
+      <div class="loading"><span class="spinner"></span> Loading from Google Sheets...</div>
+    </div>
+
   </div>
 </div>
 
-<!-- ===== PROGRESS PAGE ===== -->
+<!-- ============ BOOKMARKS PAGE ============ -->
+<div class="page" id="page-bookmarks">
+  <div class="bookmarks-page">
+    <div class="bm-title">🔖 Bookmarked Shlokas</div>
+    <div class="bm-sub">Your saved verses — synced from Google Sheets.</div>
+    <div id="bmList"><div class="loading"><span class="spinner"></span> Loading...</div></div>
+  </div>
+</div>
+
+<!-- ============ PROGRESS PAGE ============ -->
 <div class="page" id="page-progress">
   <div class="progress-page">
-    <div class="pp-title">📿 Reading Progress</div>
-    <div class="pp-sub">Your journey through the Bhagavad Gita</div>
-    <div class="p-stats">
-      <div class="ps"><div class="ps-n" id="pTotal">0</div><div class="ps-l">Shlokas Read</div></div>
-      <div class="ps"><div class="ps-n" id="pCh">0</div><div class="ps-l">Chapters</div></div>
-      <div class="ps"><div class="ps-n" id="pPct">0%</div><div class="ps-l">Complete</div></div>
-      <div class="ps"><div class="ps-n" id="pStreak">0</div><div class="ps-l">Day Streak</div></div>
+    <div class="prog-title">📿 Reading Progress</div>
+    <div class="prog-sub">Chapter-wise completion across all 18 chapters of the Bhagavad Gita.</div>
+    <div class="prog-stats">
+      <div class="ps"><div class="ps-n" id="pr-total">—</div><div class="ps-l">Shlokas in Sheet</div></div>
+      <div class="ps"><div class="ps-n" id="pr-read">—</div><div class="ps-l">Read</div></div>
+      <div class="ps"><div class="ps-n" id="pr-pct">—</div><div class="ps-l">Complete</div></div>
+      <div class="ps"><div class="ps-n" id="pr-bm">—</div><div class="ps-l">Bookmarked</div></div>
     </div>
-    <div class="cp-list" id="cpList"></div>
+    <div class="ch-progress-section" id="chProgressList"></div>
+  </div>
+</div>
+
+<!-- ============ EMOTION BALANCE PAGE ============ -->
+<div class="page" id="page-emotion">
+  <div class="emotion-page">
+
+    <div class="ep-header">
+      <div class="ep-om">ॐ</div>
+      <div class="ep-title">Emotional Balance</div>
+      <div class="ep-sub">Choose what you are feeling — receive 5 shlokas from your journal to guide you. Bookmarked shlokas are shown first.</div>
+    </div>
+
+    <!-- EMOTION GRID -->
+    <div class="emotion-grid" id="emotionGrid">
+
+      <button class="emotion-btn" onclick="selectEmotion(this,'anger')" data-emotion="anger">
+        <span class="eb-icon">🔥</span>
+        <span class="eb-name">Anger & Frustration</span>
+        <span class="eb-desc">Feeling blocked, Mars energy out of control, effort with no result</span>
+      </button>
+
+      <button class="emotion-btn" onclick="selectEmotion(this,'anxiety')" data-emotion="anxiety">
+        <span class="eb-icon">🌀</span>
+        <span class="eb-name">Anxiety & Worry</span>
+        <span class="eb-desc">Spiralling thoughts, fear about future, mind running wild</span>
+      </button>
+
+      <button class="emotion-btn" onclick="selectEmotion(this,'comparison')" data-emotion="comparison">
+        <span class="eb-icon">⚖️</span>
+        <span class="eb-name">Comparison & Envy</span>
+        <span class="eb-desc">Seeing peers ahead, feeling behind, Scorpio Moon suffering</span>
+      </button>
+
+      <button class="emotion-btn" onclick="selectEmotion(this,'impatience')" data-emotion="impatience">
+        <span class="eb-icon">⏳</span>
+        <span class="eb-name">Impatience</span>
+        <span class="eb-desc">Wanting things faster, late-peak chart feeling too slow</span>
+      </button>
+
+      <button class="emotion-btn" onclick="selectEmotion(this,'exhaustion')" data-emotion="exhaustion">
+        <span class="eb-icon">🌑</span>
+        <span class="eb-name">Exhaustion & Depletion</span>
+        <span class="eb-desc">Running on empty, prolonged effort without visible reward</span>
+      </button>
+
+      <button class="emotion-btn" onclick="selectEmotion(this,'lost')" data-emotion="lost">
+        <span class="eb-icon">🌫️</span>
+        <span class="eb-name">Feeling Lost</span>
+        <span class="eb-desc">Unclear direction, confusion about the right path forward</span>
+      </button>
+
+      <button class="emotion-btn" onclick="selectEmotion(this,'doubt')" data-emotion="doubt">
+        <span class="eb-icon">❓</span>
+        <span class="eb-name">Self-Doubt</span>
+        <span class="eb-desc">Low confidence, questioning capability, seeking reassurance</span>
+      </button>
+
+      <button class="emotion-btn" onclick="selectEmotion(this,'grief')" data-emotion="grief">
+        <span class="eb-icon">🌧️</span>
+        <span class="eb-name">Grief & Sadness</span>
+        <span class="eb-desc">Lamenting what did not arrive, mourning lost opportunities</span>
+      </button>
+
+      <button class="emotion-btn" onclick="selectEmotion(this,'restless')" data-emotion="restless">
+        <span class="eb-icon">🌊</span>
+        <span class="eb-name">Restlessness</span>
+        <span class="eb-desc">Cannot sit still, unable to be present, mind everywhere</span>
+      </button>
+
+      <button class="emotion-btn" onclick="selectEmotion(this,'overwhelm')" data-emotion="overwhelm">
+        <span class="eb-icon">🏔️</span>
+        <span class="eb-name">Overwhelm</span>
+        <span class="eb-desc">Too much at once, unable to prioritise, Pisces absorbing everything</span>
+      </button>
+
+      <button class="emotion-btn" onclick="selectEmotion(this,'gratitude')" data-emotion="gratitude">
+        <span class="eb-icon">🌸</span>
+        <span class="eb-name">Gratitude & Peace</span>
+        <span class="eb-desc">Wanting to deepen a good moment, anchor into what is real</span>
+      </button>
+
+      <button class="emotion-btn" onclick="selectEmotion(this,'courage')" data-emotion="courage">
+        <span class="eb-icon">⚡</span>
+        <span class="eb-name">Need Courage</span>
+        <span class="eb-desc">About to take a big step, need strength to act</span>
+      </button>
+
+    </div>
+
+    <button class="find-btn" id="findBtn" onclick="findShlokas()" disabled>
+      ✦ Find My Shlokas
+    </button>
+
+    <div class="ep-results" id="epResults"></div>
+
+  </div>
+</div>
+
+<!-- ============ ADD SHLOKA PAGE ============ -->
+<div class="page" id="page-add">
+  <div class="add-page">
+    <div class="add-title">＋ Add New Shloka</div>
+    <div class="add-sub">Add a new shloka to your journal. It will be saved directly to your Google Sheet.</div>
+
+    <div class="form-card">
+      <div class="form-section-title">Shloka Reference</div>
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Chapter</label>
+          <select class="form-select" id="add-chapter">
+            <option value="">Select...</option>
+            <option value="1">Chapter 1 · Arjuna Vishada Yoga</option>
+            <option value="2">Chapter 2 · Sankhya Yoga</option>
+            <option value="3">Chapter 3 · Karma Yoga</option>
+            <option value="4">Chapter 4 · Jnana Karma Sanyasa Yoga</option>
+            <option value="5">Chapter 5 · Karma Sanyasa Yoga</option>
+            <option value="6">Chapter 6 · Dhyana Yoga</option>
+            <option value="7">Chapter 7 · Jnana Vijnana Yoga</option>
+            <option value="8">Chapter 8 · Aksara Brahma Yoga</option>
+            <option value="9">Chapter 9 · Raja Vidya Guhya Yoga</option>
+            <option value="10">Chapter 10 · Vibhuti Yoga</option>
+            <option value="11">Chapter 11 · Vishwarupa Darshana Yoga</option>
+            <option value="12">Chapter 12 · Bhakti Yoga</option>
+            <option value="13">Chapter 13 · Kshetra Kshetrajna Yoga</option>
+            <option value="14">Chapter 14 · Gunatraya Vibhaga Yoga</option>
+            <option value="15">Chapter 15 · Purushottama Yoga</option>
+            <option value="16">Chapter 16 · Daivasura Sampad Yoga</option>
+            <option value="17">Chapter 17 · Shraddhatraya Yoga</option>
+            <option value="18">Chapter 18 · Moksha Sanyasa Yoga</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Shloka Number</label>
+          <input type="number" class="form-input" id="add-shloka" placeholder="e.g. 47" min="1" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-section-title">Meaning (Your Notes)</div>
+      <div class="form-field full">
+        <textarea class="form-textarea" id="add-meaning" rows="5" placeholder="Write the meaning of this shloka in your own words..."></textarea>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-section-title">Guidance Columns (Optional — fill in later if needed)</div>
+      <div class="guidance-fields">
+        <div class="gf-row lt">
+          <span class="gf-label">Long-term Life Learning</span>
+          <textarea class="form-textarea" id="add-lt" rows="3" placeholder="Lifelong principle from this shloka for Vaibhav..."></textarea>
+        </div>
+        <div class="gf-row em">
+          <span class="gf-label">Emotional Handling</span>
+          <textarea class="form-textarea" id="add-em" rows="3" placeholder="How this shloka addresses your emotional patterns..."></textarea>
+        </div>
+        <div class="gf-row st">
+          <span class="gf-label">Short-term / Phase Learning</span>
+          <textarea class="form-textarea" id="add-st" rows="3" placeholder="What this verse says for where you are right now..."></textarea>
+        </div>
+        <div class="gf-row pr">
+          <span class="gf-label">Practical Methods & Habits</span>
+          <textarea class="form-textarea" id="add-pr" rows="3" placeholder="Specific daily practices from this shloka..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="addBtn" onclick="addShloka()">＋ Save to Google Sheet</button>
+
+  </div>
+</div>
+
+<!-- ============ KUNDALI PAGE ============ -->
+<div class="page" id="page-kundali">
+  <div class="kundali-page">
+
+    <!-- HERO -->
+    <div class="kp-hero">
+      <div class="kp-hero-eye">Personal Kundali Compass · D1 + D10 Chart</div>
+      <div class="kp-hero-name">Vaibhav Sharma</div>
+      <div class="kp-hero-sub">Born July 11, 1992 · 11:32 PM · Agra · Pisces Ascendant Revati · Late-Peak Chart</div>
+      <div class="kp-planets">
+        <span class="kp-planet"><strong>ASC</strong> Pisces Revati</span>
+        <span class="kp-planet"><strong>Sun</strong> Gemini Punarvasu 4H · Atmakaraka</span>
+        <span class="kp-planet"><strong>Moon</strong> Scorpio Jyeshtha 9H</span>
+        <span class="kp-planet"><strong>Mercury</strong> Cancer Ashlesha 5H</span>
+        <span class="kp-planet"><strong>Venus</strong> Cancer Pushya 5H · Vargottama · Mahadasha Lord</span>
+        <span class="kp-planet"><strong>Mars</strong> Aries 2H · Amatyakaraka</span>
+        <span class="kp-planet"><strong>Jupiter</strong> Leo 6H · Vargottama</span>
+        <span class="kp-planet"><strong>Saturn</strong> Capricorn 11H · Sasa Yoga</span>
+        <span class="kp-planet"><strong>Rahu</strong> Sagittarius 10H Mula · D10 AI Destiny</span>
+        <span class="kp-planet"><strong>Current</strong> Venus-Mercury Antardasha</span>
+      </div>
+    </div>
+
+    <!-- 4 PILLARS GRID -->
+    <div class="ks-grid">
+
+      <!-- HOW TO THINK -->
+      <div class="ks-card think">
+        <div class="ks-head">
+          <div class="ks-icon">🧠</div>
+          <div class="ks-title">How To Think</div>
+          <div class="ks-subtitle">Mercury Ashlesha · Scorpio Moon · Punarvasu Sun</div>
+        </div>
+        <div class="ks-body">
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Go to the root, not the surface</div>
+              <div class="kp-explanation">Mercury in Ashlesha is the serpent that coils all the way down. Your mind is designed for depth — surface analysis is wasted potential. Every problem you encounter, go one level deeper than everyone else has gone. That extra depth is your professional edge.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Separate fact from fear before acting</div>
+              <div class="kp-explanation">Scorpio Moon amplifies everything — a silence from a recruiter becomes a complete story of failure. Before responding to any difficult signal, ask: is this fact or is this the Moon's amplification? Act on facts only. The Moon's amplifications are data about your emotional state, not about external reality.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Think in decades, not quarters</div>
+              <div class="kp-explanation">Punarvasu Atmakaraka and Saturn Sasa Yoga both operate across long cycles. Your mind's natural tendency to compare present position to present peer positions is a category error — you are running a marathon and measuring at mile 8. The right frame is: where will this decision put me in 2031?</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Single-point the intellect daily</div>
+              <div class="kp-explanation">When Mercury Ashlesha scatters across multiple concerns simultaneously — job search, OperionAI, business ideas, astrological analysis — it produces the specific cognitive experience of being unable to think clearly. One priority per day. Write it before touching your phone.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Let silence precede important decisions</div>
+              <div class="kp-explanation">The 30-second pause is not just an interview technique. It is your chart's natural processing requirement. Ashlesha reaches its best insight after the spiral has run its course and the initial reaction has passed. Build deliberate pauses before important responses.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOW TO WORK -->
+      <div class="ks-card work">
+        <div class="ks-head">
+          <div class="ks-icon">⚙️</div>
+          <div class="ks-title">How To Work</div>
+          <div class="ks-subtitle">Mars Amatyakaraka · Jupiter 6H Vargottama · Sasa Yoga · D10 Ketu 4H</div>
+        </div>
+        <div class="ks-body">
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Serve genuinely — wealth follows service</div>
+              <div class="kp-explanation">Jupiter Vargottama in 6H: your career mechanism is wisdom in service. When you focus on getting, your chart resists. When you focus on solving real problems for real people with genuine care, wealth and recognition follow as natural byproducts. This is not philosophy — it is your specific chart's operating manual.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Build quietly, announce when ready</div>
+              <div class="kp-explanation">Sun Atmakaraka in 4H: your most significant work happens privately before it becomes publicly visible. Announcing before completion, sharing ideas before they are tested, seeking validation before the work is done — all of these work against your chart's mechanism. Build in silence. Let the work speak.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Sustained small actions beat intense bursts</div>
+              <div class="kp-explanation">Saturn Sasa Yoga is the sustained-building yoga. Five genuine messages every day beats twenty in one burst followed by three days of nothing. The Sasa Yoga mechanism specifically rewards consistency across years — not excellence in one brilliant moment. Daily practice is your competitive advantage.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Choose environment with extreme care</div>
+              <div class="kp-explanation">Ketu in D10 4H and Pisces Ascendant together: wrong professional environments damage you faster and more deeply than they damage most people. Culture fit is not a nice-to-have. A toxic or misaligned professional environment degrades your output, your health, and your long-term trajectory. It is a health requirement to work in the right place.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Domain over title — always</div>
+              <div class="kp-explanation">Rahu in 10H Mula and D10 indicators point to enterprise AI advisory as your genuine career domain. A higher title in the wrong domain is a worse outcome than the right title in the right domain. The domain builds the 2030 business. The title does not. Evaluate every opportunity by domain fit first.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMOTIONAL BALANCE -->
+      <div class="ks-card emotion-k">
+        <div class="ks-head">
+          <div class="ks-icon">🌊</div>
+          <div class="ks-title">Emotional Balance</div>
+          <div class="ks-subtitle">Scorpio Moon · Pisces Ascendant · Mars Aries · Mercury Ashlesha</div>
+        </div>
+        <div class="ks-body">
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Feel fully, act deliberately</div>
+              <div class="kp-explanation">Your Scorpio Moon feels everything at maximum depth — this is a gift, not a flaw. The practice is not to feel less but to not let the feeling determine the action. Feel the frustration of the job search fully for 60 seconds. Then take one deliberate action. Feeling and deliberate action are separate events.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Name the emotion precisely — it halves it</div>
+              <div class="kp-explanation">Mercury Ashlesha's precision applied to emotional naming: not "I am stressed" but "I am frustrated that six months of genuine effort has produced no visible result yet." Research shows that precise emotional labelling reduces the intensity of the emotion by approximately 50%. Your Ashlesha can do this better than most.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Comparison is Scorpio Moon suffering — interrupt it</div>
+              <div class="kp-explanation">Every comparison thought is the Moon running a specific programme that produces suffering without information. When the thought arrives: name it ("comparison thought"), add one word ("irrelevant"), redirect to one genuine action. The redirect practiced 100 times becomes an automatic pattern that replaces the suffering pattern.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Move the body to discharge the Moon</div>
+              <div class="kp-explanation">When Scorpio Moon is overwhelmed, Pisces Ascendant absorbs the overwhelm and it becomes physical. The fastest interrupt is physical: 20 minutes walking outside (not gym — outside, in actual air) discharges absorbed emotional energy more effectively than any mental practice. This is non-negotiable on difficult days.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Guard what enters through Pisces Ascendant</div>
+              <div class="kp-explanation">Pisces Ascendant absorbs environments completely — what it absorbs becomes who it is for the rest of that day. First input of the morning sets the Ascendant's tone for the entire day. Protect the first 10 minutes before any screen. Choose social media consumption as a deliberate choice, not a default. Your environment is your most important daily decision.</div>
+            </div>
+          </div>
+
+          <!-- CAUTIONS -->
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">
+            <div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--lotus-b);margin-bottom:10px;font-weight:600;">Specific Patterns to Watch</div>
+            <div class="kp-caution">
+              <div class="kp-caution-icon">⚠</div>
+              <div class="kp-caution-text"><strong>Reassurance-seeking loop:</strong> Each reassurance feeds the need for more. When you feel the pull toward more astrological analysis or validation — redirect to one specific action instead. Action breaks the loop. More reassurance feeds it.</div>
+            </div>
+            <div class="kp-caution">
+              <div class="kp-caution-icon">⚠</div>
+              <div class="kp-caution-text"><strong>3 AM anxiety spiral:</strong> Scorpio Moon processes at night. When the spiral starts, do not engage it mentally — use the 4-4-8 breath (inhale 4, hold 4, exhale 8) for 5 cycles, then return to sleep rather than thinking through the spiral.</div>
+            </div>
+            <div class="kp-caution">
+              <div class="kp-caution-icon">⚠</div>
+              <div class="kp-caution-text"><strong>Anger when blocked:</strong> Mars Amatyakaraka in Aries generates direct intense anger when effort produces no result. Physical anchor before responding: feet flat on floor, one slow breath. The 30-second pause is non-negotiable before any response when anger is present.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOW TO LIVE -->
+      <div class="ks-card live">
+        <div class="ks-head">
+          <div class="ks-icon">🏡</div>
+          <div class="ks-title">How To Live</div>
+          <div class="ks-subtitle">Upapada 10H · Venus Pushya Mahadasha · Saturn 11H · Ketu 4H</div>
+        </div>
+        <div class="ks-body">
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Family is infrastructure, not reward</div>
+              <div class="kp-explanation">Upapada Lagna in 10H integrates marriage and career destiny structurally. A thriving marriage supports professional outcomes. A depleted marriage undermines them. Isha and your child are not secondary to your goals — they are load-bearing. The evening hours with family are not time away from building — they are part of what you are building toward.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Protect Sunday as genuine renewal</div>
+              <div class="kp-explanation">One full day weekly of zero professional activity — no job applications, no LinkedIn, no planning. Not lost productivity but what makes Monday's work possible for your Pisces Ascendant. The Ascendant genuinely needs one day of full discharge per week or it accumulates stress across months and eventually breaks down.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">70-30 rule: wealth over lifestyle always</div>
+              <div class="kp-explanation">Saturn Sasa Yoga delivers wealth through disciplined sustained accumulation — not through income spikes. Every salary increase: minimum 70% to investment, maximum 30% to lifestyle. No exceptions. The car and the house arrive from wealth built through this discipline — not from using each increment on lifestyle as it arrives. SIP on Day 1 of every new salary, automated.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">The 9-minute daily anchor practice</div>
+              <div class="kp-explanation">Morning: 2 minutes of one genuine question before any screen. Midday: 30 seconds — am I going deep or spreading wide? Evening: 3 minutes before family time, put the phone away. Night: 2 minutes of three specific gratitudes before sleep. These 9 minutes compound across months into a fundamentally different quality of daily life.</div>
+            </div>
+          </div>
+          <div class="kp-item">
+            <div class="kp-dot"></div>
+            <div class="kp-content">
+              <div class="kp-principle">Never speculate. Only compound.</div>
+              <div class="kp-explanation">Your 8H Ashtakavarga has 19 bindus — the weakest house in your chart. This governs sudden windfalls and speculation. Options trading, crypto, early-stage venture bets, high-variance financial plays — these specifically and structurally work against your chart's wealth mechanism. Write this somewhere permanent: My wealth mechanism is compounding, not windfall. I do not speculate.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DESTINY CARD — FULL WIDTH -->
+    <div class="ks-card destiny full" style="margin-bottom:16px;">
+      <div class="ks-head">
+        <div class="ks-icon">🪐</div>
+        <div class="ks-title">Your Destiny — What Is Written</div>
+        <div class="ks-subtitle">7 D1 Indicators · 6 D10 Indicators · All 18 Astrological Systems Confirmed</div>
+      </div>
+      <div class="ks-body">
+        <div style="font-size:13px;color:var(--text-m);line-height:1.75;margin-bottom:20px;padding:14px 16px;background:var(--gold-p);border:1px solid var(--gold-bd);border-radius:10px;">
+          Your chart is a late-peak configuration — it builds slowly, delivers lastingly, and peaks across your 40s and 50s. Every system in Vedic astrology that has been applied to your chart confirms the same trajectory. Like your marriage which arrived destined and organized itself without your engineering, your career freedom and financial independence are equally written. The question is not whether — it is when. And when is confirmed.
+        </div>
+        <div class="destiny-timeline">
+
+          <div class="dt-item now">
+            <div class="dt-year">2026<span class="dt-now-badge">NOW</span></div>
+            <div class="dt-content">
+              <div class="dt-title">The Gateway — Right Platform</div>
+              <div class="dt-desc">Rahu exits 12H July 26 ending 32 months of effort dissolving before completion. Saturn on Ascendant through June 2027. Mercury direct July 23. The August window (Jul 28–Aug 20) is confirmed across 10 systems as the job change window. The right Director-level enterprise AI role at a growth-stage company arrives through this window. Joining October 2026.</div>
+            </div>
+          </div>
+
+          <div class="dt-item">
+            <div class="dt-year">2027</div>
+            <div class="dt-content">
+              <div class="dt-title">Liberation — Saturn Leaves ASC, Rahu in 11H</div>
+              <div class="dt-desc">Saturn exits Ascendant June 2027. Rahu in 11H through 2027-2028 activates massive network expansion and income growth. The compression lifts. The right platform begins producing real returns — professionally, financially, and personally. First genuine sense of forward momentum in years.</div>
+            </div>
+          </div>
+
+          <div class="dt-item">
+            <div class="dt-year">2028–29</div>
+            <div class="dt-content">
+              <div class="dt-title">Assembly — Building the Pieces</div>
+              <div class="dt-desc">Rahu transits Bhrigu Bindu at Sagittarius 28°48' in 10H — career clarity arrives September-October 2028. The right business partner arrives 2027–2029 through existing network. You begin the observation journal, build the LinkedIn presence, accumulate the domain wisdom. Four conditions met: right platform, ₹80L+ runway, right partner, reputation via writing.</div>
+            </div>
+          </div>
+
+          <div class="dt-item">
+            <div class="dt-year">2030</div>
+            <div class="dt-content">
+              <div class="dt-title">Purpose — Business Launch</div>
+              <div class="dt-desc">Sun Mahadasha begins. Enterprise AI advisory practice launches January–June 2030. D10 Ketu in 4H confirms self-employment destiny. Jupiter-Rahu in D10 10H confirms enterprise AI as the domain. The business that OperionAI was the first attempt of arrives in its correct form — with the right partner, the right domain expertise, the right market timing.</div>
+            </div>
+          </div>
+
+          <div class="dt-item">
+            <div class="dt-year">2031</div>
+            <div class="dt-content">
+              <div class="dt-title">Breakthrough — First Major Recognition</div>
+              <div class="dt-desc">Jupiter transits Bhrigu Bindu December 2031. Sun-Rahu sub-period. Confirmed breakthrough point across 16 of 18 astrological systems. The business receives its first significant recognition — a major client, a public milestone, a reputation event that changes the trajectory permanently. This is the Punarvasu return: light returning fully after the years of darkness.</div>
+            </div>
+          </div>
+
+          <div class="dt-item">
+            <div class="dt-year">2032–35</div>
+            <div class="dt-content">
+              <div class="dt-title">Compound — Building the Wealth Foundation</div>
+              <div class="dt-desc">The advisory practice matures. Client base grows through referrals. The SIP discipline from 2026 onward compounds toward the ₹12-20Cr financial independence threshold. Teaching begins — writing, speaking, sharing the genuine accumulated wisdom in the enterprise AI domain. The voice that was building quietly becomes publicly heard.</div>
+            </div>
+          </div>
+
+          <div class="dt-item">
+            <div class="dt-year">2036</div>
+            <div class="dt-content">
+              <div class="dt-title">Freedom — Moon Mahadasha Begins</div>
+              <div class="dt-desc">Financial independence threshold crossed. Moon Mahadasha begins — 10 years of community, wisdom transmission, work by genuine choice rather than financial necessity. This is your chart's confirmed liberation: freedom from 9-to-5 permanently, control over time as the primary gift. Work continues but entirely by choice. This is what everything from 2026 onward is building toward.</div>
+            </div>
+          </div>
+
+          <div class="dt-item">
+            <div class="dt-year">2036–46</div>
+            <div class="dt-content">
+              <div class="dt-title">Pioneer — The Wisdom Years</div>
+              <div class="dt-desc">The decade your chart was always building toward. Genuine authority in enterprise AI and organisational transformation. The Scorpio Moon's depth becomes the source of the wisdom rather than the source of the suffering. The Punarvasu soul transmits light freely to others who are in the darkness you navigated. This is the peak your Saturn Sasa Yoga has been building toward your entire adult life.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- WHAT TO AVOID -->
+    <div class="ks-card full" style="margin-bottom:0;">
+      <div class="ks-head" style="background:rgba(154,74,98,0.06);">
+        <div class="ks-icon">🚫</div>
+        <div class="ks-title" style="color:var(--lotus-b);">What To Specifically Avoid</div>
+        <div class="ks-subtitle">Chart-confirmed risks that work against your specific mechanism</div>
+      </div>
+      <div class="ks-body">
+        <div class="avoid-grid">
+          <div class="avoid-item">
+            <div class="avoid-item-icon">📈</div>
+            <div class="avoid-item-title">Speculation & Trading</div>
+            <div class="avoid-item-desc">8H has 19 bindus — your weakest house. Options, crypto, high-variance bets structurally damage your wealth mechanism. Never.</div>
+          </div>
+          <div class="avoid-item">
+            <div class="avoid-item-icon">🏢</div>
+            <div class="avoid-item-title">Business Before 2029</div>
+            <div class="avoid-item-desc">Launching in active form before the 4 conditions are met repeats the OperionAI pattern. The timing is as important as the idea.</div>
+          </div>
+          <div class="avoid-item">
+            <div class="avoid-item-icon">👥</div>
+            <div class="avoid-item-title">Comparison to Peers</div>
+            <div class="avoid-item-desc">Different charts, different timelines. Your peer's car is not on your path. Comparison is the Scorpio Moon's most expensive habit.</div>
+          </div>
+          <div class="avoid-item">
+            <div class="avoid-item-icon">💸</div>
+            <div class="avoid-item-title">Lifestyle Before Wealth</div>
+            <div class="avoid-item-desc">Using each salary increment on lifestyle before investment delays the 2036 freedom. 70% investment first. Always. Non-negotiable.</div>
+          </div>
+          <div class="avoid-item">
+            <div class="avoid-item-icon">🏭</div>
+            <div class="avoid-item-title">Wrong Professional Environment</div>
+            <div class="avoid-item-desc">Toxic cultures damage your Pisces Ascendant faster than they damage others. Wrong environment = health risk, not just career risk.</div>
+          </div>
+          <div class="avoid-item">
+            <div class="avoid-item-icon">❓</div>
+            <div class="avoid-item-title">Reassurance Instead of Action</div>
+            <div class="avoid-item-desc">More astrological analysis when you already know the answer feeds anxiety rather than resolving it. The action is always the answer.</div>
+          </div>
+          <div class="avoid-item">
+            <div class="avoid-item-icon">⚡</div>
+            <div class="avoid-item-title">Wrong Job to End Search</div>
+            <div class="avoid-item-desc">Accepting a misaligned role for immediate relief delays the 2030 business by anchoring to the wrong platform. Hold the standard.</div>
+          </div>
+          <div class="avoid-item">
+            <div class="avoid-item-icon">👨‍👩‍👧</div>
+            <div class="avoid-item-title">Family as Secondary</div>
+            <div class="avoid-item-desc">Upapada in 10H means professional success and family health are structurally linked. Neglecting family undermines career. They are the same system.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script>
 // ================================================================
-// CONFIG
+// APPS SCRIPT URL
 // ================================================================
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbz9f4dDPqYCOSxsGTFO147q3Xx-j2Ofn9ysGeCZNqYnaJ1Hxoh820Wj6VOPmz9gVWmP/exec';
-
-const KUNDALI = `Vaibhav Sharma, born July 11 1992, 11:32 PM, Agra.
-Pisces ASC Revati — absorbs environments, Pushan deity, completion before new beginnings.
-Sun Gemini 4H Punarvasu — Atmakaraka, soul purpose of returning light after darkness.
-Moon Scorpio 9H Jyeshtha — deep emotional processing, comparison suffering, anxiety.
-Mercury Cancer 5H Ashlesha — coiling intelligence, spirals under pressure, depth over breadth.
-Venus Cancer 5H Pushya Vargottama — current Mahadasha lord, nourishment, warmth.
-Mars Aries 2H Amatyakaraka — self-earned wealth, direct action, anger when blocked.
-Jupiter Leo 6H Vargottama — career through solving hard problems for others.
-Saturn Capricorn 11H Sasa Yoga — late-peak chart, sustained disciplined building, wealth through patience.
-Rahu Sagittarius 10H Mula — enterprise AI advisory destiny, unconventional career.
-Ketu Gemini 4H — detachment from conventional structures.
-D10: Ketu 4H (self-employment destiny), Jupiter-Rahu 10H (AI advisory), Saturn-Venus ASC.
-Current period: Venus-Mercury Antardasha. Saturn on ASC through June 2027. Rahu exiting 12H July 26 2026.
-Current struggles: prolonged job search exhaustion, anger when blocked, comparison to peers, impatience, inability to be present with family.
-Destiny: Enterprise AI advisory 2030, financial independence 2035-36, freedom from 9-to-5.
-Core truth: Marriage arrived destined — career freedom is equally deeply written across 7 chart indicators.
-Philosophy: Build quietly. Trust the long arc. Be present where you are.`;
 
 const CH_NAMES = {
   1:'Arjuna Vishada Yoga',2:'Sankhya Yoga',3:'Karma Yoga',
@@ -416,427 +991,452 @@ const CH_NAMES = {
   16:'Daivasura Sampad Yoga',17:'Shraddhatraya Yoga',18:'Moksha Sanyasa Yoga'
 };
 const CH_TOTALS = {1:47,2:72,3:43,4:42,5:29,6:47,7:30,8:28,9:34,10:42,11:55,12:20,13:35,14:27,15:20,16:24,17:28,18:78};
-const TOTAL_SHLOKAS = 700;
+const TOTAL_POSSIBLE = Object.values(CH_TOTALS).reduce((a,b)=>a+b,0);
 
 // ================================================================
 // STATE
 // ================================================================
-let S = { apiKey:'', entries:[] };
-let current = null;
-let activeFilter = 'all';
-
-function save(){ try{ localStorage.setItem('vgita5', JSON.stringify(S)); }catch(e){} }
-function load(){ try{ const d=localStorage.getItem('vgita5'); if(d) S={...S,...JSON.parse(d)}; }catch(e){} }
+let allShlokas = [];         // all rows from sheet
+let displayShlokas = [];     // after filter/search
+let activeChapter = 'all';
+let activeFilters = new Set();
+let expandedRows = new Set();
+let pendingNotes = {};       // rowKey -> note being edited
 
 // ================================================================
 // TOAST
 // ================================================================
-function toast(msg, dur=2800){
+function toast(msg, dur=2500){
   const t=document.getElementById('toast');
   t.textContent=msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), dur);
 }
 
 // ================================================================
-// API KEY
+// SHEET API
 // ================================================================
-function saveApiKey(){
-  const k=document.getElementById('apiKeyInput').value.trim();
-  if(!k||k.length<10){ alert('Please enter your Gemini API key'); return; }
-  S.apiKey=k; save();
-  document.getElementById('apiModal').style.display='none';
-}
-function changeApiKey(){
-  document.getElementById('apiKeyInput').value=S.apiKey||'';
-  document.getElementById('apiModal').style.display='flex';
-}
-function checkKey(){
-  if(!S.apiKey){ document.getElementById('apiModal').style.display='flex'; return false; }
-  return true;
+async function sheetGet(params){
+  try{
+    const url = SHEET_URL + '?' + new URLSearchParams(params);
+    const r = await fetch(url);
+    const d = await r.json();
+    return d;
+  }catch(e){ return {error: e.message}; }
 }
 
-// ================================================================
-// GEMINI API — Text only, no image
-// ================================================================
-async function callGemini(prompt){
-  // Step 1: Discover available models for this key
-  async function discoverModels(){
-    try{
-      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${S.apiKey}&pageSize=50`);
-      if(!r.ok) return [];
-      const d=await r.json();
-      return (d.models||[])
-        .filter(m=>(m.supportedGenerationMethods||[]).includes('generateContent'))
-        .map(m=>m.name.replace('models/',''))
-        .filter(m=>!m.includes('embedding')&&!m.includes('aqa')&&!m.includes('vision'));
-    }catch(e){ return []; }
-  }
-
-  // Step 2: Try a model
-  async function tryModel(model){
-    const url=`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${S.apiKey}`;
-    const r=await fetch(url,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        contents:[{role:'user',parts:[{text:prompt}]}],
-        generationConfig:{maxOutputTokens:1200,temperature:0.75}
-      })
+async function sheetPost(action, body){
+  try{
+    const r = await fetch(SHEET_URL + '?action=' + action, {
+      method:'POST', body: JSON.stringify(body)
     });
-    if(!r.ok){
-      const e=await r.json().catch(()=>({}));
-      const msg=e.error?.message||`Error ${r.status}`;
-      if(r.status===400&&msg.toLowerCase().includes('api key')){ changeApiKey(); throw new Error('Invalid key'); }
-      throw new Error(msg);
-    }
-    const d=await r.json();
-    const text=d.candidates?.[0]?.content?.parts?.[0]?.text;
-    if(!text) throw new Error('Empty response');
-    return text;
-  }
+    return await r.json();
+  }catch(e){ return {error: e.message}; }
+}
 
-  // Step 3: If we have a cached working model, try it first
-  if(S.workingModel){
-    try{ return await tryModel(S.workingModel); }
-    catch(e){ if(e.message==='Invalid key') throw e; S.workingModel=null; }
-  }
-
-  // Step 4: Discover and try models
-  const discovered=await discoverModels();
+// ================================================================
+// LOAD DATA FROM SHEET
+// ================================================================
+async function loadData(){
+  document.getElementById('shlokaList').innerHTML = '<div class="loading"><span class="spinner"></span> Loading from Google Sheets...</div>';
   
-  // Priority order — prefer flash models
-  const priority=['gemini-1.5-flash-latest','gemini-1.5-flash','gemini-2.0-flash','gemini-1.5-pro','gemini-1.0-pro','gemini-pro'];
-  const ordered=[
-    ...priority.filter(m=>discovered.includes(m)||discovered.length===0),
-    ...discovered.filter(m=>!priority.includes(m))
-  ];
-
-  // If discovery failed, use full fallback list
-  const fallback=['gemini-1.5-flash-latest','gemini-1.5-flash','gemini-2.0-flash','gemini-1.5-pro-latest','gemini-1.5-pro','gemini-1.0-pro','gemini-pro','gemini-2.0-flash-thinking-exp'];
-  const toTry=ordered.length>0?ordered:fallback;
-
-  let lastErr='No models available for your API key';
-  for(const model of toTry.slice(0,8)){
-    try{
-      const result=await tryModel(model);
-      S.workingModel=model; save(); // Cache the working model
-      return result;
-    }catch(e){
-      if(e.message==='Invalid key') throw e;
-      lastErr=e.message;
-    }
-  }
-  throw new Error(`Could not connect to Gemini. ${lastErr}. Please check your API key at aistudio.google.com`);
-}
-
-function parseJSON(text){
-  // Method 1: Clean and parse JSON directly
-  try{
-    const c=text.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
-    const s=c.search(/\{/);
-    const e=c.lastIndexOf('}');
-    if(s!==-1&&e>s){
-      const jsonStr=c.slice(s,e+1);
-      return JSON.parse(jsonStr);
-    }
-  }catch(e){}
-
-  // Method 2: Extract each field with flexible regex
-  function extractField(key){
-    // Match "key": "value" allowing multiline and escaped chars
-    const patterns=[
-      new RegExp(`"${key}"\\s*:\\s*"([\\s\\S]*?)"(?=\\s*[,}])`, 'i'),
-      new RegExp(`"${key}"\\s*:\\s*"([\\s\\S]*?)"\\s*\\n`, 'i'),
-      new RegExp(`\\*\\*${key}\\*\\*:?\\s*([\\s\\S]*?)(?=\\*\\*|$)`, 'i'),
-      new RegExp(`${key}:?\\s*([^\\n]{20,})`, 'i'),
-    ];
-    for(const re of patterns){
-      const m=text.match(re);
-      if(m&&m[1]&&m[1].trim().length>10){
-        return m[1].trim().replace(/\\n/g,'\n').replace(/\\"/g,'"');
-      }
-    }
-    return '';
-  }
-
-  // Method 3: If Gemini returned plain text without JSON, split by sections
-  function extractSection(labels, nextLabels){
-    for(const label of labels){
-      const re=new RegExp(`(?:${label})[:\s*]*([\s\S]{30,})`, 'i');
-      const m=text.match(re);
-      if(m){
-        let val=m[1].trim();
-        // Cut at next section
-        for(const next of nextLabels){
-          const cut=val.search(new RegExp(next,'i'));
-          if(cut>30) val=val.slice(0,cut).trim();
-        }
-        if(val.length>20) return val;
-      }
-    }
-    return '';
-  }
-
-  const allLabels=['meaning','longterm','long.term','long term','emotional','phase','habits','practical'];
-  const meaning=extractField('meaning')||extractSection(['meaning','MEANING'],['longterm','long','emotional','phase','habits']);
-  const longterm=extractField('longterm')||extractField('long_term')||extractSection(['longterm','long.term','long term','lifelong','LONG'],['emotional','EMOTIONAL','phase','habits']);
-  const emotional=extractField('emotional')||extractSection(['emotional','EMOTIONAL'],['phase','PHASE','habits','HABITS']);
-  const phase=extractField('phase')||extractSection(['phase','PHASE','astrology','ASTROLOGY'],['habits','HABITS','practical']);
-  const habits=extractField('habits')||extractField('practical')||extractSection(['habits','HABITS','practical','PRACTICAL'],[]);
-
-  // Method 4: Last resort — if we got nothing, the whole text is the meaning
-  if(!meaning&&!longterm&&!emotional&&!phase&&!habits&&text.length>50){
-    // Split text into 5 equal parts
-    const lines=text.split('\n').filter(l=>l.trim().length>0);
-    const chunk=Math.ceil(lines.length/5);
-    return {
-      meaning: lines.slice(0,chunk).join(' '),
-      longterm: lines.slice(chunk,chunk*2).join(' '),
-      emotional: lines.slice(chunk*2,chunk*3).join(' '),
-      phase: lines.slice(chunk*3,chunk*4).join(' '),
-      habits: lines.slice(chunk*4).join(' ')
-    };
-  }
-
-  return { meaning, longterm, emotional, phase, habits };
-}
-
-// ================================================================
-// GENERATE
-// ================================================================
-async function generate(){
-  if(!checkKey()) return;
-  const ch=document.getElementById('chSel').value;
-  const sh=document.getElementById('shNum').value;
-  if(!ch){ toast('⚠ Please select a chapter'); return; }
-  if(!sh){ toast('⚠ Please enter the shloka number'); return; }
-
-  const chName=CH_NAMES[parseInt(ch)]||'';
-  const btn=document.getElementById('genBtn');
-  btn.disabled=true;
-
-  document.getElementById('loadCh').textContent=ch;
-  document.getElementById('loadSh').textContent=sh;
-  document.getElementById('genLoad').classList.add('show');
-  document.getElementById('results').classList.remove('show');
-
-  const prompt=`You are a Bhagavad Gita scholar and Vedic astrologer. The reader is Vaibhav Sharma.
-
-KUNDALI:
-${KUNDALI}
-
-Today Vaibhav read: Bhagavad Gita Chapter ${ch} (${chName}), Shloka ${sh}.
-
-Please provide the following five responses. Write directly to Vaibhav — warm, personal, specific. No generic spiritual platitudes. Connect each response genuinely to his chart and his life.
-
-Return ONLY a valid JSON object with these exact five keys:
-
-{
-  "meaning": "The meaning and essence of Chapter ${ch} Shloka ${sh} in 3-4 poetic sentences. Translate the verse's core teaching clearly and beautifully. No Sanskrit needed — just the meaning in English.",
-  "longterm": "The lifelong principle this specific shloka establishes for Vaibhav. What does this verse say about how he should live his entire life? Connect to his Saturn Sasa Yoga (build patiently over decades), his Punarvasu Atmakaraka (return of light after darkness), his destiny to build quietly and trust the long arc. 3-4 sentences.",
-  "emotional": "The emotional learning from this specific shloka for Vaibhav. How does this verse address his exact emotional patterns — Scorpio Moon comparison anxiety, Pisces Ascendant absorbing stress from environments, Mercury Ashlesha spiraling under pressure, Mars anger when blocked, the impatience and frustration he feels when effort produces no visible result? 3-4 sentences.",
-  "phase": "What this specific shloka means for Vaibhav RIGHT NOW in July 2026. His job search has been going on for months. Rahu exits his 12H on July 26 — just 8 days away — ending 32 months of effort dissolving before completion. Saturn still on Ascendant compressing his energy. The turning point is very close. How does this verse speak to exactly this moment? 3-4 sentences.",
-  "habits": "3-5 specific practical daily or weekly habits and actions this shloka recommends for Vaibhav. Make them concrete and immediately doable — specific morning practices, behavioural changes, actions to take this week. Connect each habit directly to the verse's teaching AND his chart. Number them clearly: 1. 2. 3."
-}`;
-
-  try{
-    const text=await callGemini(prompt);
-    const data=parseJSON(text);
-
-    // Show shloka ref
-    document.getElementById('shlokaRef').innerHTML=`
-      <div class="sr-badge">Ch.${ch} · Shloka ${sh}</div>
-      <div class="sr-name">${chName}</div>`;
-
-    document.getElementById('rMeaning').value=data.meaning||'';
-    document.getElementById('rLong').value=data.longterm||'';
-    document.getElementById('rEmo').value=data.emotional||'';
-    document.getElementById('rPhase').value=data.phase||'';
-    document.getElementById('rHabits').value=data.habits||'';
-
-    current={ chapter:ch, shloka:sh, chapterName:chName,
-      meaning:data.meaning||'', longterm:data.longterm||'',
-      emotional:data.emotional||'', phase:data.phase||'',
-      habits:data.habits||'', date:new Date().toISOString() };
-
-    document.getElementById('results').classList.add('show');
-    document.getElementById('genLoad').classList.remove('show');
-    btn.disabled=false;
-    if(S.workingModel) toast(`✓ Generated using ${S.workingModel}`);
-
-    // Reset save button
-    const sv=document.getElementById('saveBtn');
-    sv.textContent='💾 Save to Journal'; sv.disabled=false; sv.style.background='';
-
-    document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
-
-  }catch(e){
-    document.getElementById('genLoad').classList.remove('show');
-    btn.disabled=false;
-    toast(`⚠ ${e.message||'Could not generate. Please try again.'}`);
-  }
-}
-
-// ================================================================
-// SAVE
-// ================================================================
-async function saveEntry(){
-  if(!current){ toast('⚠ Generate guidance first'); return; }
-  const btn=document.getElementById('saveBtn');
-  btn.disabled=true; btn.textContent='⟳ Saving...';
-
-  // Capture any edits
-  current.meaning=document.getElementById('rMeaning').value;
-  current.longterm=document.getElementById('rLong').value;
-  current.emotional=document.getElementById('rEmo').value;
-  current.phase=document.getElementById('rPhase').value;
-  current.habits=document.getElementById('rHabits').value;
-
-  // Save locally
-  // Remove duplicate if same chapter-shloka exists
-  S.entries=S.entries.filter(e=>!(String(e.chapter)===String(current.chapter)&&String(e.shloka)===String(current.shloka)));
-  S.entries.unshift({...current, id:Date.now()});
-  save(); updateJStats();
-
-  // Save to Sheet
-  try{
-    await fetch(SHEET_URL+'?action=saveShloka',{
-      method:'POST',
-      body:JSON.stringify({
-        chapter:current.chapter, shloka:current.shloka,
-        chapterName:current.chapterName, meaning:current.meaning,
-        learning:current.longterm, longterm:current.longterm,
-        emotions:current.emotional, emotional:current.emotional,
-        phase:current.phase, habits:current.habits, date:current.date
-      })
-    });
-    toast('✓ Saved to your Gita Journal and Google Sheet!');
-  }catch(e){
-    toast('✓ Saved locally. Sheet sync will retry next time.');
-  }
-
-  btn.textContent='✓ Saved!'; btn.style.background='var(--sage-b)';
-  setTimeout(()=>{ btn.textContent='💾 Save to Journal'; btn.style.background=''; btn.disabled=false; },3000);
-}
-
-// ================================================================
-// JOURNAL
-// ================================================================
-function renderJournal(filter='all'){
-  activeFilter=filter;
-  const entries=filter==='all'?S.entries:S.entries.filter(e=>String(e.chapter)===String(filter));
-  const container=document.getElementById('jEntries');
-
-  if(!entries.length){
-    container.innerHTML=`<div class="empty"><div class="empty-om">ॐ</div>
-      <div class="empty-t">${filter==='all'?'Your journal awaits':'No entries for this chapter yet'}</div>
-      <div class="empty-s">${filter==='all'?'Enter your first shloka to begin':'Read a shloka from this chapter'}</div></div>`;
-    buildFilter(); return;
-  }
-
-  container.innerHTML=entries.map((e,i)=>{
-    const uid=`je${e.id||i}`;
-    const dt=e.date?new Date(e.date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'';
-    return `<div class="je" id="${uid}">
-      <div class="je-head" onclick="toggleJE('${uid}')">
-        <div class="je-badge">Ch.${e.chapter} · ${e.shloka}</div>
-        <div class="je-info">
-          <div class="je-ch">${e.chapterName||CH_NAMES[parseInt(e.chapter)]||''}</div>
-          <div class="je-preview">${e.meaning||'Tap to expand'}</div>
-        </div>
-        <div class="je-date">${dt}</div>
-        <div class="je-arr" id="arr${uid}">▼</div>
-      </div>
-      <div class="je-body" id="bod${uid}">
-        <div class="je-sec"><div class="je-slbl" style="color:var(--gold)">Meaning</div><div class="je-stxt italic">${e.meaning||'—'}</div></div>
-        <div class="je-sec"><div class="je-slbl" style="color:var(--sage-b)">Long-term Life Learning</div><div class="je-stxt">${e.longterm||'—'}</div></div>
-        <div class="je-sec"><div class="je-slbl" style="color:var(--lotus-b)">Emotional Learning</div><div class="je-stxt">${e.emotional||'—'}</div></div>
-        <div class="je-sec"><div class="je-slbl" style="color:var(--slate-b)">For This Phase · Astrology</div><div class="je-stxt">${e.phase||'—'}</div></div>
-        ${e.habits?`<div class="je-sec"><div class="je-slbl" style="color:var(--violet-b)">Practical Daily Habits</div><div class="je-stxt">${e.habits}</div></div>`:''}
-      </div>
-    </div>`;
-  }).join('');
-
-  buildFilter();
-}
-
-function toggleJE(uid){
-  const bod=document.getElementById(`bod${uid}`);
-  const arr=document.getElementById(`arr${uid}`);
-  if(!bod) return;
-  const open=bod.classList.contains('open');
-  bod.classList.toggle('open',!open);
-  if(arr) arr.classList.toggle('open',!open);
-}
-
-function buildFilter(){
-  const chs=[...new Set(S.entries.map(e=>String(e.chapter)))].sort((a,b)=>parseInt(a)-parseInt(b));
-  const f=document.getElementById('chFilter');
-  f.innerHTML=`<button class="cf ${activeFilter==='all'?'active':''}" onclick="filterCh('all',this)">All (${S.entries.length})</button>`;
-  chs.forEach(ch=>{
-    const c=S.entries.filter(e=>String(e.chapter)===ch).length;
-    f.innerHTML+=`<button class="cf ${activeFilter===ch?'active':''}" onclick="filterCh('${ch}',this)">Ch.${ch} (${c})</button>`;
-  });
-}
-
-function filterCh(ch,btn){
-  document.querySelectorAll('.cf').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderJournal(ch);
-}
-
-function updateJStats(){
-  const t=S.entries.length;
-  const c=[...new Set(S.entries.map(e=>e.chapter))].length;
-  document.getElementById('jTotal').textContent=t;
-  document.getElementById('jCh').textContent=c;
-}
-
-// ================================================================
-// PROGRESS
-// ================================================================
-function renderProgress(){
-  const total=S.entries.length;
-  const chs=[...new Set(S.entries.map(e=>e.chapter))].length;
-  const pct=Math.round(total/TOTAL_SHLOKAS*100);
-
-  // Streak
-  const dates=[...new Set(S.entries.map(e=>e.date?new Date(e.date).toDateString():null).filter(Boolean))].sort();
-  let streak=0;
-  if(dates.length){
-    const today=new Date().toDateString();
-    const yest=new Date(Date.now()-86400000).toDateString();
-    if(dates[dates.length-1]===today||dates[dates.length-1]===yest){
-      streak=1;
-      for(let i=dates.length-2;i>=0;i--){
-        if(new Date(dates[i+1])-new Date(dates[i])<=86400000*1.5) streak++;
-        else break;
-      }
-    }
-  }
-
-  document.getElementById('pTotal').textContent=total;
-  document.getElementById('pCh').textContent=chs;
-  document.getElementById('pPct').textContent=pct+'%';
-  document.getElementById('pStreak').textContent=streak;
-
-  const byChapter={};
-  S.entries.forEach(e=>{ byChapter[e.chapter]=(byChapter[e.chapter]||0)+1; });
-
-  const list=document.getElementById('cpList');
-  if(!Object.keys(byChapter).length){
-    list.innerHTML=`<div class="empty"><div class="empty-om">ॐ</div><div class="empty-t">No readings yet</div><div class="empty-s">Start by entering today's shloka</div></div>`;
+  const d = await sheetGet({action: 'getAllEntries'});
+  
+  if(d.error || !d.entries){
+    document.getElementById('shlokaList').innerHTML = `<div class="empty"><div class="empty-om">ॐ</div><div class="empty-t">Could not load from Sheet</div><div class="empty-s">${d.error||'Check your Apps Script deployment'}</div></div>`;
     return;
   }
+  
+  allShlokas = d.entries || [];
+  
+  // Sort by chapter then shloka
+  allShlokas.sort((a,b)=>{
+    const ca = parseInt(a.chapter)||0, cb = parseInt(b.chapter)||0;
+    if(ca!==cb) return ca-cb;
+    return (parseInt(a.shloka)||0)-(parseInt(b.shloka)||0);
+  });
+  
+  updateStats();
+  updateChapterPills();
+  applyFilters();
+  
+  if(document.getElementById('page-progress').classList.contains('active')) renderProgress();
+  if(document.getElementById('page-bookmarks').classList.contains('active')) renderBookmarks();
+}
 
-  list.innerHTML=Object.entries(byChapter).sort((a,b)=>parseInt(a[0])-parseInt(b[0])).map(([ch,count])=>{
-    const tot=CH_TOTALS[parseInt(ch)]||78;
-    const p=Math.round(count/tot*100);
-    return `<div class="cp" onclick="showPage('journal');setTimeout(()=>filterCh('${ch}',document.querySelector('.cf.active')),100)">
-      <div class="cp-top"><div class="cp-name">Chapter ${ch} · ${CH_NAMES[parseInt(ch)]||''}</div><div class="cp-count">${count}/${tot} · ${p}%</div></div>
-      <div class="cp-bar"><div class="cp-fill" style="width:${p}%"></div></div>
+// ================================================================
+// STATS
+// ================================================================
+function updateStats(){
+  const total = allShlokas.length;
+  const read  = allShlokas.filter(s=>s.status==='✓ Read'||s.status==='Read').length;
+  const bm    = allShlokas.filter(s=>s.bookmarked==='TRUE'||s.bookmarked===true||s.bookmarked==='1').length;
+  const pct   = total ? Math.round(read/total*100) : 0;
+
+  ['st-total','pr-total'].forEach(id=>{ const el=document.getElementById(id); if(el)el.textContent=total; });
+  ['st-read','pr-read'].forEach(id=>{ const el=document.getElementById(id); if(el)el.textContent=read; });
+  ['st-bm','pr-bm'].forEach(id=>{ const el=document.getElementById(id); if(el)el.textContent=bm; });
+  ['st-pct','pr-pct'].forEach(id=>{ const el=document.getElementById(id); if(el)el.textContent=pct+'%'; });
+}
+
+function updateChapterPills(){
+  for(let ch=1;ch<=18;ch++){
+    const chShlokas = allShlokas.filter(s=>parseInt(s.chapter)===ch);
+    const chRead = chShlokas.filter(s=>s.status==='✓ Read'||s.status==='Read').length;
+    const el = document.getElementById(`pct-${ch}`);
+    if(el){
+      if(chShlokas.length > 0){
+        const pct = Math.round(chRead/chShlokas.length*100);
+        el.textContent = `${pct}%`;
+      } else {
+        el.textContent = '';
+      }
+    }
+  }
+}
+
+// ================================================================
+// FILTERS
+// ================================================================
+function filterChapter(ch, btn){
+  activeChapter = ch;
+  document.querySelectorAll('.ch-pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function toggleFilter(f){
+  if(activeFilters.has(f)) activeFilters.delete(f);
+  else activeFilters.add(f);
+  document.getElementById('filter'+f.charAt(0).toUpperCase()+f.slice(1))?.classList.toggle('on', activeFilters.has(f));
+  applyFilters();
+}
+
+function applyFilters(){
+  const q = document.getElementById('searchInput')?.value?.toLowerCase() || '';
+  let filtered = allShlokas;
+  
+  if(activeChapter !== 'all')
+    filtered = filtered.filter(s=>parseInt(s.chapter)===parseInt(activeChapter));
+  
+  if(activeFilters.has('read'))
+    filtered = filtered.filter(s=>s.status==='✓ Read'||s.status==='Read');
+  if(activeFilters.has('unread'))
+    filtered = filtered.filter(s=>!s.status||!(s.status==='✓ Read'||s.status==='Read'));
+  if(activeFilters.has('bm'))
+    filtered = filtered.filter(s=>s.bookmarked==='TRUE'||s.bookmarked===true||s.bookmarked==='1');
+  
+  if(q){
+    filtered = filtered.filter(s=>{
+      const hay = [s.key,s.meaning,s.chapter_name,s.personal_notes,s.longterm,s.emotional,s.shortterm,s.practical].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+  }
+  
+  displayShlokas = filtered;
+  renderList();
+}
+
+// ================================================================
+// RENDER SHLOKA LIST
+// ================================================================
+function renderList(){
+  const container = document.getElementById('shlokaList');
+  
+  if(!displayShlokas.length){
+    container.innerHTML = '<div class="empty"><div class="empty-om">ॐ</div><div class="empty-t">No shlokas found</div><div class="empty-s">Try a different filter or add new shlokas</div></div>';
+    return;
+  }
+  
+  container.innerHTML = displayShlokas.map((s,i) => {
+    const key = s.key || `${s.chapter}.${s.shloka}`;
+    const isRead = s.status==='✓ Read'||s.status==='Read';
+    const isBm   = s.bookmarked==='TRUE'||s.bookmarked===true||s.bookmarked==='1';
+    const isExp  = expandedRows.has(key);
+    const chName = s.chapter_name || CH_NAMES[parseInt(s.chapter)] || '';
+    const prevText = (s.meaning||'').substring(0,80) + ((s.meaning||'').length>80?'...':'');
+    const hasNote = !!(s.personal_notes||'').trim();
+    
+    return `
+    <div class="shloka-row ${isRead?'read-row':''}" id="row-${key}">
+      <div class="sr-header" onclick="toggleRow('${key}')">
+        <div class="sr-ref">Ch.${s.chapter}.${s.shloka}</div>
+        <div class="sr-preview">
+          <div class="sr-ch-name">${chName}${hasNote?' · 📝':''}</div>
+          <div class="sr-meaning-prev">${prevText||'No meaning added yet'}</div>
+        </div>
+        <div class="sr-actions" onclick="event.stopPropagation()">
+          <button class="sr-read-btn ${isRead?'read':''}" id="rbtn-${key}" onclick="toggleRead('${key}','${s.chapter}','${s.shloka}')">
+            ${isRead?'✓ Read':'Mark Read'}
+          </button>
+          <button class="sr-bm-btn ${isBm?'bm':''}" id="bmbtn-${key}" onclick="toggleBm('${key}','${s.chapter}','${s.shloka}')" title="${isBm?'Remove bookmark':'Bookmark'}">
+            ${isBm?'★':'☆'}
+          </button>
+        </div>
+        <div class="sr-arr ${isExp?'open':''}" id="arr-${key}">▼</div>
+      </div>
+      <div class="sr-body ${isExp?'open':''}" id="body-${key}">
+        ${buildBody(s, key)}
+      </div>
     </div>`;
   }).join('');
+}
+
+function buildBody(s, key){
+  const hasGuidance = s.longterm||s.emotional||s.shortterm||s.practical;
+  const savedNote = (s.personal_notes||'').trim();
+  
+  return `
+    <div class="sr-tabs">
+      <div class="sr-tab active" onclick="switchTab('${key}','meaning',this)">Meaning</div>
+      ${hasGuidance?`<div class="sr-tab" onclick="switchTab('${key}','guidance',this)">Guidance</div>`:''}
+      <div class="sr-tab" onclick="switchTab('${key}','notes',this)">Notes${savedNote?' 📝':''}</div>
+    </div>
+
+    <div class="sr-tab-content active" id="tc-meaning-${key}">
+      <div class="meaning-block">
+        <div class="g-lbl">Meaning · Your Notes</div>
+        <div class="meaning-text">${s.meaning||'<span style="color:var(--text-l);font-style:normal;font-size:12px">No meaning added yet</span>'}</div>
+      </div>
+      ${s.date_saved?`<div style="font-size:10px;color:var(--text-f);margin-top:6px">Saved: ${s.date_saved}</div>`:''}
+    </div>
+
+    ${hasGuidance?`
+    <div class="sr-tab-content" id="tc-guidance-${key}">
+      <div class="guidance-grid">
+        ${s.longterm?`<div class="g-block lt"><div class="g-lbl">Long-term Life Learning</div><div class="g-text">${s.longterm}</div></div>`:''}
+        ${s.emotional?`<div class="g-block em"><div class="g-lbl">Emotional Handling</div><div class="g-text">${s.emotional}</div></div>`:''}
+        ${s.shortterm?`<div class="g-block st"><div class="g-lbl">Phase Learning</div><div class="g-text">${s.shortterm}</div></div>`:''}
+        ${s.practical?`<div class="g-block pr"><div class="g-lbl">Practical Methods</div><div class="g-text">${s.practical}</div></div>`:''}
+      </div>
+    </div>`:''}
+
+    <div class="sr-tab-content" id="tc-notes-${key}">
+      ${savedNote?`<div class="saved-note-display" id="note-display-${key}">${savedNote}</div><div style="height:8px"></div>`:''}
+      <textarea class="notes-area" id="note-input-${key}" placeholder="Add your personal reflection on this shloka...">${savedNote}</textarea>
+      <div class="notes-row">
+        <button class="save-note-btn" onclick="saveNote('${key}','${s.chapter}','${s.shloka}')">Save Note</button>
+        <span style="font-size:11px;color:var(--text-l)">Saves to Google Sheets</span>
+      </div>
+    </div>
+  `;
+}
+
+function switchTab(key, tab, btn){
+  const body = document.getElementById(`body-${key}`);
+  if(!body) return;
+  body.querySelectorAll('.sr-tab').forEach(t=>t.classList.remove('active'));
+  body.querySelectorAll('.sr-tab-content').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const tc = document.getElementById(`tc-${tab}-${key}`);
+  if(tc) tc.classList.add('active');
+}
+
+function toggleRow(key){
+  const body = document.getElementById(`body-${key}`);
+  const arr  = document.getElementById(`arr-${key}`);
+  if(!body) return;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  arr?.classList.toggle('open',!isOpen);
+  if(!isOpen) expandedRows.add(key); else expandedRows.delete(key);
+}
+
+// ================================================================
+// READ / BOOKMARK / NOTES
+// ================================================================
+async function toggleRead(key, chapter, shloka){
+  const btn = document.getElementById(`rbtn-${key}`);
+  const row = document.getElementById(`row-${key}`);
+  const s   = allShlokas.find(x=>(x.key||`${x.chapter}.${x.shloka}`)===key || (x.key||`${x.chapter}.${x.shloka}`)===key);
+  if(!s) return;
+  
+  const wasRead = s.status==='✓ Read'||s.status==='Read';
+  const newStatus = wasRead ? '' : '✓ Read';
+  
+  // Optimistic UI
+  s.status = newStatus;
+  btn.textContent  = newStatus ? '✓ Read' : 'Mark Read';
+  btn.classList.toggle('read', !!newStatus);
+  row.classList.toggle('read-row', !!newStatus);
+  
+  updateStats(); updateChapterPills();
+  
+  const dotKey = key.includes('.')?key:`${chapter}.${shloka}`;
+  const r = await sheetPost('updateStatus', {key: dotKey, chapter, shloka, status: newStatus});
+  if(r.error){ toast('⚠ Could not save to Sheet'); s.status = wasRead?'✓ Read':''; }
+  else toast(newStatus ? '✓ Marked as read' : 'Marked as unread');
+}
+
+async function toggleBm(key, chapter, shloka){
+  const btn = document.getElementById(`bmbtn-${key}`);
+  const s   = allShlokas.find(x=>(x.key||`${x.chapter}.${x.shloka}`)===key || (x.key||`${x.chapter}.${x.shloka}`)===key);
+  if(!s) return;
+  
+  const wasBm = s.bookmarked==='TRUE'||s.bookmarked===true||s.bookmarked==='1';
+  const newBm = !wasBm;
+  
+  s.bookmarked = newBm ? 'TRUE' : 'FALSE';
+  btn.textContent = newBm ? '★' : '☆';
+  btn.classList.toggle('bm', newBm);
+  
+  updateStats();
+  
+  const dotKey2 = key.includes('.')?key:`${chapter}.${shloka}`;
+  const r = await sheetPost('updateBookmark', {key: dotKey2, chapter, shloka, bookmarked: newBm?'TRUE':'FALSE'});
+  if(r.error){ toast('⚠ Could not save to Sheet'); s.bookmarked = wasBm?'TRUE':'FALSE'; }
+  else toast(newBm ? '★ Bookmarked' : 'Bookmark removed');
+}
+
+async function saveNote(key, chapter, shloka){
+  const textarea = document.getElementById(`note-input-${key}`);
+  if(!textarea) return;
+  const note = textarea.value.trim();
+  
+  const s = allShlokas.find(x=>(x.key||`${x.chapter}.${x.shloka}`)===key);
+  if(s) s.personal_notes = note;
+  
+  // Update display
+  const display = document.getElementById(`note-display-${key}`);
+  if(display){ display.textContent = note; display.style.display = note?'block':'none'; }
+  
+  const dotKey3 = key.includes('.')?key:`${chapter}.${shloka}`;
+  const r = await sheetPost('updateNote', {key: dotKey3, chapter, shloka, note});
+  if(r.error) toast('⚠ Could not save note to Sheet');
+  else toast('📝 Note saved to Sheet');
+  
+  // Update the preview indicator
+  const chName = document.querySelector(`#row-${key} .sr-ch-name`);
+  if(chName && s){
+    const hasNote = !!note;
+    const chNameText = s.chapter_name || CH_NAMES[parseInt(s.chapter)] || '';
+    chName.textContent = chNameText + (hasNote?' · 📝':'');
+  }
+}
+
+// ================================================================
+// BOOKMARKS PAGE
+// ================================================================
+function renderBookmarks(){
+  const bms = allShlokas.filter(s=>s.bookmarked==='TRUE'||s.bookmarked===true||s.bookmarked==='1');
+  const container = document.getElementById('bmList');
+  
+  if(!bms.length){
+    container.innerHTML = '<div class="empty"><div class="empty-om">ॐ</div><div class="empty-t">No bookmarks yet</div><div class="empty-s">Star shlokas in the Journal to bookmark them</div></div>';
+    return;
+  }
+  
+  container.innerHTML = `<div class="shloka-list">${bms.map(s=>{
+    const key = s.key||`${s.chapter}-${s.shloka}`;
+    const isRead = s.status==='✓ Read'||s.status==='Read';
+    const chName = s.chapter_name||CH_NAMES[parseInt(s.chapter)]||'';
+    const isExp = expandedRows.has(key);
+    return `
+    <div class="shloka-row" id="bm-row-${key}">
+      <div class="sr-header" onclick="toggleBmRow('${key}')">
+        <div class="sr-ref">Ch.${s.chapter}.${s.shloka}</div>
+        <div class="sr-preview">
+          <div class="sr-ch-name">${chName}</div>
+          <div class="sr-meaning-prev">${(s.meaning||'').substring(0,80)}</div>
+        </div>
+        <div class="sr-actions" onclick="event.stopPropagation()">
+          <span class="sr-read-btn ${isRead?'read':''}">${isRead?'✓ Read':'Unread'}</span>
+          <button class="sr-bm-btn bm" onclick="toggleBm('${key}','${s.chapter}','${s.shloka}');setTimeout(renderBookmarks,400)">★</button>
+        </div>
+        <div class="sr-arr ${isExp?'open':''}" id="bmarr-${key}">▼</div>
+      </div>
+      <div class="sr-body ${isExp?'open':''}" id="bmbody-${key}">
+        ${buildBody(s, key)}
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+function toggleBmRow(key){
+  const body=document.getElementById(`bmbody-${key}`);
+  const arr=document.getElementById(`bmarr-${key}`);
+  if(!body)return;
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  arr?.classList.toggle('open',!isOpen);
+  if(!isOpen)expandedRows.add(key);else expandedRows.delete(key);
+}
+
+// ================================================================
+// PROGRESS PAGE
+// ================================================================
+function renderProgress(){
+  updateStats();
+  const list = document.getElementById('chProgressList');
+  const chaptersPresent = [...new Set(allShlokas.map(s=>parseInt(s.chapter)).filter(Boolean))].sort((a,b)=>a-b);
+  
+  if(!chaptersPresent.length){
+    list.innerHTML = '<div class="empty"><div class="empty-om">ॐ</div><div class="empty-t">No data yet</div><div class="empty-s">Load your sheet to see progress</div></div>';
+    return;
+  }
+  
+  list.innerHTML = chaptersPresent.map(ch=>{
+    const chShlokas = allShlokas.filter(s=>parseInt(s.chapter)===ch);
+    const chRead    = chShlokas.filter(s=>s.status==='✓ Read'||s.status==='Read').length;
+    const chBm      = chShlokas.filter(s=>s.bookmarked==='TRUE'||s.bookmarked===true||s.bookmarked==='1').length;
+    const possible  = CH_TOTALS[ch] || chShlokas.length;
+    const pct       = chShlokas.length ? Math.round(chRead/chShlokas.length*100) : 0;
+    const chName    = CH_NAMES[ch] || `Chapter ${ch}`;
+    return `
+    <div class="cp-item" onclick="filterChapter(${ch},document.querySelector('.ch-pill:nth-child(${ch+1})'));showPage('journal')">
+      <div class="cp-top">
+        <div class="cp-name">Ch.${ch} · ${chName}</div>
+        <div class="cp-stats">${chRead}/${chShlokas.length} read · ${pct}% · ${chBm} bookmarked</div>
+      </div>
+      <div style="font-size:10px;color:var(--text-f);margin-bottom:6px">${chShlokas.length} of ${possible} total shlokas in Sheet</div>
+      <div class="cp-bar"><div class="cp-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+// ================================================================
+// ADD SHLOKA
+// ================================================================
+async function addShloka(){
+  const ch  = document.getElementById('add-chapter').value;
+  const sh  = document.getElementById('add-shloka').value;
+  const me  = document.getElementById('add-meaning').value.trim();
+  
+  if(!ch){toast('⚠ Please select a chapter');return;}
+  if(!sh){toast('⚠ Please enter a shloka number');return;}
+  
+  const btn = document.getElementById('addBtn');
+  btn.disabled=true; btn.textContent='⟳ Saving to Sheet...';
+  
+  const key = `${ch}-${sh}`;
+  const chName = CH_NAMES[parseInt(ch)]||'';
+  
+  const body = {
+    key, chapter:ch, shloka:sh,
+    chapter_name: chName,
+    meaning: me,
+    longterm: document.getElementById('add-lt').value.trim(),
+    emotional: document.getElementById('add-em').value.trim(),
+    shortterm: document.getElementById('add-st').value.trim(),
+    practical: document.getElementById('add-pr').value.trim(),
+  };
+  
+  const r = await sheetPost('saveShloka', body);
+  
+  btn.disabled=false; btn.textContent='＋ Save to Google Sheet';
+  
+  if(r.error){ toast('⚠ Could not save: '+r.error); return; }
+  
+  toast('✓ Shloka saved to Google Sheet!');
+  
+  // Clear form
+  ['add-chapter','add-shloka','add-meaning','add-lt','add-em','add-st','add-pr'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='';
+  });
+  
+  // Reload data
+  await loadData();
+  showPage('journal');
 }
 
 // ================================================================
@@ -845,21 +1445,269 @@ function renderProgress(){
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById(`page-${id}`).classList.add('active');
+  document.getElementById(`page-${id}`)?.classList.add('active');
   document.querySelectorAll('.nav-tab').forEach(t=>{
     if((t.getAttribute('onclick')||'').includes(`'${id}'`)) t.classList.add('active');
   });
-  if(id==='journal') renderJournal(activeFilter);
   if(id==='progress') renderProgress();
+  if(id==='bookmarks') renderBookmarks();
   window.scrollTo(0,0);
+}
+
+// ================================================================
+// EMOTIONAL BALANCE
+// ================================================================
+
+let selectedEmotion = null;
+
+function selectEmotion(btn, emotion){
+  document.querySelectorAll('.emotion-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedEmotion = emotion;
+  document.getElementById('findBtn').disabled = false;
+}
+
+// Keyword map: each emotion maps to terms to search across meaning + guidance columns
+const EMOTION_KEYWORDS = {
+  anger:      ['anger','frustrat','block','wrath','krodha','control','react','temper','mars','fire'],
+  anxiety:    ['anxiety','worry','fear','doubt','uncertain','restless','mind','peace','calm','tranquil','shanti'],
+  comparison: ['envy','compar','equal','others','superior','inferior','delude','maya','illusion','desire','material'],
+  impatience: ['patience','time','steady','persist','wait','slow','gradual','sustain','endure','fruit','result'],
+  exhaustion: ['tired','exhaust','deplet','weak','surrender','rest','refuge','renounce','strength','sustain','uplift'],
+  lost:       ['direction','path','duty','dharma','purpose','clarity','wisdom','knowledge','guide','lost','confusion'],
+  doubt:      ['faith','doubt','belief','trust','knowledge','self','soul','eternal','certain','resolve','intellect'],
+  grief:      ['grief','mourn','lament','sorrow','loss','dead','birth','impermanent','transient','accept','eternal'],
+  restless:   ['restless','mind','control','wander','steady','fixed','meditat','practice','detach','senses','focus'],
+  overwhelm:  ['overwhelm','burden','duty','surrender','action','detach','fruit','renounce','equipoise','balance','mode'],
+  gratitude:  ['peace','gratitude','content','satisfied','joy','divine','grace','bless','fortunate','present','aware'],
+  courage:    ['courage','rise','fight','duty','fear','warrior','action','arjun','arise','strength','bold'],
+};
+
+// Emotional guidance text — what the emotion specifically means for Vaibhav's chart
+const EMOTION_GUIDANCE = {
+  anger:      "Your Mars Amatyakaraka in Aries generates direct anger when blocked. The Gita's instruction is not to suppress it but to redirect it — from reactive expression toward righteous purposeful action. Use the 30-second pause before responding. This shloka speaks to your Mars directly.",
+  anxiety:    "Your Scorpio Moon processes everything at depth, which makes anxiety spiral intensely. Your Mercury Ashlesha coils inward under pressure. The Gita consistently returns to one antidote: present action. This shloka is your anchor when the spiral begins.",
+  comparison: "Scorpio Moon comparison suffering is the specific maya this shloka addresses. The peer's car, the colleague's promotion — these are the illusion. Your Sasa Yoga path peaks in your 40s and 50s. This shloka restores the correct perspective on your actual timeline.",
+  impatience: "Your Saturn Sasa Yoga builds through sustained disciplined effort over decades — not through bursts. The impatience you feel is your chart's natural late-peak tension. This shloka is the Gita's specific teaching for the person who builds slowly and lastingly.",
+  exhaustion: "Six months of sustained effort with delayed visible results is genuinely depleting. Your Pisces Ascendant absorbs stress from the environment. This shloka is your permission to receive support — not to stop, but to continue from a restored place rather than from depletion.",
+  lost:       "When the path feels unclear, your Mercury Ashlesha spirals in analysis without resolution. The Gita's answer is always to return to the present duty — not the long arc, just today's clear action. This shloka restores direction when everything else feels like noise.",
+  doubt:      "The soul-level doubt — 'perhaps none of this is real' — is the specific doubt the Gita names as most destructive. Your organizing intelligence has delivered your marriage, your past right jobs, your deepest relationships. This shloka is the weapon of genuine knowledge against that doubt.",
+  grief:      "Your Scorpio Moon mourns not just people but opportunities that did not arrive — the June window, the process that died in round four. This shloka teaches what is genuinely worth mourning and what the wise person releases as the natural transience of things.",
+  restless:   "Your Mercury Ashlesha mind wanders toward calculation and comparison hundreds of times a day. The Gita does not ask you to prevent the wandering — it asks you to return every time. This shloka is the instruction for the returning practice.",
+  overwhelm:  "Pisces Ascendant absorbs everything in its environment. When it all comes at once — boAt operational load, job search pressure, family responsibility, financial concern — the Gita returns you to the single thing in your control: this one action, right now.",
+  gratitude:  "This is the rarest emotional state and the most worth anchoring into when it arrives. Your Venus Pushya Mahadasha lord naturally produces moments of genuine warmth and appreciation. This shloka deepens a good moment into a lasting orientation.",
+  courage:    "Mars Amatyakaraka in Aries is your career planet — it is naturally courageous when properly directed. The Gita's call to arise is specific and direct. This shloka is Krishna speaking to you exactly as Krishna spoke to Arjuna at the threshold of his great transition.",
+};
+
+function scoreShlokaForEmotion(s, emotion){
+  const keywords = EMOTION_KEYWORDS[emotion] || [];
+  const text = [
+    s.meaning, s.longterm, s.emotional, s.shortterm, s.practical, s.personal_notes
+  ].join(' ').toLowerCase();
+
+  let score = 0;
+
+  // Keyword matches
+  keywords.forEach(kw => {
+    const count = (text.match(new RegExp(kw,'gi')) || []).length;
+    score += count * 2;
+  });
+
+  // Boost bookmarked shlokas significantly — they were personally selected
+  const isBm = s.bookmarked==='TRUE' || s.bookmarked===true || s.bookmarked==='1';
+  if(isBm) score += 40;
+
+  // Boost shlokas that have been read (engaged with)
+  const isRead = s.status==='✓ Read' || s.status==='Read';
+  if(isRead) score += 8;
+
+  // Boost shlokas that have personal notes (deeply engaged)
+  if((s.personal_notes||'').trim().length > 20) score += 12;
+
+  // Boost emotional handling column specifically — most relevant
+  const emotionalText = (s.emotional || '').toLowerCase();
+  keywords.forEach(kw => {
+    if(emotionalText.includes(kw)) score += 5;
+  });
+
+  // Boost shortterm column — what's relevant right now
+  const shorttermText = (s.shortterm || '').toLowerCase();
+  keywords.forEach(kw => {
+    if(shorttermText.includes(kw)) score += 3;
+  });
+
+  return score;
+}
+
+function findShlokas(){
+  if(!selectedEmotion) return;
+  if(!allShlokas.length){
+    document.getElementById('epResults').innerHTML = '<div class="ep-empty"><div class="ep-empty-t">No shlokas loaded yet</div><div>Go to Journal tab and wait for data to load, then return here.</div></div>';
+    return;
+  }
+
+  const btn = document.getElementById('findBtn');
+  btn.disabled = true;
+  btn.textContent = '⟳ Finding your shlokas...';
+
+  // Score all shlokas
+  const scored = allShlokas
+    .filter(s => s.meaning || s.longterm || s.emotional) // must have some content
+    .map(s => ({ s, score: scoreShlokaForEmotion(s, selectedEmotion) }))
+    .filter(x => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5);
+
+  // If fewer than 5 scored shlokas, pad with bookmarked ones
+  if(scored.length < 5){
+    const alreadyKeys = new Set(scored.map(x => x.s.key));
+    const bookmarked = allShlokas
+      .filter(s => (s.bookmarked==='TRUE'||s.bookmarked===true||s.bookmarked==='1') && !alreadyKeys.has(s.key) && (s.meaning||s.longterm))
+      .slice(0, 5 - scored.length);
+    bookmarked.forEach(s => scored.push({ s, score: 0, padded: true }));
+  }
+
+  btn.disabled = false;
+  btn.textContent = '✦ Find My Shlokas';
+
+  if(!scored.length){
+    document.getElementById('epResults').innerHTML = '<div class="ep-empty"><div class="ep-empty-t">No shlokas found yet</div><div style="font-size:12px;color:var(--text-l)">Add more shlokas with meanings and guidance to your journal first.</div></div>';
+    return;
+  }
+
+  const emotionGuidance = EMOTION_GUIDANCE[selectedEmotion] || '';
+  const emotionLabel = document.querySelector(`.emotion-btn[data-emotion="${selectedEmotion}"] .eb-name`)?.textContent || selectedEmotion;
+
+  let html = `
+    <div style="background:var(--lotus-p);border:1px solid var(--lotus-bd);border-radius:10px;padding:14px 16px;margin-bottom:16px;">
+      <div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--lotus-b);margin-bottom:6px;font-weight:600;">For What You Are Feeling · ${emotionLabel}</div>
+      <div style="font-size:13px;color:var(--text-m);line-height:1.7;">${emotionGuidance}</div>
+    </div>`;
+
+  html += scored.map((item, i) => {
+    const s = item.s;
+    const key = s.key || `${s.chapter}.${s.shloka}`;
+    const isBm = s.bookmarked==='TRUE' || s.bookmarked===true || s.bookmarked==='1';
+    const chName = s.chapter_name || CH_NAMES[parseInt(s.chapter)] || '';
+    const bodyId = `ep-body-${i}`;
+    const arrId = `ep-arr-${i}`;
+
+    // Pick the most relevant guidance column to surface first
+    const relevantGuidance = s.emotional || s.shortterm || s.longterm || s.practical || '';
+
+    return `
+    <div class="ep-card ${isBm?'bookmarked-card':''}" id="ep-card-${i}">
+      <div class="ep-card-head" onclick="toggleEpCard('${bodyId}','${arrId}')">
+        <div class="ep-badge">Ch.${s.chapter}.${s.shloka}</div>
+        ${isBm?'<div class="ep-bm-badge">★ Bookmarked</div>':''}
+        <div class="ep-info">
+          <div class="ep-ch-name">${chName}</div>
+          <div class="ep-why">${(s.meaning||'').substring(0,70)}${(s.meaning||'').length>70?'...':''}</div>
+        </div>
+        <div class="ep-arr" id="${arrId}">▼</div>
+      </div>
+      <div class="ep-card-body" id="${bodyId}">
+        ${s.meaning ? `<div class="ep-meaning">${s.meaning}</div>` : ''}
+        ${relevantGuidance ? `
+          <div class="ep-guidance-label">Guidance for Vaibhav</div>
+          <div class="ep-guidance-text">${relevantGuidance}</div>
+        ` : ''}
+        ${s.personal_notes ? `
+          <div style="margin-top:10px;padding:10px 12px;background:var(--lift);border-radius:7px;border:1px solid var(--border);">
+            <div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);margin-bottom:4px;">Your Personal Note</div>
+            <div style="font-size:12px;color:var(--text-m);line-height:1.65;">${s.personal_notes}</div>
+          </div>
+        ` : ''}
+        <div class="ep-actions">
+          <button class="ep-goto-btn" onclick="goToShloka('${key}')">→ View in Journal</button>
+          <button class="ep-bm-btn-card ${isBm?'bm':''}" id="ep-bm-${i}" onclick="toggleEpBm('${key}',${i},'${s.chapter}','${s.shloka}')">
+            ${isBm?'★ Bookmarked':'☆ Bookmark'}
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('epResults').innerHTML = html;
+
+  // Auto-expand first card
+  setTimeout(()=>{
+    const firstBody = document.getElementById('ep-body-0');
+    const firstArr  = document.getElementById('ep-arr-0');
+    if(firstBody){ firstBody.classList.add('open'); firstArr?.classList.add('open'); }
+  }, 100);
+}
+
+function toggleEpCard(bodyId, arrId){
+  const body = document.getElementById(bodyId);
+  const arr  = document.getElementById(arrId);
+  if(!body) return;
+  body.classList.toggle('open');
+  arr?.classList.toggle('open', body.classList.contains('open'));
+}
+
+function goToShloka(key){
+  // Navigate to journal and expand that shloka
+  showPage('journal');
+  activeChapter = 'all';
+  document.querySelectorAll('.ch-pill').forEach((p,i) => p.classList.toggle('active', i===0));
+  applyFilters();
+  setTimeout(()=>{
+    const row = document.getElementById(`row-${key}`);
+    if(row){
+      row.scrollIntoView({ behavior:'smooth', block:'center' });
+      const body = document.getElementById(`body-${key}`);
+      const arr  = document.getElementById(`arr-${key}`);
+      if(body && !body.classList.contains('open')){
+        body.classList.add('open');
+        arr?.classList.add('open');
+        expandedRows.add(key);
+      }
+    }
+  }, 300);
+}
+
+async function toggleEpBm(key, cardIdx, chapter, shloka){
+  const s = allShlokas.find(x => (x.key||`${x.chapter}.${x.shloka}`)===key);
+  if(!s) return;
+
+  const wasBm = s.bookmarked==='TRUE' || s.bookmarked===true || s.bookmarked==='1';
+  const newBm = !wasBm;
+
+  s.bookmarked = newBm ? 'TRUE' : 'FALSE';
+
+  const btn = document.getElementById(`ep-bm-${cardIdx}`);
+  const card = document.getElementById(`ep-card-${cardIdx}`);
+  if(btn){ btn.textContent = newBm ? '★ Bookmarked' : '☆ Bookmark'; btn.classList.toggle('bm', newBm); }
+  if(card){ card.classList.toggle('bookmarked-card', newBm); }
+
+  // Also update the main journal bm button if visible
+  const mainBtn = document.getElementById(`bmbtn-${key}`);
+  if(mainBtn){ mainBtn.textContent = newBm?'★':'☆'; mainBtn.classList.toggle('bm', newBm); }
+
+  updateStats();
+
+  const dotKey = key.includes('.')?key:`${chapter}.${shloka}`;
+  const r = await sheetPost('updateBookmark', {key: dotKey, chapter, shloka, bookmarked: newBm?'TRUE':'FALSE'});
+  if(r.error) toast('⚠ Could not save to Sheet');
+  else toast(newBm ? '★ Bookmarked' : 'Bookmark removed');
+}
+
+// ================================================================
+// DEBUG
+// ================================================================
+async function runDebug(){
+  const panel = document.getElementById('debugPanel');
+  panel.style.display='block';
+  panel.textContent = 'Connecting to sheet...';
+  const d = await sheetGet({action:'debug'});
+  panel.textContent = JSON.stringify(d, null, 2);
 }
 
 // ================================================================
 // INIT
 // ================================================================
-load();
-updateJStats();
-if(S.apiKey) document.getElementById('apiModal').style.display='none';
+loadData();
 </script>
 </body>
 </html>
