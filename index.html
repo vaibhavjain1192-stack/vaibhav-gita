@@ -136,6 +136,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .notes-row{display:flex;gap:8px;align-items:center;margin-top:8px;}
 .save-note-btn{padding:7px 16px;background:var(--sage);color:white;border:none;border-radius:7px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;box-shadow:0 1px 4px rgba(45,106,63,0.25);}
 .save-note-btn:hover{background:var(--sage-b);}
+
+/* ── INLINE EDIT CONTROLS ── */
+.edit-btn{background:none;border:1px solid var(--border-m);color:var(--text-l);font-size:10px;font-family:'DM Sans',sans-serif;padding:2px 9px;border-radius:5px;cursor:pointer;letter-spacing:.03em;transition:all .15s;float:right;margin-top:-2px;}
+.edit-btn:hover{border-color:var(--gold-bd);color:var(--gold);}
+.g-lbl-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.g-lbl-row .g-lbl{margin-bottom:0;}
+.edit-area{width:100%;background:var(--surface);border:1px solid var(--gold-bd);border-radius:7px;color:var(--text);font-size:12.5px;font-family:'DM Sans',sans-serif;padding:9px 11px;resize:vertical;min-height:80px;line-height:1.65;}
+.edit-area:focus{outline:none;border-color:var(--gold);}
+.edit-area.meaning-edit{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;}
+.edit-actions{display:flex;gap:7px;align-items:center;margin-top:7px;}
+.edit-save{padding:6px 15px;background:var(--gold);color:#0D1F14;border:none;border-radius:6px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.edit-save:hover{background:var(--gold-b);}
+.edit-cancel{padding:6px 13px;background:none;border:1px solid var(--border-m);color:var(--text-l);border-radius:6px;font-size:11.5px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.edit-cancel:hover{color:var(--text-m);border-color:var(--border-h);}
 .saved-note-display{font-size:12px;color:var(--text-m);line-height:1.65;background:var(--lift);border:1px solid var(--border-m);border-radius:8px;padding:10px 12px;white-space:pre-wrap;}
 
 /* ============ PROGRESS PAGE ============ */
@@ -1231,44 +1245,134 @@ function renderList(){
   }).join('');
 }
 
+// escape a value for safe placement inside an HTML attribute / JS-free display
+function esc(v){
+  return String(v||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Build one editable guidance block. field = longterm|emotional|shortterm|practical
+function guidanceBlock(s, key, field, cls, label){
+  const val = s[field] || '';
+  const emptyHint = '<span style="color:var(--text-l);font-size:11px">Not filled yet — tap Edit to add.</span>';
+  return `
+    <div class="g-block ${cls}" id="gblock-${field}-${key}">
+      <div class="g-lbl-row">
+        <div class="g-lbl">${label}</div>
+        <button class="edit-btn" onclick="startEdit('${key}','${field}')">✎ Edit</button>
+      </div>
+      <div class="g-text" id="gtext-${field}-${key}">${val?esc(val):emptyHint}</div>
+      <div id="gedit-${field}-${key}" style="display:none">
+        <textarea class="edit-area" id="gedit-area-${field}-${key}">${esc(val)}</textarea>
+        <div class="edit-actions">
+          <button class="edit-save" onclick="saveField('${key}','${s.chapter}','${s.shloka}','${field}')">Save to Sheet</button>
+          <button class="edit-cancel" onclick="cancelEdit('${key}','${field}')">Cancel</button>
+        </div>
+      </div>
+    </div>`;
+}
+
 function buildBody(s, key){
-  const hasGuidance = s.longterm||s.emotional||s.shortterm||s.practical;
   const savedNote = (s.personal_notes||'').trim();
-  
+  const meaningVal = s.meaning || '';
+  const meaningEmpty = '<span style="color:var(--text-l);font-style:normal;font-size:12px">No meaning added yet — tap Edit to add.</span>';
+
   return `
     <div class="sr-tabs">
       <div class="sr-tab active" onclick="switchTab('${key}','meaning',this)">Meaning</div>
-      ${hasGuidance?`<div class="sr-tab" onclick="switchTab('${key}','guidance',this)">Guidance</div>`:''}
+      <div class="sr-tab" onclick="switchTab('${key}','guidance',this)">Guidance</div>
       <div class="sr-tab" onclick="switchTab('${key}','notes',this)">Notes${savedNote?' 📝':''}</div>
     </div>
 
     <div class="sr-tab-content active" id="tc-meaning-${key}">
-      <div class="meaning-block">
-        <div class="g-lbl">Meaning · Your Notes</div>
-        <div class="meaning-text">${s.meaning||'<span style="color:var(--text-l);font-style:normal;font-size:12px">No meaning added yet</span>'}</div>
+      <div class="meaning-block" id="gblock-meaning-${key}">
+        <div class="g-lbl-row">
+          <div class="g-lbl">Meaning · Your Notes</div>
+          <button class="edit-btn" onclick="startEdit('${key}','meaning')">✎ Edit</button>
+        </div>
+        <div class="meaning-text" id="gtext-meaning-${key}">${meaningVal?esc(meaningVal):meaningEmpty}</div>
+        <div id="gedit-meaning-${key}" style="display:none">
+          <textarea class="edit-area meaning-edit" id="gedit-area-meaning-${key}">${esc(meaningVal)}</textarea>
+          <div class="edit-actions">
+            <button class="edit-save" onclick="saveField('${key}','${s.chapter}','${s.shloka}','meaning')">Save to Sheet</button>
+            <button class="edit-cancel" onclick="cancelEdit('${key}','meaning')">Cancel</button>
+          </div>
+        </div>
       </div>
       ${s.date_saved?`<div style="font-size:10px;color:var(--text-f);margin-top:6px">Saved: ${s.date_saved}</div>`:''}
     </div>
 
-    ${hasGuidance?`
     <div class="sr-tab-content" id="tc-guidance-${key}">
       <div class="guidance-grid">
-        ${s.longterm?`<div class="g-block lt"><div class="g-lbl">Long-term Life Learning</div><div class="g-text">${s.longterm}</div></div>`:''}
-        ${s.emotional?`<div class="g-block em"><div class="g-lbl">Emotional Handling</div><div class="g-text">${s.emotional}</div></div>`:''}
-        ${s.shortterm?`<div class="g-block st"><div class="g-lbl">Phase Learning</div><div class="g-text">${s.shortterm}</div></div>`:''}
-        ${s.practical?`<div class="g-block pr"><div class="g-lbl">Practical Methods</div><div class="g-text">${s.practical}</div></div>`:''}
+        ${guidanceBlock(s,key,'longterm','lt','Long-term Life Learning')}
+        ${guidanceBlock(s,key,'emotional','em','Emotional Handling')}
+        ${guidanceBlock(s,key,'shortterm','st','Phase Learning')}
+        ${guidanceBlock(s,key,'practical','pr','Practical Methods')}
       </div>
-    </div>`:''}
+    </div>
 
     <div class="sr-tab-content" id="tc-notes-${key}">
-      ${savedNote?`<div class="saved-note-display" id="note-display-${key}">${savedNote}</div><div style="height:8px"></div>`:''}
-      <textarea class="notes-area" id="note-input-${key}" placeholder="Add your personal reflection on this shloka...">${savedNote}</textarea>
+      ${savedNote?`<div class="saved-note-display" id="note-display-${key}">${esc(savedNote)}</div><div style="height:8px"></div>`:''}
+      <textarea class="notes-area" id="note-input-${key}" placeholder="Add your personal reflection on this shloka...">${esc(savedNote)}</textarea>
       <div class="notes-row">
         <button class="save-note-btn" onclick="saveNote('${key}','${s.chapter}','${s.shloka}')">Save Note</button>
         <span style="font-size:11px;color:var(--text-l)">Saves to Google Sheets</span>
       </div>
     </div>
   `;
+}
+
+// ── INLINE EDIT: show textarea, hide display ──
+function startEdit(key, field){
+  const disp = document.getElementById(`gtext-${field}-${key}`);
+  const edit = document.getElementById(`gedit-${field}-${key}`);
+  if(disp) disp.style.display = 'none';
+  if(edit) edit.style.display = 'block';
+  const area = document.getElementById(`gedit-area-${field}-${key}`);
+  if(area){ area.focus(); }
+}
+
+function cancelEdit(key, field){
+  const disp = document.getElementById(`gtext-${field}-${key}`);
+  const edit = document.getElementById(`gedit-${field}-${key}`);
+  const s = allShlokas.find(x=>(x.key||`${x.chapter}.${x.shloka}`)===key);
+  // reset textarea to stored value
+  const area = document.getElementById(`gedit-area-${field}-${key}`);
+  if(area && s) area.value = s[field]||'';
+  if(edit) edit.style.display = 'none';
+  if(disp) disp.style.display = 'block';
+}
+
+async function saveField(key, chapter, shloka, field){
+  const area = document.getElementById(`gedit-area-${field}-${key}`);
+  if(!area) return;
+  const val = area.value.trim();
+
+  const s = allShlokas.find(x=>(x.key||`${x.chapter}.${x.shloka}`)===key);
+  const prev = s ? s[field] : '';
+  if(s) s[field] = val;
+
+  // Update display optimistically
+  const disp = document.getElementById(`gtext-${field}-${key}`);
+  if(disp){
+    if(val) disp.textContent = val;
+    else {
+      disp.innerHTML = (field==='meaning')
+        ? '<span style="color:var(--text-l);font-style:normal;font-size:12px">No meaning added yet — tap Edit to add.</span>'
+        : '<span style="color:var(--text-l);font-size:11px">Not filled yet — tap Edit to add.</span>';
+    }
+  }
+  const edit = document.getElementById(`gedit-${field}-${key}`);
+  if(edit) edit.style.display = 'none';
+  if(disp) disp.style.display = 'block';
+
+  const dotKey = key.includes('.')?key:`${chapter}.${shloka}`;
+  const r = await sheetPost('updateField', {key: dotKey, chapter, shloka, field, value: val});
+  if(r.error){
+    toast('⚠ Could not save to Sheet');
+    if(s) s[field] = prev;   // roll back local
+  } else {
+    toast('✓ Saved to Sheet');
+  }
 }
 
 function switchTab(key, tab, btn){
