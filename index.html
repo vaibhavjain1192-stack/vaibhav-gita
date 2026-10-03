@@ -2321,7 +2321,10 @@ function cnPrompt(ch, type){
   const ex = type==='summary'
     ? `> One or two sentence overview.\n\n# ⏳ Theme title | ${ch}.17 – ${ch}.22\n${ch}.17 | One-line meaning of the verse.\n${ch}.18 | One-line meaning, *italics* allowed.`
     : `> The single idea running underneath all the methods.\n\n## The four mechanisms\n\n# 🎯 1. Method title | sanskrit term — ${ch}.8\nShort bold lead. | Explanation of how to practise it.\nWhy this works: | The reasoning.`;
-  return `Write ${what}. Output ONLY plain text in this exact format (no code fences, no other markdown):\n\n${ex}\n\nRules: "> " = intro line. "## " = small section heading. "# " = a block, starting with one emoji, then the title, then " | " and a tag. Every following line is "label | text" (label = verse ref for summaries, a short bold lead for methods). Use **bold** and *italic* sparingly.`;
+  const plain = type==='summary'
+    ? `Cover EVERY shloka of the chapter, one line each (combine only verses that say the same thing, e.g. ${ch}.15–16). Explain what each shloka means in simple, everyday words — as if telling a friend who has never read the Gita.`
+    : `Each method must be something a busy person can actually do today — say exactly what to do, when, and for how long. Use everyday examples (work, family, phone, commute, meals).`;
+  return `Write ${what}. Output ONLY plain text in this exact format (no code fences, no other markdown):\n\n${ex}\n\n${plain}\n\nLANGUAGE — keep it simple so anyone can understand:\n- Short sentences (under 20 words). Plain English, the way you would explain it out loud.\n- Avoid philosophy jargon (no "transcendental", "manifestation", "ontological"…).\n- If a Sanskrit word is needed, give its meaning in brackets right after it, e.g. abhyāsa (steady practice).\n- Prefer concrete pictures and examples over abstract ideas.\n- Stay true to the meaning of the verse — simplify the words, not the teaching.\n\nFORMAT RULES: "> " = intro line. "## " = small section heading. "# " = a block, starting with one emoji, then the title, then " | " and a tag. Every following line is "label | text" (label = verse ref for summaries, a short bold lead for methods). Use **bold** and *italic* sparingly.`;
 }
 
 async function cnCopyPrompt(){
