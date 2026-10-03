@@ -38,7 +38,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 
 /* ── MOBILE: BOTTOM TAB BAR ── */
 .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:400;background:rgba(13,31,20,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--border-m);box-shadow:0 -4px 20px rgba(0,0,0,0.4);}
-.mobile-nav-grid{display:grid;grid-template-columns:repeat(7,1fr);}
+.mobile-nav-grid{display:grid;grid-template-columns:repeat(8,1fr);}
 .mob-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 2px 10px;cursor:pointer;transition:all .15s;border:none;background:none;font-family:'DM Sans',sans-serif;}
 .mob-tab-icon{font-size:16px;line-height:1;margin-bottom:3px;}
 .mob-tab-lbl{font-size:8px;font-weight:500;color:var(--text-l);letter-spacing:.01em;line-height:1;}
@@ -400,13 +400,93 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 @media(max-width:700px){
   .nav{display:none;}.mobile-nav{display:block;}
   body{padding-bottom:64px;}
-  .journal-page,.progress-page,.bookmarks-page,.add-page,.emotion-page,.kundali-page{padding-bottom:80px;}
+  .journal-page,.progress-page,.bookmarks-page,.add-page,.emotion-page,.kundali-page,.chap-page{padding-bottom:80px;}
   .toast{bottom:80px;}
   .journal-page,.progress-page,.bookmarks-page,.add-page{padding:16px 12px 60px;}
   .stats-bar,.prog-stats{grid-template-columns:1fr 1fr;}
   .guidance-grid{grid-template-columns:1fr;}
   .form-grid{grid-template-columns:1fr;}
   .filter-bar{gap:6px;}
+}
+
+/* ============ CHAPTER NOTES PAGE (summary + practical methods) ============ */
+.chap-page{max-width:900px;margin:0 auto;padding:28px 24px 80px;}
+.chap-pills{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 18px;}
+.chap-pill{min-width:34px;padding:5px 9px;background:var(--lift);border:1px solid var(--border-m);border-radius:8px;font-size:12px;color:var(--text-m);cursor:pointer;font-family:'DM Sans',sans-serif;text-align:center;position:relative;transition:all .15s;}
+.chap-pill:hover{border-color:var(--gold-bd);color:var(--gold);}
+.chap-pill.active{background:var(--gold-p);border-color:var(--gold-bd);color:var(--gold);font-weight:600;}
+.chap-pill .dots{display:flex;gap:3px;justify-content:center;margin-top:3px;height:4px;}
+.chap-pill .dots i{width:4px;height:4px;border-radius:50%;background:var(--text-f);}
+.chap-pill .dots i.on-s{background:var(--saffron);}
+.chap-pill .dots i.on-p{background:var(--violet-b);}
+.chap-legend{font-size:10.5px;color:var(--text-l);margin:-10px 0 18px;display:flex;gap:14px;flex-wrap:wrap;}
+.chap-legend i{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+.chap-title-row{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
+.chap-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--text);line-height:1.15;}
+.chap-title small{display:block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:400;color:var(--text-l);letter-spacing:.02em;margin-bottom:2px;}
+.chap-updated{font-size:10.5px;color:var(--text-l);}
+.chap-switch{display:flex;border-bottom:1px solid var(--border-m);margin-bottom:18px;}
+.chap-switch div{padding:9px 16px;font-size:12px;font-weight:500;color:var(--text-l);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;}
+.chap-switch div:hover{color:var(--text-m);}
+.chap-switch div.active{color:var(--gold);border-bottom-color:var(--gold);font-weight:600;}
+.chap-actions{display:flex;justify-content:flex-end;gap:8px;margin-bottom:12px;}
+
+/* rendered notes */
+.cn-intro{background:linear-gradient(90deg,rgba(74,138,170,0.14),rgba(74,138,170,0.04));border-left:3px solid var(--slate-b);border-radius:0 10px 10px 0;padding:13px 16px;margin-bottom:16px;font-size:13.5px;color:var(--text);line-height:1.7;}
+.cn-intro p+p{margin-top:6px;}
+.cn-heading{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-l);font-weight:600;margin:20px 0 10px;}
+.cn-heading:first-child{margin-top:0;}
+.cn-block{background:var(--card);border:1px solid var(--border-m);border-radius:12px;padding:14px 18px 6px;margin-bottom:12px;}
+.cn-bhead{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.cn-icon{font-size:16px;line-height:1;flex-shrink:0;}
+.cn-btitle{flex:1;font-weight:600;font-size:14px;color:var(--text);}
+.cn-tag{font-size:11px;color:var(--text-l);white-space:nowrap;}
+.cn-block.practical .cn-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;}
+.cn-items{list-style:none;}
+.cn-item{display:grid;grid-template-columns:58px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--border);font-size:13px;line-height:1.6;color:var(--text);}
+.cn-item:first-child{border-top:none;}
+.cn-item.nolabel{grid-template-columns:1fr;}
+.cn-ref{font-weight:600;font-size:11.5px;padding-top:1px;}
+.cn-block.practical .cn-item{grid-template-columns:22px 1fr;}
+.cn-num{width:20px;height:20px;border-radius:50%;background:var(--violet-p);border:1px solid var(--violet-bd);color:var(--violet-b);font-size:10.5px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.cn-item b,.cn-intro b{color:var(--gold-accent);font-weight:600;}
+.cn-item em,.cn-intro em{font-family:'Cormorant Garamond',serif;font-size:1.08em;}
+.cn-para{font-size:13px;color:var(--text-m);margin-bottom:10px;}
+
+/* editor */
+.cn-editor{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;}
+.cn-ed-col{display:flex;flex-direction:column;gap:8px;min-width:0;}
+.cn-ed-label{font-size:10.5px;color:var(--text-l);letter-spacing:.06em;text-transform:uppercase;}
+.cn-toolbar{display:flex;gap:6px;flex-wrap:wrap;}
+.cn-toolbar button{padding:5px 10px;background:var(--lift);border:1px solid var(--border-m);border-radius:6px;color:var(--text-m);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.cn-toolbar button:hover{border-color:var(--gold-bd);color:var(--gold);}
+.cn-textarea{width:100%;min-height:440px;background:var(--surface);border:1px solid var(--border-m);border-radius:10px;color:var(--text);font-size:12.5px;line-height:1.7;padding:12px 14px;font-family:ui-monospace,Consolas,'Courier New',monospace;resize:vertical;tab-size:2;}
+.cn-textarea:focus{outline:none;border-color:var(--gold);}
+.cn-preview{max-height:620px;overflow-y:auto;padding-right:4px;}
+.cn-help{background:var(--surface);border:1px dashed var(--border-m);border-radius:10px;padding:10px 13px;font-size:11.5px;color:var(--text-m);line-height:1.75;}
+.cn-help code{font-family:ui-monospace,Consolas,monospace;color:var(--gold);font-size:11.5px;}
+.cn-save-row{display:flex;gap:8px;justify-content:flex-end;margin-top:12px;}
+.cn-save{padding:9px 20px;background:var(--gold-rich);color:#1a1205;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.cn-save:hover{background:var(--gold-b);}
+.cn-save:disabled{opacity:.5;cursor:not-allowed;}
+.cn-notice{background:var(--saffron-p);border:1px solid var(--saffron-bd);border-radius:10px;padding:11px 14px;font-size:12px;color:var(--text);margin-bottom:14px;}
+
+/* journal banner when a chapter is filtered */
+.ch-notes-banner{display:none;gap:8px;flex-wrap:wrap;align-items:center;margin:-8px 0 14px;}
+.ch-notes-banner.show{display:flex;}
+.ch-notes-banner span{font-size:11px;color:var(--text-l);}
+.ch-notes-banner button{padding:6px 12px;background:var(--lift);border:1px solid var(--border-m);border-radius:7px;color:var(--text-m);font-size:11.5px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.ch-notes-banner button:hover{border-color:var(--gold-bd);color:var(--gold);}
+.ch-notes-banner button.has{border-color:var(--gold-bd);color:var(--gold);}
+
+@media(max-width:700px){
+  .chap-page{padding:16px 12px 90px;}
+  .cn-editor{grid-template-columns:1fr;}
+  .cn-textarea{min-height:300px;}
+  .cn-preview{max-height:none;}
+  .cn-block{padding:12px 13px 4px;}
+  .cn-item{grid-template-columns:50px 1fr;}
+  .chap-title{font-size:22px;}
 }
 </style>
 </head>
@@ -423,6 +503,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
       <div class="nav-tab active" onclick="showPage('glance')">✦ Glance</div>
       <div class="nav-tab" onclick="showPage('journal')">📖 Journal</div>
       <div class="nav-tab" onclick="showPage('bookmarks')">🔖 Bookmarks</div>
+      <div class="nav-tab" onclick="showPage('chapters')">📜 Chapters</div>
       <div class="nav-tab" onclick="showPage('progress')">📿 Progress</div>
       <div class="nav-tab" onclick="showPage('add')">＋ Add Shloka</div>
       <div class="nav-tab" onclick="showPage('emotion')">🌊 Emotional Balance</div>
@@ -445,6 +526,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
     <button class="mob-tab" id="mob-bookmarks" onclick="showPage('bookmarks')">
       <span class="mob-tab-icon">🔖</span>
       <span class="mob-tab-lbl">Saved</span>
+    </button>
+    <button class="mob-tab" id="mob-chapters" onclick="showPage('chapters')">
+      <span class="mob-tab-icon">📜</span>
+      <span class="mob-tab-lbl">Chapters</span>
     </button>
     <button class="mob-tab" id="mob-progress" onclick="showPage('progress')">
       <span class="mob-tab-icon">📿</span>
@@ -531,6 +616,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
     </div>
     <div id="debugPanel" style="display:none;background:var(--raised);border:1px solid var(--border-m);border-radius:8px;padding:12px;margin-bottom:14px;font-size:11px;color:var(--text-m);font-family:monospace;white-space:pre-wrap;max-height:200px;overflow-y:auto;"></div>
 
+    <!-- CHAPTER NOTES SHORTCUT (shown when one chapter is selected) -->
+    <div class="ch-notes-banner" id="chNotesBanner"></div>
+
     <!-- SHLOKA LIST -->
     <div class="shloka-list" id="shlokaList">
       <div class="loading"><span class="spinner"></span> Loading from Google Sheets...</div>
@@ -545,6 +633,26 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
     <div class="bm-title">🔖 Bookmarked Shlokas</div>
     <div class="bm-sub">Your saved verses — synced from Google Sheets.</div>
     <div id="bmList"><div class="loading"><span class="spinner"></span> Loading...</div></div>
+  </div>
+</div>
+
+<!-- ============ CHAPTER NOTES PAGE ============ -->
+<div class="page" id="page-chapters">
+  <div class="chap-page">
+    <div class="prog-title">📜 Chapter Notes</div>
+    <div class="prog-sub">A chapter-level summary, and the practical methods it teaches. Both save to the “Chapter Notes” tab of your Sheet.</div>
+    <div class="chap-pills" id="chapPills"></div>
+    <div class="chap-legend"><span><i style="background:var(--saffron)"></i>has summary</span><span><i style="background:var(--violet-b)"></i>has practical methods</span></div>
+    <div id="chapNotice"></div>
+    <div class="chap-title-row">
+      <div class="chap-title" id="chapTitle"></div>
+      <div class="chap-updated" id="chapUpdated"></div>
+    </div>
+    <div class="chap-switch">
+      <div id="chapTab-summary" class="active" onclick="setChapType('summary')">📖 Chapter Summary</div>
+      <div id="chapTab-practical" onclick="setChapType('practical')">🛠 Practical Methods</div>
+    </div>
+    <div id="chapView"></div>
   </div>
 </div>
 
@@ -1182,6 +1290,7 @@ async function loadData(){
   updateChapterPills();
   applyFilters();
   renderGlance();
+  loadChapterNotes();
   
   if(document.getElementById('page-progress').classList.contains('active')) renderProgress();
   if(document.getElementById('page-bookmarks').classList.contains('active')) renderBookmarks();
@@ -1226,6 +1335,7 @@ function filterChapter(ch, btn){
   document.querySelectorAll('.ch-pill').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
   applyFilters();
+  updateChNotesBanner();
 }
 
 function toggleFilter(f){
@@ -1669,6 +1779,7 @@ function showPage(id){
   if(id==='progress') renderProgress();
   if(id==='bookmarks') renderBookmarks();
   if(id==='glance') renderGlance();
+  if(id==='chapters') renderChapterPage();
   window.scrollTo(0,0);
 }
 
@@ -2064,6 +2175,331 @@ async function toggleEpBm(key, cardIdx, chapter, shloka){
   const r = await sheetPost('updateBookmark', {key: dotKey, chapter, shloka, bookmarked: newBm?'TRUE':'FALSE'});
   if(r.error) toast('⚠ Could not save to Sheet');
   else toast(newBm ? '★ Bookmarked' : 'Bookmark removed');
+}
+
+// ================================================================
+// CHAPTER NOTES — chapter summary + practical methods summary
+// Stored in the Sheet tab "Chapter Notes" as plain text, one row per
+// chapter per type. Format (both types):
+//   > intro / callout line
+//   ## Small section heading
+//   # 🎯 Block title | tag (verse range, or sanskrit term)
+//   label | text       ← verse ref (summary) or bold lead (practical)
+//   **bold**  *italic*
+// ================================================================
+let chapterNotes = {};          // "8|summary" -> {content, updated}
+let chapNotesLoaded = false;
+let chapNotesOutdated = false;  // Apps Script not yet redeployed
+let chapSel = null;
+let chapType = 'summary';
+let chapEditing = false;
+let chapDraft = '';
+
+const CN_COLORS = ['var(--saffron)','var(--sage-b)','var(--slate-b)','var(--lotus-b)','var(--violet-b)','var(--gold)'];
+
+function cnKey(ch,type){ return `${ch}|${type}`; }
+function cnGet(ch,type){ return chapterNotes[cnKey(ch,type)] || null; }
+
+async function loadChapterNotes(){
+  const d = await sheetGet({action:'getChapterNotes'});
+  chapterNotes = {};
+  if(d && d.notes){
+    chapNotesOutdated = false;
+    d.notes.forEach(n=>{
+      const ch = parseInt(n.chapter); const t = (n.type||'').toLowerCase();
+      if(ch && (t==='summary'||t==='practical') && String(n.content||'').trim())
+        chapterNotes[cnKey(ch,t)] = {content:n.content, updated:n.updated};
+    });
+  } else if(d && d.error && /Unknown GET action/i.test(d.error)){
+    chapNotesOutdated = true;
+  }
+  chapNotesLoaded = true;
+  updateChNotesBanner();
+  if(document.getElementById('page-chapters').classList.contains('active') && !chapEditing) renderChapterPage();
+}
+
+// ---------- parsing & rendering ----------
+function cnEsc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function cnFmt(s){
+  return cnEsc(s)
+    .replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
+    .replace(/(^|[^*])\*(?!\s)(.+?)\*(?!\*)/g,'$1<em>$2</em>');
+}
+
+function parseNotes(text, type){
+  const nodes = []; let block = null; let intro = null;
+  String(text||'').split(/\r?\n/).forEach(raw=>{
+    const line = raw.trim();
+    if(!line){ intro = null; return; }
+    if(line.startsWith('>')){
+      const t = line.replace(/^>\s?/,'');
+      if(!intro){ intro = {kind:'intro', paras:[]}; nodes.push(intro); }
+      if(t) intro.paras.push(t);
+      block = null; return;
+    }
+    intro = null;
+    if(line.startsWith('##')){ nodes.push({kind:'heading', text:line.replace(/^#+\s*/,'')}); block = null; return; }
+    if(line.startsWith('#')){
+      let rest = line.replace(/^#\s*/,''); let tag = '';
+      const bar = rest.indexOf('|');
+      if(bar>=0){ tag = rest.slice(bar+1).trim(); rest = rest.slice(0,bar).trim(); }
+      let icon = '';
+      const m = rest.match(/^(\S+)\s+(.+)$/);
+      if(m && !/[\p{L}\p{N}]/u.test(m[1])){ icon = m[1]; rest = m[2]; }
+      block = {kind:'block', icon, title:rest, tag, items:[]};
+      nodes.push(block); return;
+    }
+    const t = line.replace(/^[-•]\s+/,'').replace(/^\*\s+/,'');
+    let label = '', body = t;
+    const bar = t.indexOf('|');
+    if(bar>=0){ label = t.slice(0,bar).trim(); body = t.slice(bar+1).trim(); }
+    else if(type==='summary'){
+      const m = t.match(/^(\d{1,2}\.\d{1,2}(?:\s*[–-]\s*\d{1,2})?)\s+(.+)$/);
+      if(m){ label = m[1].replace(/\s+/g,''); body = m[2]; }
+    }
+    if(block) block.items.push({label, text:body});
+    else nodes.push({kind:'para', text:t});
+  });
+  return nodes;
+}
+
+function renderNotesHTML(text, type){
+  const nodes = parseNotes(text, type);
+  if(!nodes.length) return '<div class="cn-para" style="color:var(--text-l)">Preview appears here as you type.</div>';
+  let bi = 0;
+  return nodes.map(n=>{
+    if(n.kind==='intro')   return `<div class="cn-intro">${n.paras.map(p=>`<p>${cnFmt(p)}</p>`).join('')}</div>`;
+    if(n.kind==='heading') return `<div class="cn-heading">${cnFmt(n.text)}</div>`;
+    if(n.kind==='para')    return `<div class="cn-para">${cnFmt(n.text)}</div>`;
+    const color = CN_COLORS[bi++ % CN_COLORS.length];
+    const items = n.items.map((it,i)=>{
+      if(type==='practical'){
+        return `<li class="cn-item"><span class="cn-num">${i+1}</span><span>${it.label?`<b>${cnFmt(it.label)}</b> `:''}${cnFmt(it.text)}</span></li>`;
+      }
+      return it.label
+        ? `<li class="cn-item"><span class="cn-ref" style="color:${color}">${cnEsc(it.label)}</span><span>${cnFmt(it.text)}</span></li>`
+        : `<li class="cn-item nolabel"><span>${cnFmt(it.text)}</span></li>`;
+    }).join('');
+    return `<div class="cn-block ${type}">
+      <div class="cn-bhead">${n.icon?`<span class="cn-icon">${cnEsc(n.icon)}</span>`:''}<span class="cn-btitle">${cnFmt(n.title)}</span>${n.tag?`<span class="cn-tag">${cnFmt(n.tag)}</span>`:''}</div>
+      ${items?`<ul class="cn-items">${items}</ul>`:''}
+    </div>`;
+  }).join('');
+}
+
+// ---------- templates ----------
+function cnStarter(ch, type){
+  const max = CH_TOTALS[ch] || 20;
+  const a = Math.max(1, Math.round(max/3));
+  if(type==='summary') return `> One or two lines on what Chapter ${ch} is really about.
+
+# 🌱 First theme | ${ch}.1 – ${ch}.${a}
+${ch}.1 | What this verse says, in one line.
+${ch}.2 | …
+
+# 🔥 Second theme | ${ch}.${a+1} – ${ch}.${max}
+${ch}.${a+1} | …
+`;
+  return `> The one idea all these methods serve.
+
+## The mechanisms
+
+# 🎯 1. First method | sanskrit term — ${ch}.x
+A short lead. | How to actually do it.
+Why this works: | The reasoning behind it.
+
+# 🔔 2. Second method | sanskrit term
+Lead. | Detail.
+`;
+}
+
+function cnPrompt(ch, type){
+  const name = CH_NAMES[ch]||'';
+  const what = type==='summary'
+    ? `a chapter-level summary of Bhagavad Gita Chapter ${ch} (${name}), grouping the verses into 4–6 themes`
+    : `a summary of the practical methods taught in Bhagavad Gita Chapter ${ch} (${name}) — the concrete mechanisms to apply in daily life`;
+  const ex = type==='summary'
+    ? `> One or two sentence overview.\n\n# ⏳ Theme title | ${ch}.17 – ${ch}.22\n${ch}.17 | One-line meaning of the verse.\n${ch}.18 | One-line meaning, *italics* allowed.`
+    : `> The single idea running underneath all the methods.\n\n## The four mechanisms\n\n# 🎯 1. Method title | sanskrit term — ${ch}.8\nShort bold lead. | Explanation of how to practise it.\nWhy this works: | The reasoning.`;
+  return `Write ${what}. Output ONLY plain text in this exact format (no code fences, no other markdown):\n\n${ex}\n\nRules: "> " = intro line. "## " = small section heading. "# " = a block, starting with one emoji, then the title, then " | " and a tag. Every following line is "label | text" (label = verse ref for summaries, a short bold lead for methods). Use **bold** and *italic* sparingly.`;
+}
+
+async function cnCopyPrompt(){
+  const txt = cnPrompt(chapSel, chapType);
+  try{ await navigator.clipboard.writeText(txt); toast('✓ Prompt copied — paste it into Claude'); }
+  catch(e){
+    const ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta);
+    ta.select(); try{ document.execCommand('copy'); toast('✓ Prompt copied'); }catch(_){ toast('⚠ Could not copy'); }
+    ta.remove();
+  }
+}
+
+function cnInsert(kind){
+  const ta = document.getElementById('cnText'); if(!ta) return;
+  const ch = chapSel;
+  const snippets = chapType==='summary'
+    ? {block:`\n# ✨ Theme title | ${ch}.1 – ${ch}.5\n`, line:`${ch}. | `, intro:`> `, heading:`## `}
+    : {block:`\n# 🎯 Method title | sanskrit term\n`, line:`Lead. | `, intro:`> `, heading:`## `};
+  let ins = snippets[kind];
+  const pos = ta.selectionStart, v = ta.value;
+  const atLineStart = pos===0 || v[pos-1]==='\n';
+  if(!atLineStart && kind!=='block') ins = '\n'+ins;
+  ta.value = v.slice(0,pos) + ins + v.slice(ta.selectionEnd);
+  ta.focus(); ta.selectionStart = ta.selectionEnd = pos + ins.length;
+  cnOnInput();
+}
+
+// ---------- page ----------
+function cnDefaultChapter(){
+  for(let c=1;c<=18;c++) if(cnGet(c,'summary')||cnGet(c,'practical')) return c;
+  const chs = [...new Set(allShlokas.map(s=>parseInt(s.chapter)).filter(Boolean))].sort((a,b)=>a-b);
+  return chs[0] || 1;
+}
+
+function cnConfirmLeave(){
+  if(!chapEditing) return true;
+  const saved = (cnGet(chapSel,chapType)||{}).content || '';
+  if(chapDraft === saved) return true;
+  return confirm('Discard unsaved changes?');
+}
+
+function selectChapterNotes(ch){
+  if(ch===chapSel) return;
+  if(!cnConfirmLeave()) return;
+  chapSel = ch; chapEditing = false; renderChapterPage();
+}
+function setChapType(t){
+  if(t===chapType) return;
+  if(!cnConfirmLeave()) return;
+  chapType = t; chapEditing = false; renderChapterPage();
+}
+function openChapterNotes(ch, type){
+  chapSel = parseInt(ch); chapType = type; chapEditing = false;
+  showPage('chapters');
+}
+
+function renderChapterPage(){
+  if(chapSel===null) chapSel = cnDefaultChapter();
+  // pills
+  let pills = '';
+  for(let c=1;c<=18;c++){
+    pills += `<button class="chap-pill ${c===chapSel?'active':''}" onclick="selectChapterNotes(${c})">${c}<span class="dots"><i class="${cnGet(c,'summary')?'on-s':''}"></i><i class="${cnGet(c,'practical')?'on-p':''}"></i></span></button>`;
+  }
+  document.getElementById('chapPills').innerHTML = pills;
+  document.getElementById('chapTitle').innerHTML = `<small>Chapter ${chapSel}</small>${cnEsc(CH_NAMES[chapSel]||'')}`;
+  ['summary','practical'].forEach(t=>document.getElementById('chapTab-'+t).classList.toggle('active', t===chapType));
+
+  const note = cnGet(chapSel, chapType);
+  const upd = note && note.updated ? new Date(note.updated) : null;
+  document.getElementById('chapUpdated').textContent = (upd && !isNaN(upd)) ? 'Updated ' + upd.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : '';
+
+  document.getElementById('chapNotice').innerHTML = chapNotesOutdated
+    ? `<div class="cn-notice">⚠ Your Apps Script doesn't know about chapter notes yet. Paste the updated script and deploy a <b>new version</b> (Deploy → Manage deployments → Edit → New version), then refresh.</div>` : '';
+
+  const view = document.getElementById('chapView');
+  const label = chapType==='summary' ? 'chapter summary' : 'practical methods summary';
+
+  if(chapEditing){
+    view.innerHTML = `
+      <div class="cn-editor">
+        <div class="cn-ed-col">
+          <div class="cn-toolbar">
+            <button onclick="cnInsert('intro')">＋ Intro</button>
+            <button onclick="cnInsert('heading')">＋ Heading</button>
+            <button onclick="cnInsert('block')">＋ ${chapType==='summary'?'Theme':'Method'}</button>
+            <button onclick="cnInsert('line')">＋ Line</button>
+            <button onclick="cnCopyPrompt()" title="Copies a prompt that asks Claude to write this in the right format">⧉ Copy prompt for Claude</button>
+          </div>
+          <textarea class="cn-textarea" id="cnText" spellcheck="false" oninput="cnOnInput()"></textarea>
+          <div class="cn-help">
+            <code>&gt; text</code> intro callout &nbsp; <code>## text</code> small heading<br>
+            <code># 🎯 Title | tag</code> new ${chapType==='summary'?'theme (tag = verse range)':'method (tag = sanskrit term)'}<br>
+            <code>${chapType==='summary'?'8.17 | text':'Bold lead. | text'}</code> a line inside it &nbsp; <code>**bold**</code> <code>*italic*</code>
+          </div>
+        </div>
+        <div class="cn-ed-col">
+          <div class="cn-ed-label">Preview</div>
+          <div class="cn-preview" id="cnPreview"></div>
+        </div>
+      </div>
+      <div class="cn-save-row">
+        ${note?`<button class="btn btn-danger" onclick="cnDelete()">Delete</button>`:''}
+        <button class="btn btn-outline" onclick="cnCancel()">Cancel</button>
+        <button class="cn-save" id="cnSaveBtn" onclick="cnSave()">Save to Sheet</button>
+      </div>`;
+    const ta = document.getElementById('cnText');
+    ta.value = chapDraft;
+    document.getElementById('cnPreview').innerHTML = renderNotesHTML(chapDraft, chapType);
+    return;
+  }
+
+  if(!chapNotesLoaded){
+    view.innerHTML = '<div class="loading"><span class="spinner"></span> Loading chapter notes…</div>';
+    return;
+  }
+
+  if(note){
+    view.innerHTML = `<div class="chap-actions"><button class="btn btn-outline" onclick="cnEdit()">✎ Edit</button></div>${renderNotesHTML(note.content, chapType)}`;
+  } else {
+    view.innerHTML = `<div class="empty">
+      <div class="empty-om">ॐ</div>
+      <div class="empty-t">No ${label} for Chapter ${chapSel} yet</div>
+      <div class="empty-s" style="margin-bottom:16px">Write it yourself, or copy the prompt, ask Claude, and paste the answer in.</div>
+      <button class="cn-save" onclick="cnEdit()">＋ Write ${label}</button>
+    </div>`;
+  }
+}
+
+function cnEdit(){
+  const note = cnGet(chapSel, chapType);
+  chapDraft = note ? note.content : cnStarter(chapSel, chapType);
+  chapEditing = true;
+  renderChapterPage();
+  const ta = document.getElementById('cnText'); if(ta) ta.focus();
+}
+function cnOnInput(){
+  const ta = document.getElementById('cnText'); if(!ta) return;
+  chapDraft = ta.value;
+  document.getElementById('cnPreview').innerHTML = renderNotesHTML(chapDraft, chapType);
+}
+function cnCancel(){
+  if(!cnConfirmLeave()) return;
+  chapEditing = false; renderChapterPage();
+}
+
+async function cnSave(contentOverride){
+  const content = contentOverride!==undefined ? contentOverride : chapDraft;
+  const btn = document.getElementById('cnSaveBtn');
+  if(btn){ btn.disabled = true; btn.textContent = '⟳ Saving…'; }
+  const r = await sheetPost('saveChapterNote', {chapter:String(chapSel), type:chapType, content});
+  if(btn){ btn.disabled = false; btn.textContent = 'Save to Sheet'; }
+  if(r.error){
+    if(/Unknown POST action/i.test(r.error)){ chapNotesOutdated = true; renderChapterPage(); }
+    toast('⚠ Could not save: ' + r.error, 4000); return false;
+  }
+  if(content.trim()) chapterNotes[cnKey(chapSel,chapType)] = {content, updated:new Date().toISOString()};
+  else delete chapterNotes[cnKey(chapSel,chapType)];
+  chapEditing = false;
+  renderChapterPage();
+  updateChNotesBanner();
+  toast(content.trim() ? '✓ Saved to Chapter Notes' : 'Deleted');
+  return true;
+}
+async function cnDelete(){
+  if(!confirm(`Delete the ${chapType==='summary'?'chapter summary':'practical methods summary'} for Chapter ${chapSel}?`)) return;
+  await cnSave('');
+}
+
+// Journal page shortcut when a single chapter is filtered
+function updateChNotesBanner(){
+  const el = document.getElementById('chNotesBanner'); if(!el) return;
+  if(activeChapter==='all'){ el.classList.remove('show'); el.innerHTML=''; return; }
+  const ch = parseInt(activeChapter);
+  const hs = !!cnGet(ch,'summary'), hp = !!cnGet(ch,'practical');
+  el.innerHTML = `<span>Chapter ${ch} notes</span>
+    <button class="${hs?'has':''}" onclick="openChapterNotes(${ch},'summary')">📖 ${hs?'Chapter summary':'＋ Add chapter summary'}</button>
+    <button class="${hp?'has':''}" onclick="openChapterNotes(${ch},'practical')">🛠 ${hp?'Practical methods':'＋ Add practical methods'}</button>`;
+  el.classList.add('show');
 }
 
 // ================================================================
